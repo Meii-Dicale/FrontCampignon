@@ -1,5 +1,5 @@
 import { useContext, useState } from 'react';
-import { loginUser } from '../Services/AuthServices';
+import AuthServices from '../Services/AuthServices';
 import { Container, Form, InputGroup } from 'react-bootstrap';
 import AuthContext from '../Context/AuthContext';
 
@@ -22,7 +22,7 @@ const Login = ({ setShowLoginModal }) => {
     e.preventDefault(); // empèche le rechargement de la page
     try {
       console.log(user);
-      const res = await loginUser(user); // appel au service de connexion
+      const res = await AuthServices.loginUser(user); // appel au service de connexion
       localStorage.setItem('token', res.data.token); // sauvegarde du token renvoyé par le serveur
       console.log('Token saved'); // console pour tracer l'étape
 
@@ -72,7 +72,7 @@ const Login = ({ setShowLoginModal }) => {
         />
         <p className="mt-3">
           Vous n&apos;avez pas de compte?{' '}
-          <a href="/register">Formulaire d&apos;inscription</a>
+          <a href="/Inscription">Formulaire d&apos;inscription</a>
         </p>
       </Form>
     </Container>

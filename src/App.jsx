@@ -6,6 +6,7 @@ import Navbar from '../Composants/Navbar';
 import Navbardroite from '../Composants/Navbardroite';
 import DashboardAdmin from '../Pages/DashboardAdmin';
 import NavBarAdmin from '../Composants/NavbarAdmin';
+import Inscription from '../Pages/InscriptionPage';
 import AuthContext from '../Context/AuthContext';
 import Login from '../Pages/Login';
 import { useState, useEffect } from 'react';
@@ -53,6 +54,7 @@ function App() {
           <Route path="/" element={<HomePage />} />
           <Route path="/DashboardAdmin" element={<DashboardAdmin />} />
           <Route path='/Login' element={<Login />} />
+          <Route path='/Inscription' element={<Inscription />} />
         </Routes>
       </BrowserRouter>
     </AuthContext.Provider>

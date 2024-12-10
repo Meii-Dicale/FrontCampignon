@@ -1,10 +1,15 @@
 import axios from 'axios';
 import { jwtDecode } from 'jwt-decode';
 
-const API_URL = 'http://localhost:3001'; // URL de l'API
+const API_URL = 'http://localhost:3001/api'; // URL de l'API
 
 function loginUser(user) {
-  return axios.post(`${API_URL}/api/login/loginUser`, user);
+  return axios.post(`${API_URL}/login/loginUser`, user);
+}
+
+function inscription(user) {
+  return axios.post(
+    `${API_URL}/utilisateur/utilisateur/${user.idUtilisateur}`, user);
 }
 
 function setAxiosToken() {
@@ -29,6 +34,7 @@ function logout() {
   delete axios.defaults.headers['Authorization'];
   localStorage.removeItem('token');
   console.log('Logged out successfully');
+  window.location.reload(); // redirection vers la page d'accueil
 }
 
 function isValid() {
@@ -48,4 +54,4 @@ function isValid() {
   }
 }
 
-export { loginUser, decodeToken, logout, isValid };
+export default { loginUser, decodeToken, logout, isValid, inscription };

@@ -3,6 +3,8 @@ import { Navbar, Container, Nav } from 'react-bootstrap';
 import AuthContext from '../Context/AuthContext';
 import LoginModal from './LoginModal';
 import { useNavigate } from 'react-router-dom';
+import AuthServices from '../Services/AuthServices';
+import { X } from 'react-bootstrap-icons';
 
 function MyNavbar() {
   const { isAuthenticated, setIsAuthenticated, user } = useContext(AuthContext);
@@ -14,6 +16,10 @@ function MyNavbar() {
       navigate('/dashboardAdmin');
     }
   }, [user, navigate]);
+
+  const handleLogout = () => {
+    AuthServices.logout();
+  };
 
   return (
     <Navbar className="nabar" expand="lg">
@@ -36,12 +42,20 @@ function MyNavbar() {
 
         <Nav className="ms-auto d-flex align-items-center">
           {isAuthenticated ? (
-            <Nav.Link
-              href="#home"
-              style={{ margin: '0 15px', color: 'black', fontWeight: '500' }}
-            >
-              Compte Utilisateur
-            </Nav.Link>
+            <>
+              <Nav.Link
+                href="#home"
+                style={{ margin: '0 15px', color: 'black', fontWeight: '500' }}
+              >
+                Compte Utilisateur
+              </Nav.Link>
+              <Nav.Link
+                onClick={handleLogout}
+                style={{ margin: '0 15px', color: 'red', fontWeight: '500' }}
+              >
+                <X size={24} />
+              </Nav.Link>
+            </>
           ) : (
             <Nav.Link
               onClick={() => setShowLoginModal(true)}
