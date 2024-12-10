@@ -9,7 +9,7 @@ function loginUser(user) {
 
 function inscription(user) {
   return axios.post(
-    `${API_URL}/utilisateur/utilisateur/${user.idUtilisateur}`, user);
+    `${API_URL}/utilisateur/AjoutUtilisateur`, user);
 }
 
 function setAxiosToken() {

@@ -14,7 +14,7 @@ const Inscription = () => {
     tel: '',
     mail: '',
     dateNaissance: '',
-    mot_de_passe: '',
+    mdp: '',
   });
   const navigate = useNavigate();
 
@@ -25,6 +25,8 @@ const Inscription = () => {
   const handleSubmit = async (e) => {
     e.preventDefault();
     try {
+      setUtilisateur({ ...utilisateur, role: 'client' });
+      console.log(utilisateur);
       // Appelez la méthode d'inscription du service avec les données de l'utilisateur
       await AuthServices.inscription(utilisateur); // Assurez-vous que le service d'inscription soit bien défini ailleurs dans votre code.
       console.log(utilisateur);
@@ -147,7 +149,7 @@ const Inscription = () => {
           <Form.Control
             placeholder="Mot de Passe"
             type="password"
-            name="mot_de_passe"
+            name="mdp"
             value={utilisateur.mot_de_passe}
             onChange={handleChange}
             required
