@@ -1,19 +1,20 @@
 import { BrowserRouter, Route, Routes, useLocation } from 'react-router-dom';
-import HomePage from '../Pages/HomePage';
+import { useState, useEffect } from 'react';
 import 'bootstrap/dist/css/bootstrap.min.css';
 import './App.css';
+import HomePage from '../Pages/HomePage';
+import DashboardAdmin from '../Pages/DashboardAdmin';
+import Inscription from '../Pages/InscriptionPage';
+import Login from '../Pages/Login';
+import ConnexionPage from '../Pages/ConnexionPage';
 import Navbar from '../Composants/Navbar';
 import Navbardroite from '../Composants/Navbardroite';
-import DashboardAdmin from '../Pages/DashboardAdmin';
 import NavBarAdmin from '../Composants/NavbarAdmin';
-import Inscription from '../Pages/InscriptionPage';
 import AuthContext from '../Context/AuthContext';
-import Login from '../Pages/Login';
-import { useState, useEffect } from 'react';
 
 function Layout() {
   const location = useLocation();
-
+  
   return (
     <>
       {/* Affiche une Navbar différente selon la page */}
@@ -24,6 +25,26 @@ function Layout() {
         </>
       )}
       {location.pathname === '/DashboardAdmin' && <NavBarAdmin />}
+    </>
+  );
+}
+
+function AppContent() {
+  const location = useLocation();
+  const isInscriptionPage = location.pathname === '/inscription';
+  const isConnexionPage = location.pathname === '/connexion';
+
+  return (
+    <>
+      {/* Affiche la Navbar et Navbardroite seulement si on n'est pas sur la page d'inscription ou de connexion */}
+      {!isInscriptionPage && !isConnexionPage && <Navbar />}
+      {!isInscriptionPage && !isConnexionPage && <Navbardroite />}
+      
+      <Routes>
+        <Route path='/' element={<HomePage />} />
+        <Route path='/inscription' element={<InscritpionPage />} />
+        <Route path='/connexion' element={<ConnexionPage />} />
+      </Routes>
     </>
   );
 }
@@ -49,6 +70,7 @@ function App() {
       value={{ isAuthenticated, setIsAuthenticated, user, setUser }}
     >
       <BrowserRouter>
+        <AppContent />
         <Layout />
         <Routes>
           <Route path="/" element={<HomePage />} />
@@ -58,6 +80,7 @@ function App() {
         </Routes>
       </BrowserRouter>
     </AuthContext.Provider>
+
   );
 }
 

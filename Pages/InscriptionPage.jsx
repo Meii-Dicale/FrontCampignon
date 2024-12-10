@@ -166,13 +166,12 @@ const Inscription = () => {
                         required
                     />
                 </InputGroup> */}
-
-        <Button type="submit" variant="primary">
-          S'inscrire
-        </Button>
-      </Form>
-    </Container>
-  );
+               <Button type="submit" variant="primary">
+                    S'inscrire
+                </Button>
+            </Form>
+        </Container>
+    );
 };
 
 export default Inscription;

@@ -1,10 +1,10 @@
 import { useState, useContext, useEffect } from 'react';
 import { Navbar, Container, Nav } from 'react-bootstrap';
-import AuthContext from '../Context/AuthContext';
-import LoginModal from './LoginModal';
-import { useNavigate } from 'react-router-dom';
-import AuthServices from '../Services/AuthServices';
 import { X } from 'react-bootstrap-icons';
+import { Link, useNavigate } from 'react-router-dom';
+import AuthContext from '../Context/AuthContext';
+import AuthServices from '../Services/AuthServices';
+import LoginModal from './LoginModal';
 
 function MyNavbar() {
   const { isAuthenticated, setIsAuthenticated, user } = useContext(AuthContext);
