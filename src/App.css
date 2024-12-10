@@ -40,6 +40,8 @@ body {
 .navbardroite h4 {
   color: black;
   font-weight: 600;
+}
+
 #root {
   max-width: 1920px;
   margin: 0 auto;
