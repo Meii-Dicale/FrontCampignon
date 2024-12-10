@@ -29,25 +29,7 @@ function Layout() {
   );
 }
 
-function AppContent() {
-  const location = useLocation();
-  const isInscriptionPage = location.pathname === '/inscription';
-  const isConnexionPage = location.pathname === '/connexion';
 
-  return (
-    <>
-      {/* Affiche la Navbar et Navbardroite seulement si on n'est pas sur la page d'inscription ou de connexion */}
-      {!isInscriptionPage && !isConnexionPage && <Navbar />}
-      {!isInscriptionPage && !isConnexionPage && <Navbardroite />}
-      
-      <Routes>
-        <Route path='/' element={<HomePage />} />
-        <Route path='/inscription' element={<Inscription />} />
-        <Route path='/connexion' element={<ConnexionPage />} />
-      </Routes>
-    </>
-  );
-}
 
 function App() {
   const [isAuthenticated, setIsAuthenticated] = useState(
@@ -70,7 +52,6 @@ function App() {
       value={{ isAuthenticated, setIsAuthenticated, user, setUser }}
     >
       <BrowserRouter>
-        <AppContent />
         <Layout />
         <Routes>
           <Route path="/" element={<HomePage />} />
