@@ -37,6 +37,8 @@ const Connexion = () => {
 
     return (
         <>
+        <Container className="d-flex flex-column align-items-center mt-3">
+
             <div className="d-flex align-items-center justify-content-between w-100">
                 <img
                     src="../logo camping.png" 
@@ -52,7 +54,6 @@ const Connexion = () => {
             </div>
 
             
-            <Container className="d-flex flex-column align-items-center mt-5">
             
                 {error && <div className="alert alert-danger mt-3">{error}</div>}
 
