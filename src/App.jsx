@@ -42,7 +42,7 @@ function AppContent() {
       
       <Routes>
         <Route path='/' element={<HomePage />} />
-        <Route path='/inscription' element={<InscritpionPage />} />
+        <Route path='/inscription' element={<Inscription />} />
         <Route path='/connexion' element={<ConnexionPage />} />
       </Routes>
     </>
