@@ -1,17 +1,13 @@
-import { BrowserRouter, Route, Routes, useLocation } from "react-router-dom";
-import HomePage from "../Pages/HomePage";
+import { BrowserRouter, Route, Routes, useLocation } from "react-router-dom"; // Importez useLocation ici
+import HomePage from '../Pages/HomePage';
 import "bootstrap/dist/css/bootstrap.min.css";
-import "./App.css";
-import Navbar from "../Composants/Navbar";
-import Navbardroite from "../Composants/Navbardroite";
-import InscriptionPage from '../Pages/InscriptionPage';
+import './App.css';
+import Navbar from '../Composants/Navbar';
+import Navbardroite from '../Composants/Navbardroite';
+import InscritpionPage from '../Pages/InscriptionPage';
 import ConnexionPage from '../Pages/ConnexionPage';
-import DashboardAdmin from "../Pages/DashboardAdmin";
-import NavBarAdmin from "../Composants/NavbarAdmin";
 
-function Layout() {
-  const location = useLocation();
-
+function App() {
   return (
     <BrowserRouter>
       <AppContent />
@@ -26,35 +22,16 @@ function AppContent() {
 
   return (
     <>
-      {/* Affiche la Navbar seulement si on n'est pas sur la page d'inscription */}
+      {/* Affiche la Navbar et Navbardroite seulement si on n'est pas sur la page d'inscription ou de connexion */}
       {!isInscriptionPage && !isConnexionPage && <Navbar />}
-      {!isInscriptionPage && !isConnexionPage && <Navbardroite />}      
+      {!isInscriptionPage && !isConnexionPage && <Navbardroite />}
+      
       <Routes>
         <Route path='/' element={<HomePage />} />
         <Route path='/inscription' element={<InscritpionPage />} />
         <Route path='/connexion' element={<ConnexionPage />} />
       </Routes>
-      {/* Affiche une Navbar différente selon la page */}
-      {location.pathname === "/" && (
-        <>
-          <Navbar />
-          <Navbardroite />
-        </>
-      )}
-      {location.pathname === "/DashboardAdmin" && <NavBarAdmin />}
     </>
-  );
-}
-
-function App() {
-  return (
-    <BrowserRouter>
-      <Layout />
-      <Routes>
-        <Route path="/" element={<HomePage />} />
-        <Route path="/DashboardAdmin" element={<DashboardAdmin />} />
-      </Routes>
-    </BrowserRouter>
   );
 }
 
