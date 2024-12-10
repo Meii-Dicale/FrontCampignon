@@ -1,5 +1,5 @@
-import { BrowserRouter, Route, Routes, useLocation } from "react-router-dom";
-import HomePage from "../Pages/HomePage";
+import { BrowserRouter, Route, Routes, useLocation } from "react-router-dom"; // Importez useLocation ici
+import HomePage from '../Pages/HomePage';
 import "bootstrap/dist/css/bootstrap.min.css";
 import "./App.css";
 import Navbar from "../Composants/Navbar";
@@ -28,12 +28,28 @@ function Layout() {
 function App() {
   return (
     <BrowserRouter>
-      <Layout />
-      <Routes>
-        <Route path="/" element={<HomePage />} />
-        <Route path="/DashboardAdmin" element={<DashboardAdmin />} />
-      </Routes>
+      <AppContent />
     </BrowserRouter>
+  );
+}
+
+function AppContent() {
+  const location = useLocation();
+  const isInscriptionPage = location.pathname === '/inscription';
+  const isConnexionPage = location.pathname === '/connexion';
+
+  return (
+    <>
+      {/* Affiche la Navbar et Navbardroite seulement si on n'est pas sur la page d'inscription ou de connexion */}
+      {!isInscriptionPage && !isConnexionPage && <Navbar />}
+      {!isInscriptionPage && !isConnexionPage && <Navbardroite />}
+      
+      <Routes>
+        <Route path='/' element={<HomePage />} />
+        <Route path='/inscription' element={<InscritpionPage />} />
+        <Route path='/connexion' element={<ConnexionPage />} />
+      </Routes>
+    </>
   );
 }
 
