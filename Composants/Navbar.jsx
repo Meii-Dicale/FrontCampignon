@@ -1,5 +1,6 @@
 import React from 'react';
 import { Navbar, Container, Nav } from 'react-bootstrap';
+import { Link } from 'react-router-dom'; // Import du Link pour la redirection
 
 function MyNavbar() {
   return (
@@ -22,12 +23,9 @@ function MyNavbar() {
         </div>
         
         <Nav className="ms-auto d-flex align-items-center">
-          <Nav.Link href="#home" style={{ margin: '0 15px', color: 'black', fontWeight: '500' }}>
-            Compte Utilisateur
-          </Nav.Link>
-          <Nav.Link href="#home" style={{ margin: '0 15px', color: 'black', fontWeight: '500' }}>
-            Inscription
-          </Nav.Link>
+          <Link to="/connexion" style={{ margin: '0 15px', color: 'black', fontWeight: '500', textDecoration: 'none' }}>
+            Connexion
+          </Link>
         </Nav>
       </Container>
     </Navbar>
