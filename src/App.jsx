@@ -19,6 +19,7 @@ function Layout() {
           <Navbardroite />
         </>
       )}
+      
       {location.pathname === "/DashboardAdmin" && <NavBarAdmin />}
     </>
   );

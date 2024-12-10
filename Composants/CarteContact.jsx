@@ -2,7 +2,7 @@ import Button from 'react-bootstrap/Button';
 import Card from 'react-bootstrap/Card';
 import { Archivage } from '../src/Services/ContactService';
 
-function ContactCard({ nom, message, mail, idContact, onArchived }) {
+function ContactCard({ nom, message, mail, idContact, }) {
   const handleArchive = async () => {
     try {
       await Archivage(idContact); // Appel de l'API
