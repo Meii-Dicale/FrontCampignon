@@ -48,7 +48,7 @@ function logout() {
   delete axios.defaults.headers['Authorization'];
   localStorage.removeItem('token');
   console.log('Logged out successfully');
-  window.location.reload(); // redirection vers la page d'accueil
+  window.location.href = '/' // redirection vers la page d'accueil
 }
 
 function isValid() {
@@ -63,7 +63,6 @@ function isValid() {
       return true;
     }
   } else {
-    logout();
     return false;
   }
 }
