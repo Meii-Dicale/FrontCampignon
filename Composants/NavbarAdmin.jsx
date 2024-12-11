@@ -1,7 +1,19 @@
 import React from "react";
 import "bootstrap/dist/css/bootstrap.min.css";
+import { Button } from "react-bootstrap";
+
+
+
+
 
 const NavBarAdmin = () => {
+
+  const logout = () =>  {
+    console.log("exec");
+    localStorage.removeItem('token'); 
+    window.location.href = '/'
+  }
+
   return (
     <div className="d-flex">
       {/* Barre de navigation */}
@@ -63,10 +75,9 @@ const NavBarAdmin = () => {
                 Mon compte
               </a>
             </li>
-            <li className="nav-item">
-              <a className="nav-link text-danger" href="#deconnexion">
-                Déconnexion
-              </a>
+            <li className="nav-item" 
+            >
+              <Button variant="danger"  onClick={logout}> Deconnexion </Button>
             </li>
           </ul>
         </div>

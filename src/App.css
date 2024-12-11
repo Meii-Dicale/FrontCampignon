@@ -202,11 +202,3 @@ input {
   text-align: center;
 }
 
-/* S'assurer que le texte ne dépasse pas dans les bulles */
-.offer-bubble p {
-  margin: 0;
-  padding: 0;
-  word-wrap: break-word;
-  text-align: center;
-
-}
