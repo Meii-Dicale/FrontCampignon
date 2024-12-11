@@ -52,7 +52,7 @@ const Inscription = () => {
       </div>
 
       <Form className="col-10 mt-3" onSubmit={handleSubmit}>
-        <InputGroup className="mb-3">
+        <InputGroup className="mb-2">
           <Form.Control
             placeholder="Nom"
             name="nom"
@@ -62,7 +62,7 @@ const Inscription = () => {
           />
         </InputGroup>
 
-        <InputGroup className="mb-3">
+        <InputGroup className="mb-2">
           <Form.Control
             placeholder="Prénom"
             name="prenom"
@@ -72,7 +72,7 @@ const Inscription = () => {
           />
         </InputGroup>
 
-        <InputGroup className="mb-3">
+        <InputGroup className="mb-2">
           <Form.Control
             placeholder="Rue"
             name="rue"
@@ -82,7 +82,7 @@ const Inscription = () => {
           />
         </InputGroup>
 
-        <InputGroup className="mb-3">
+        <InputGroup className="mb-2">
           <Form.Control
             placeholder="Code Postal"
             name="codePostal"
@@ -92,7 +92,7 @@ const Inscription = () => {
           />
         </InputGroup>
 
-        <InputGroup className="mb-3">
+        <InputGroup className="mb-2">
           <Form.Control
             placeholder="Ville"
             name="ville"
@@ -102,7 +102,7 @@ const Inscription = () => {
           />
         </InputGroup>
 
-        <InputGroup className="mb-3">
+        <InputGroup className="mb-2">
           <Form.Control
             placeholder="Pays"
             name="pays"
@@ -112,7 +112,7 @@ const Inscription = () => {
           />
         </InputGroup>
 
-        <InputGroup className="mb-3">
+        <InputGroup className="mb-2">
           <Form.Control
             placeholder="Téléphone"
             name="tel"
@@ -122,7 +122,7 @@ const Inscription = () => {
           />
         </InputGroup>
 
-        <InputGroup className="mb-3">
+        <InputGroup className="mb-2">
           <Form.Control
             placeholder="Email"
             type="email"
@@ -133,7 +133,7 @@ const Inscription = () => {
           />
         </InputGroup>
 
-        <InputGroup className="mb-3">
+        <InputGroup className="mb-2">
           <InputGroup.Text>Date de Naissance</InputGroup.Text>
           <Form.Control
             placeholder="Date de Naissance"
@@ -145,17 +145,18 @@ const Inscription = () => {
           />
         </InputGroup>
 
-        <InputGroup className="mb-3">
+        <InputGroup className="mb-2">
           <Form.Control
             placeholder="Mot de Passe"
             type="password"
-            name="mdp"
+            name="mot_de_passe"
             value={utilisateur.mot_de_passe}
             onChange={handleChange}
             required
           />
         </InputGroup>
 
+        {/* <InputGroup className="mb-3">
         {/* <InputGroup className="mb-3">
                     <InputGroup.Text>Rôle</InputGroup.Text>
                     <Form.Control
@@ -166,12 +167,13 @@ const Inscription = () => {
                         required
                     />
                 </InputGroup> */}
-               <Button type="submit" variant="primary">
-                    S'inscrire
-                </Button>
-            </Form>
-        </Container>
-    );
+
+        <Button type="submit" variant="primary">
+          S&apos;inscrire
+        </Button>
+      </Form>
+    </Container>
+  );
 };
 
 export default Inscription;

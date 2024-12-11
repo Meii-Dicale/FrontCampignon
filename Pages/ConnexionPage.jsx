@@ -58,7 +58,7 @@ const Connexion = () => {
                 {error && <div className="alert alert-danger mt-3">{error}</div>}
 
                 <Form className="col-10 mt-3" onSubmit={handleSubmit}>
-                    <InputGroup className="mb-3">
+                    <InputGroup className="mb-2">
                         <Form.Control
                             type="email"
                             name="email"
@@ -69,7 +69,7 @@ const Connexion = () => {
                         />
                     </InputGroup>
 
-                    <InputGroup className="mb-3">
+                    <InputGroup className="mb-2">
                         <Form.Control
                             type="password"
                             name="mot_de_passe"
