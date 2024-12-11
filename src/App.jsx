@@ -1,37 +1,35 @@
-import { BrowserRouter, Route, Routes, useLocation } from "react-router-dom"; // Importez useLocation ici
+import { BrowserRouter, Route, Routes } from "react-router-dom"; 
 import HomePage from '../Pages/HomePage';
-import "bootstrap/dist/css/bootstrap.min.css";
-import './App.css';
-import Navbar from '../Composants/Navbar';
-import Navbardroite from '../Composants/Navbardroite';
 import InscritpionPage from '../Pages/InscriptionPage';
 import ConnexionPage from '../Pages/ConnexionPage';
+import MonComptePage from "../Pages/MoncomptePage";
+
+import "bootstrap/dist/css/bootstrap.min.css";
+import './App.css';
+import MesFacturesPage from "../Pages/MesfacturesPage";
+import MesReservationsPage from "../Pages/MesReservationsPage";
+import PromoPage from '../Pages/PromoPage'
+import CarteDuCamping from "../Pages/Carteducamping";
+import InfoPersonnelPage from '../Pages/InfoPersonnelPage';
+import ContactPage from '../Pages/ContactPage';
 
 function App() {
   return (
     <BrowserRouter>
-      <AppContent />
-    </BrowserRouter>
-  );
-}
-
-function AppContent() {
-  const location = useLocation();
-  const isInscriptionPage = location.pathname === '/inscription';
-  const isConnexionPage = location.pathname === '/connexion';
-
-  return (
-    <>
-      {/* Affiche la Navbar et Navbardroite seulement si on n'est pas sur la page d'inscription ou de connexion */}
-      {!isInscriptionPage && !isConnexionPage && <Navbar />}
-      {!isInscriptionPage && !isConnexionPage && <Navbardroite />}
-      
       <Routes>
+        {/* Routes principales */}
         <Route path='/' element={<HomePage />} />
         <Route path='/inscription' element={<InscritpionPage />} />
         <Route path='/connexion' element={<ConnexionPage />} />
+        <Route path='/compte' element={<MonComptePage />} />
+        <Route path='/infos-personnel' element={<InfoPersonnelPage />} />
+        <Route path='/facture' element={<MesFacturesPage />} />
+        <Route path='/reservations' element={<MesReservationsPage />} />
+        <Route path='/promo' element={<PromoPage />} />
+        <Route path='/carte' element={<CarteDuCamping />} />
+        <Route path='/contact' element={<ContactPage />} />
       </Routes>
-    </>
+    </BrowserRouter>
   );
 }
 
