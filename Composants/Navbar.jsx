@@ -2,8 +2,8 @@ import { useState, useContext, useEffect } from 'react';
 import { Navbar, Container, Nav } from 'react-bootstrap';
 import { X } from 'react-bootstrap-icons';
 import { Link, useNavigate } from 'react-router-dom';
-import AuthContext from '../Context/AuthContext';
-import AuthServices from '../Services/AuthServices';
+import AuthContext from '../src/Context/AuthContext';
+import AuthServices from '../src/Services/AuthServices';
 import LoginModal from './LoginModal';
 
 function MyNavbar() {

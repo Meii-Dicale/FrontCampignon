@@ -1,7 +1,7 @@
 import { useState } from 'react';
 import { Button, Container, InputGroup, Form } from 'react-bootstrap';
 import { Link, useNavigate } from 'react-router-dom';
-import AuthServices from '../Services/AuthServices';
+import AuthServices from '../src/Services/AuthServices';
 
 const Inscription = () => {
   const [utilisateur, setUtilisateur] = useState({
