@@ -10,7 +10,8 @@ import ConnexionPage from '../Pages/ConnexionPage';
 import Navbar from '../Composants/Navbar';
 import Navbardroite from '../Composants/Navbardroite';
 import NavBarAdmin from '../Composants/NavbarAdmin';
-import AuthContext from '../Context/AuthContext';
+import AuthContext from '../src/Context/AuthContext';
+import AuthServices from './Services/AuthServices';
 
 function Layout() {
   const location = useLocation();
@@ -29,13 +30,10 @@ function Layout() {
   );
 }
 
-
-
 function App() {
-  const [isAuthenticated, setIsAuthenticated] = useState(
-    !!localStorage.getItem('token')
-  );
-  const [user, setUser] = useState(null);
+  const [isAuthenticated, setIsAuthenticated] = useState(AuthServices.isValid());
+  const [user, setUser] = useState(AuthServices.getUser());
+  console.log(user);
 
   useEffect(() => {
     const token = localStorage.getItem('token');

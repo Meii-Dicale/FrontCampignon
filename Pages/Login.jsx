@@ -1,7 +1,7 @@
 import { useContext, useState } from 'react';
-import AuthServices from '../Services/AuthServices';
 import { Container, Form, InputGroup } from 'react-bootstrap';
-import AuthContext from '../Context/AuthContext';
+import AuthContext from '../src/Context/AuthContext';
+import AuthServices from '../src/Services/AuthServices';
 
 const Login = ({ setShowLoginModal }) => {
   // déclaration des variables et constantes
@@ -21,13 +21,13 @@ const Login = ({ setShowLoginModal }) => {
   const handleSubmit = async (e) => {
     e.preventDefault(); // empèche le rechargement de la page
     try {
-      console.log(user);
       const res = await AuthServices.loginUser(user); // appel au service de connexion
       localStorage.setItem('token', res.data.token); // sauvegarde du token renvoyé par le serveur
       console.log('Token saved'); // console pour tracer l'étape
 
       setIsAuthenticated(true); // mise à jour du contexte
       setAuthUser(res.data.user); // mise à jour du contexte
+      console.log('res.data :' + res.data)
       console.log('isAuthenticated :', isAuthenticated);
 
       setShowLoginModal(false); // fermeture de la modal
