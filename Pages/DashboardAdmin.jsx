@@ -3,11 +3,14 @@ import NavBarAdmin from "../Composants/NavbarAdmin";
 import Contact from "../src/Services/ContactService";
 import { Alert, Container } from "react-bootstrap";
 import ContactCard from "../Composants/CarteContact";
+import NouvellesReservations from "../src/Services/ReservationService";
+import ReservationCard from "../Composants/CarteReservation";
 
 
 function DashboardAdmin() {
 
     const [NouveauxMessages, setNouveauxMessages] = useState([]);
+    const [NouvellesReservation, setNouvellesReservation] = useState([]);
 
     const fetchNouveauxMessages = async () => {
         // Récupération des nouveaux messages
@@ -15,9 +18,18 @@ function DashboardAdmin() {
         setNouveauxMessages(response.data);
         console.log(response.data);
       };
+
+    const fetchNouvellesReservation = async () => {
+        // Récupération des nouvelles réservations
+        const response = await NouvellesReservations();
+        setNouvellesReservation(response.data);
+        console.log(response.data);
+      };
+
     
       useEffect(() => {
         fetchNouveauxMessages();
+        fetchNouvellesReservation();
       }, []);
 
 return (
@@ -25,13 +37,14 @@ return (
 
   <NavBarAdmin />
   <Container className="d-flex w-75 justify-content-around ">
-<div className="dashboard d-flex flex-row gap-5 justify-content-around">
+<div className="dashboard d-flex flex-row gap-5 justify-content-between">
     <div className="messages d-flex flex-column w-25">
-     <div className="d-flex "><Alert key={'light'} variant={'light'}>
+     <div className="d-flex ">
+        <Alert key={'light'} variant={'light'}>
           Nouveaux messages 
         </Alert>
         </div>
-        <div className="d-flex flex-column justify-content-center align-items-center ">
+        <div className="d-flex flex-column justify-content-center align-items-center gap-3">
         {NouveauxMessages.length === 0 && <Alert key={'light'} variant={'light'}>
           Aucun nouveau message
         </Alert>}
@@ -40,13 +53,21 @@ return (
 }
 </div>
     </div>
-    
-    <div className="messages d-flex flex-column w-25">
-    <div className="d-flex "><Alert key={'light'} variant={'light'}>
-          Nouveelles Reserations
+
+    <div className="messages d-flex flex-column w-25 gap-3">
+    <div className="d-flex ">
+        
+        <Alert key={'light'} variant={'light'}>
+          Nouvelles Reserations
         </Alert>
         </div>
-        <div className="d-flex flex-column justify-content-center align-items-center ">
+        <div className="d-flex flex-column justify-content-center align-items-center gap-3">
+           
+            {NouvellesReservation.length === 0 && <Alert key={'light'} variant={'light'}> Aucune Réservations </Alert>}
+            {NouvellesReservation.map(reservation=> ( <ReservationCard key={reservation.idReservation} nom={reservation.nom}
+             dateEntree={reservation.dateEntree} dateSortie={reservation.dateSortie} idReservation={reservation.idReservation} 
+             mail={reservation.mail} numero={reservation.numero} prenom={reservation.prenom} tarif={reservation.tarif} 
+             type={reservation.type}></ReservationCard>))}
             </div>
             </div>
 </div>

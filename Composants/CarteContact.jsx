@@ -2,11 +2,12 @@ import Button from 'react-bootstrap/Button';
 import Card from 'react-bootstrap/Card';
 import { Archivage } from '../src/Services/ContactService';
 
-function ContactCard({ nom, message, mail, idContact, onArchived }) {
+function ContactCard({ nom, message, mail, idContact, }) {
   const handleArchive = async () => {
     try {
       await Archivage(idContact); // Appel de l'API
       alert("Message archivé avec succès !");
+      window.location.reload(); // Rafraîchissement de la page pour afficher les modifications
     } catch (error) {
       console.error("Erreur lors de l'archivage :", error);
       alert("Une erreur s'est produite lors de l'archivage.");
