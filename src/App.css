@@ -98,6 +98,12 @@ body {
   color: black; /* Change la couleur au survol */
 }
 
+
+.calendar{
+
+  margin-left: 280px;
+  
+}
 .container {
   max-width: 1200px;
   margin: auto;
@@ -202,4 +208,5 @@ input {
   padding: 0;
   word-wrap: break-word;
   text-align: center;
+
 }
