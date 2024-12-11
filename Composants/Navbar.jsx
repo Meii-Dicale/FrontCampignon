@@ -1,4 +1,4 @@
-import { useState, useContext, useEffect } from 'react';
+import React, { useState, useContext, useEffect, useRef } from 'react';
 import { Navbar, Container, Nav } from 'react-bootstrap';
 import { X } from 'react-bootstrap-icons';
 import { Link, useNavigate } from 'react-router-dom';
@@ -10,6 +10,7 @@ function MyNavbar() {
   const { isAuthenticated, setIsAuthenticated, user } = useContext(AuthContext);
   const [showLoginModal, setShowLoginModal] = useState(false);
   const navigate = useNavigate();
+ 
 
   useEffect(() => {
     if (user && user.role && Array.isArray(user.role) && user.role.includes('superadmin')) {
