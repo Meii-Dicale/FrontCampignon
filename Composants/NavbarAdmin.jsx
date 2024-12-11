@@ -29,12 +29,12 @@ const NavBarAdmin = () => {
         >
           <ul className="navbar-nav flex-column w-100">
             <li className="nav-item">
-              <a className="nav-link" href="#dashboard">
+              <a className="nav-link" href="/DashboardAdmin">
                 Dashboard
               </a>
             </li>
             <li className="nav-item">
-              <a className="nav-link" href="#calendrier">
+              <a className="nav-link" href="/CalendrierAdmin">
                 Calendrier
               </a>
             </li>
