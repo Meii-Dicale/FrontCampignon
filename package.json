@@ -10,11 +10,12 @@
     "preview": "vite preview"
   },
   "dependencies": {
+    "@fullcalendar/daygrid": "^6.1.15",
+    "@fullcalendar/react": "^6.1.15",
+    "@fullcalendar/resource-timeline": "^6.1.15",
     "axios": "^1.7.9",
     "bootstrap": "^5.3.3",
-    "daypilot-pro-react": "https://npm.daypilot.org/daypilot-pro-react/trial/2024.3.5973.tar.gz",
     "jwt-decode": "^4.0.0",
-    "moment": "^2.30.1",
     "react": "^18.3.1",
     "react-bootstrap": "^2.10.6",
     "react-bootstrap-icons": "^1.11.5",
