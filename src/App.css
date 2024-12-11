@@ -98,7 +98,115 @@ body {
   color: black; /* Change la couleur au survol */
 }
 
+
 .calendar{
 
   margin-left: 280px;
+  
+}
+.container {
+  max-width: 1200px;
+  margin: auto;
+}
+
+h1 {
+  text-align: center;
+  margin-bottom: 30px;
+}
+
+textarea,
+input {
+  margin-bottom: 15px;
+}
+
+.btn {
+  font-size: 16px;
+  font-weight: 500;
+  border-radius: 5px;
+}
+
+.btn-light {
+  background-color: #f8f9fa;
+  border: 1px solid #ddd;
+  transition: transform 0.2s;
+}
+
+.btn-light:hover {
+  transform: scale(1.05);
+}
+
+.btn-secondary {
+  background-color: #343a40;
+  color: white;
+}
+
+.navbar {
+
+  position: absolute;
+}
+
+.input-group-text {
+  display: flex;
+  align-items: center;
+  height: calc(1.5em + 0.75rem + 2px); /* Même hauteur que Form.Control */
+}
+
+.contact-bubbles .bubble {
+  background-color: #6c757d; /* Couleur secondaire */
+  color: white;
+  padding: 15px;
+  border-radius: 10px;
+  text-align: center;
+  min-width: 200px; 
+  flex: 1 1 200px; 
+}
+
+/* Style des boutons sociaux */
+.social-buttons .social-btn {
+  background-color: lightgreen;
+  border-radius: 50%;
+  width: 80px;
+  height: 80px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-size: 14px;
+}
+
+.offers-bubbles {
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: center;
+  gap: 15px;
+}
+
+.offer-bubble {
+  background-color: #6c757d; /* Couleur secondaire */
+  color: white;
+  padding: 20px;
+  border-radius: 50%; /* Pour faire des bulles */
+  text-align: center;
+  min-width: 200px; /* Largeur minimale pour les bulles */
+  flex: 1 1 200px; /* Flexibilité pour la disposition des bulles */
+  box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+
+.offer-text {
+  font-size: 14px;
+  font-weight: bold;
+  padding: 0;
+  margin: 0;
+  text-align: center;
+}
+
+/* S'assurer que le texte ne dépasse pas dans les bulles */
+.offer-bubble p {
+  margin: 0;
+  padding: 0;
+  word-wrap: break-word;
+  text-align: center;
+
 }
