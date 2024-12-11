@@ -8,8 +8,7 @@ function loginUser(user) {
 }
 
 function inscription(user) {
-  return axios.post(
-    `${API_URL}/utilisateur/AjoutUtilisateur`, user);
+  return axios.post(`${API_URL}/utilisateur/AjoutUtilisateur`, user);
 }
 
 function setAxiosToken() {
@@ -29,6 +28,21 @@ const decodeToken = (token) => {
     throw new Error('Invalid token'); // si le token est invalide, on lève une erreur
   }
 };
+
+function getUser() {
+  const token = localStorage.getItem('token');
+  if (token && isValid()) {
+    const decodedToken = jwtDecode(token);
+    return {
+      nom: decodedToken.nom,
+      prenom: decodedToken.prenom,
+      email: decodedToken.email,
+      role: decodedToken.role,
+    };
+  } else {
+    return {};
+  }
+}
 
 function logout() {
   delete axios.defaults.headers['Authorization'];
@@ -54,4 +68,4 @@ function isValid() {
   }
 }
 
-export default { loginUser, decodeToken, logout, isValid, inscription };
+export default { loginUser, decodeToken, logout, isValid, inscription, getUser };
