@@ -1,6 +1,7 @@
 import React, { useEffect, useState } from 'react';
 import NavbarMonCompte from '../Composants/NavbarMonCompte';
 import { Button, Container, Row, Col, Form } from 'react-bootstrap';
+import { useNavigate } from 'react-router-dom';
 
 function MonComptePage() {
   const [userInfo, setUserInfo] = useState({
@@ -17,6 +18,7 @@ function MonComptePage() {
     telephone: '',
     motDePasse: '',
   });
+  const navigate = useNavigate();
 
   // Simulation d'une récupération de données depuis le backend
   useEffect(() => {
@@ -92,20 +94,35 @@ function MonComptePage() {
 
           {/* Section des bulles d'action */}
           <Col lg={4} className="d-flex flex-wrap justify-content-center align-items-start mt-5 gap-3">
-            <Button className="btn-light" style={{ width: '200px', height: '100px' }}>
-              Mes factures
-            </Button>
-            <Button className="btn-light" style={{ width: '200px', height: '100px' }}>
-              Mes réservations
-            </Button>
-            <Button className="btn-light" style={{ width: '200px', height: '100px' }}>
-              Voir les offres
-            </Button>
-            <Button className="btn-light" style={{ width: '200px', height: '100px' }}>
-              Carte du camping
-            </Button>
-          </Col>
-        </Row>
+      <Button
+        className="btn-light"
+        style={{ width: '200px', height: '100px' }}
+        onClick={() => navigate('/facture')}
+      >
+        Mes factures
+      </Button>
+      <Button
+        className="btn-light"
+        style={{ width: '200px', height: '100px' }}
+        onClick={() => navigate('/reservations')}
+      >
+        Mes réservations
+      </Button>
+      <Button
+        className="btn-light"
+        style={{ width: '200px', height: '100px' }}
+        onClick={() => navigate('/promo')}
+      >
+        Voir les offres
+      </Button>
+      <Button
+        className="btn-light"
+        style={{ width: '200px', height: '100px' }}
+        onClick={() => navigate('/carte')}
+      >
+        Carte du camping
+      </Button>
+    </Col>        </Row>
 
         {/* Bouton Réserver */}
         <div className="text-center mt-5">

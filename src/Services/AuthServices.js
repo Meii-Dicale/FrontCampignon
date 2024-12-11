@@ -1,5 +1,5 @@
 import axios from 'axios';
-import { jwtDecode } from 'jwt-decode';
+import { jwtDecode } from "jwt-decode";
 
 const API_URL = 'http://localhost:3001/api'; // URL de l'API
 
@@ -22,10 +22,10 @@ function setAxiosToken() {
 
 const decodeToken = (token) => {
   try {
-    return jwtDecode(token); // décodage du token
+    return jwtDecode(token); // Décodage du token
   } catch (err) {
     console.error(err);
-    throw new Error('Invalid token'); // si le token est invalide, on lève une erreur
+    throw new Error('Invalid token'); // Si le token est invalide, on lève une erreur
   }
 };
 
@@ -47,23 +47,42 @@ function getUser() {
 function logout() {
   delete axios.defaults.headers['Authorization'];
   localStorage.removeItem('token');
+  localStorage.setItem('loggedOut', 'true'); // Ajout d'un indicateur
   console.log('Logged out successfully');
-  window.location.reload(); // redirection vers la page d'accueil
+
+  // Redirection au lieu de recharger
+  window.location.href = '/login'; // Modifiez la route en fonction de votre projet
 }
 
+let isTokenValidCache = null;
+
 function isValid() {
+  if (isTokenValidCache !== null) {
+    return isTokenValidCache;
+  }
+
   const token = localStorage.getItem('token');
   if (token) {
     const decodedToken = jwtDecode(token);
-    if (decodedToken.exp * 1000 < new Date().getTime()) {
-      logout();
+    const isExpired = decodedToken.exp * 1000 < new Date().getTime();
+    if (isExpired) {
+      // Empêcher une déconnexion répétée
+      if (!localStorage.getItem('loggedOut')) {
+        logout();
+      }
+      isTokenValidCache = false;
       return false;
     } else {
       setAxiosToken();
+      isTokenValidCache = true;
       return true;
     }
   } else {
-    logout();
+    // Empêcher une déconnexion répétée
+    if (!localStorage.getItem('loggedOut')) {
+      logout();
+    }
+    isTokenValidCache = false;
     return false;
   }
 }

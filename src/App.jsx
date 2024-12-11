@@ -7,7 +7,7 @@ import "bootstrap/dist/css/bootstrap.min.css";
 import './App.css';
 import Navbar from '../Composants/Navbar';
 import Navbardroite from '../Composants/Navbardroite';
-import InscritpionPage from '../Pages/InscriptionPage';
+// import InscritpionPage from '../Pages/InscriptionPage';
 import ConnexionPage from '../Pages/ConnexionPage';
 import MonComptePage from "../Pages/MoncomptePage";
 
@@ -83,6 +83,7 @@ function App() {
         <Route path='/promo' element={<PromoPage />} />
         <Route path='/carte' element={<CarteDuCamping />} />
         <Route path='/contact' element={<ContactPage />} />
+        <Route path='/connexion' element={<ConnexionPage />} />
         </Routes>
       </BrowserRouter>
     </AuthContext.Provider>
