@@ -34,7 +34,7 @@ const NavBarAdmin = () => {
               </a>
             </li>
             <li className="nav-item">
-              <a className="nav-link" href="#calendrier">
+              <a className="nav-link" href="/CalendrierAdmin">
                 Calendrier
               </a>
             </li>

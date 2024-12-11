@@ -7,6 +7,7 @@ function ContactCard({ nom, message, mail, idContact, }) {
     try {
       await Archivage(idContact); // Appel de l'API
       alert("Message archivé avec succès !");
+      window.location.reload(); // Rafraîchissement de la page pour afficher les modifications
     } catch (error) {
       console.error("Erreur lors de l'archivage :", error);
       alert("Une erreur s'est produite lors de l'archivage.");

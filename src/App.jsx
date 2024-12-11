@@ -12,6 +12,7 @@ import Navbardroite from '../Composants/Navbardroite';
 import NavBarAdmin from '../Composants/NavbarAdmin';
 import AuthContext from '../src/Context/AuthContext';
 import AuthServices from './Services/AuthServices';
+import CalendrierAdmin from '../Pages/CalendrierAdmin';
 
 function Layout() {
   const location = useLocation();
@@ -26,6 +27,7 @@ function Layout() {
         </>
       )}
       {location.pathname === '/DashboardAdmin' && <NavBarAdmin />}
+      {location.pathname === '/CalendrierAdmin' && <NavBarAdmin />}
     </>
   );
 }
@@ -56,6 +58,7 @@ function App() {
           <Route path="/DashboardAdmin" element={<DashboardAdmin />} />
           <Route path='/Login' element={<Login />} />
           <Route path='/Inscription' element={<Inscription />} />
+          <Route path='/CalendrierAdmin' element={<CalendrierAdmin />} />
         </Routes>
       </BrowserRouter>
     </AuthContext.Provider>
