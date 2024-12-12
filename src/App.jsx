@@ -48,7 +48,6 @@ function Layout() {
 function App() {
   const [isAuthenticated, setIsAuthenticated] = useState(AuthServices.isValid());
   const [user, setUser] = useState(AuthServices.getUser());
-  console.log(user);
 
   useEffect(() => {
     const token = localStorage.getItem('token');
