@@ -13,6 +13,8 @@ function EmplacementAdminCard({ numero, tarif, type, idEmplacement }) {
         try {
             const response = await EmplacementServices.serviceEmplacement(idEmplacement); 
             setServices(response.data);
+            
+            
         }
         catch (error) {
             console.error(error);
@@ -25,6 +27,7 @@ function EmplacementAdminCard({ numero, tarif, type, idEmplacement }) {
             const response = await EmplacementServices.photos(idEmplacement); 
             setPhotographies(response.data);
             console.log(response.data);
+            
         }
         catch (error) {
             console.error(error);
@@ -59,13 +62,22 @@ function EmplacementAdminCard({ numero, tarif, type, idEmplacement }) {
                     <br />
                     Équipements disponibles :
                
-                        {services.length > 0 ? (
-                            services.map((service, index) => (
-                                <li key={index}>{service.libelle}</li>
-                            ))
-                        ) : (
-                            <li>Aucun équipement disponible</li>
-                        )}
+                        
+                    {services.length > 0 ? (
+  services.map((service, index) => (
+
+    service && service.libelle ? (
+      <li key={index}>{service.libelle}</li>
+    ) : (
+       
+      <span> <br />Aucun équipement disponible</span>
+    )
+  ))
+) : (
+  <li>Aucun équipement disponible</li>
+)}
+
+
                    
             </Card.Text>
             </div>

@@ -2,13 +2,14 @@ import axios from 'axios';
 
 
 
-function photos(idEmplacement) {
-    return axios.get(`http://localhost:3001/api/services/photoEmplacement`, idEmplacement);
+function photos(id) {
+    return axios.get(`http://localhost:3001/api/services/photoEmplacement/${id}`);
   }
   
-  function serviceEmplacement(idEmplacement) {
-    return axios.get(`http://localhost:3001/api/services/servicesEmplacement`, idEmplacement);
-  }
+  function serviceEmplacement(id) {
+    return axios.get(`http://localhost:3001/api/services/serviceEmplacement/${id}`);
+}
+
 
 export default {photos, serviceEmplacement}
 
