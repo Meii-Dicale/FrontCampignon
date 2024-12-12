@@ -21,6 +21,7 @@ import InfoPersonnelPage from '../Pages/InfoPersonnelPage';
 import ContactPage from '../Pages/ContactPage';
 
 import DashboardAdmin from '../Pages/DashboardAdmin';
+import EmplacementsAdminPage from '../Pages/EmplacementAdminPage';
 import Inscription from '../Pages/InscriptionPage';
 import Login from '../Pages/Login';
 
@@ -45,6 +46,7 @@ function Layout() {
       )}
       {location.pathname === '/DashboardAdmin' && <NavBarAdmin />}
       {location.pathname === '/CalendrierAdmin' && <NavBarAdmin />}
+      {location.pathname === '/Emplacements' && <NavBarAdmin />}
     </>
   );
 }
@@ -83,6 +85,7 @@ function App() {
         <Route path='/promo' element={<PromoPage />} />
         <Route path='/carte' element={<CarteDuCamping />} />
         <Route path='/contact' element={<ContactPage />} />
+        <Route path='/Emplacements' element={<EmplacementsAdminPage />} />
         </Routes>
       </BrowserRouter>
     </AuthContext.Provider>
