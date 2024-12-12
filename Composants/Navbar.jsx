@@ -45,7 +45,7 @@ function MyNavbar() {
           {isAuthenticated ? (
             <>
               <Nav.Link
-                href="#home"
+                href="/infos-personnel"
                 style={{ margin: '0 15px', color: 'black', fontWeight: '500' }}
               >
                 Compte Utilisateur

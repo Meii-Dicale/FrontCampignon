@@ -149,7 +149,7 @@ const Inscription = () => {
           <Form.Control
             placeholder="Mot de Passe"
             type="password"
-            name="mot_de_passe"
+            name="mdp"
             value={utilisateur.mot_de_passe}
             onChange={handleChange}
             required

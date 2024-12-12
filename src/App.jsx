@@ -1,35 +1,31 @@
 import { BrowserRouter, Route, Routes, useLocation } from 'react-router-dom';
 import { useState, useEffect } from 'react';
+
 import 'bootstrap/dist/css/bootstrap.min.css';
 import './App.css';
-import HomePage from '../Pages/HomePage';
-import "bootstrap/dist/css/bootstrap.min.css";
-import './App.css';
-import Navbar from '../Composants/Navbar';
-import Navbardroite from '../Composants/Navbardroite';
-import InscritpionPage from '../Pages/InscriptionPage';
-import ConnexionPage from '../Pages/ConnexionPage';
-import MonComptePage from "../Pages/MoncomptePage";
 
-import "bootstrap/dist/css/bootstrap.min.css";
-import './App.css';
+import CarteDuCamping from "../Pages/Carteducamping";
+import CalendrierAdmin from '../Pages/CalendrierAdmin';
+import ContactPage from '../Pages/ContactPage';
+import DashboardAdmin from '../Pages/DashboardAdmin';
+import GalleriePage from '../Pages/GalleriePage';
+import HomePage from '../Pages/HomePage';
+import InfoPersonnelPage from '../Pages/InfoPersonnelPage';
+import Inscription from '../Pages/InscriptionPage';
+import Login from '../Pages/Login';
+import MonComptePage from "../Pages/MoncomptePage";
 import MesFacturesPage from "../Pages/MesfacturesPage";
 import MesReservationsPage from "../Pages/MesReservationsPage";
 import PromoPage from '../Pages/PromoPage'
-import CarteDuCamping from "../Pages/Carteducamping";
-import InfoPersonnelPage from '../Pages/InfoPersonnelPage';
-import ContactPage from '../Pages/ContactPage';
+import ReservationPage from '../Pages/ReservationPage';
 
-import DashboardAdmin from '../Pages/DashboardAdmin';
-import Inscription from '../Pages/InscriptionPage';
-import Login from '../Pages/Login';
-
-
-
+import Navbar from '../Composants/Navbar';
 import NavBarAdmin from '../Composants/NavbarAdmin';
+import Navbardroite from '../Composants/Navbardroite';
+
 import AuthContext from '../src/Context/AuthContext';
+
 import AuthServices from './Services/AuthServices';
-import CalendrierAdmin from '../Pages/CalendrierAdmin';
 
 function Layout() {
   const location = useLocation();
@@ -83,6 +79,8 @@ function App() {
         <Route path='/promo' element={<PromoPage />} />
         <Route path='/carte' element={<CarteDuCamping />} />
         <Route path='/contact' element={<ContactPage />} />
+        <Route path='/Reservation' element={<ReservationPage />} />
+        <Route path='/Gallerie' element={<GalleriePage />} />
         </Routes>
       </BrowserRouter>
     </AuthContext.Provider>
