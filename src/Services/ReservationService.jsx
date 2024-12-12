@@ -8,5 +8,15 @@ function ChangerDatesReservations (dateEntree, dateSortie , idReservation) {
     return axios.put ('http://localhost:3001/api/reservations/UpdateReservation', data )
 }
 
+function fetchReservations () {
+    return axios.get('http://localhost:3001/api/reservations/AllReservations');
+}
+
+function fetchEmplacements () {
+     return  axios.get('http://localhost:3001/api/emplacement/');
+
+}
+
 export default NouvellesReservations;
+export { fetchReservations, fetchEmplacements };
 export { ChangerDatesReservations };
