@@ -3,38 +3,28 @@ import { useState, useEffect } from 'react';
 import 'bootstrap/dist/css/bootstrap.min.css';
 import './App.css';
 import HomePage from '../Pages/HomePage';
-import "bootstrap/dist/css/bootstrap.min.css";
-import './App.css';
 import Navbar from '../Composants/Navbar';
 import Navbardroite from '../Composants/Navbardroite';
-import InscritpionPage from '../Pages/InscriptionPage';
-import ConnexionPage from '../Pages/ConnexionPage';
 import MonComptePage from "../Pages/MoncomptePage";
-
-import "bootstrap/dist/css/bootstrap.min.css";
-import './App.css';
 import MesFacturesPage from "../Pages/MesfacturesPage";
 import MesReservationsPage from "../Pages/MesReservationsPage";
 import PromoPage from '../Pages/PromoPage'
 import CarteDuCamping from "../Pages/Carteducamping";
 import InfoPersonnelPage from '../Pages/InfoPersonnelPage';
 import ContactPage from '../Pages/ContactPage';
-
 import DashboardAdmin from '../Pages/DashboardAdmin';
 import EmplacementsAdminPage from '../Pages/EmplacementAdminPage';
 import Inscription from '../Pages/InscriptionPage';
 import Login from '../Pages/Login';
-
-
-
 import NavBarAdmin from '../Composants/NavbarAdmin';
 import AuthContext from '../src/Context/AuthContext';
 import AuthServices from './Services/AuthServices';
 import CalendrierAdmin from '../Pages/CalendrierAdmin';
+import EmplacementDetail from '../Pages/DetailEmplacementAdmin';
 
 function Layout() {
   const location = useLocation();
-  
+
   return (
     <>
       {/* Affiche une Navbar différente selon la page */}
@@ -46,7 +36,8 @@ function Layout() {
       )}
       {location.pathname === '/DashboardAdmin' && <NavBarAdmin />}
       {location.pathname === '/CalendrierAdmin' && <NavBarAdmin />}
-      {location.pathname === '/Emplacements' && <NavBarAdmin />}
+      {location.pathname.includes('/emplacementsAdmin') && <NavBarAdmin />}
+      
     </>
   );
 }
@@ -79,13 +70,14 @@ function App() {
           <Route path='/Inscription' element={<Inscription />} />
           <Route path='/CalendrierAdmin' element={<CalendrierAdmin />} />
           <Route path='/compte' element={<MonComptePage />} />
-        <Route path='/infos-personnel' element={<InfoPersonnelPage />} />
-        <Route path='/facture' element={<MesFacturesPage />} />
-        <Route path='/reservations' element={<MesReservationsPage />} />
-        <Route path='/promo' element={<PromoPage />} />
-        <Route path='/carte' element={<CarteDuCamping />} />
-        <Route path='/contact' element={<ContactPage />} />
-        <Route path='/Emplacements' element={<EmplacementsAdminPage />} />
+          <Route path='/infos-personnel' element={<InfoPersonnelPage />} />
+          <Route path='/facture' element={<MesFacturesPage />} />
+          <Route path='/reservations' element={<MesReservationsPage />} />
+          <Route path='/promo' element={<PromoPage />} />
+          <Route path='/carte' element={<CarteDuCamping />} />
+          <Route path='/contact' element={<ContactPage />} />
+          <Route path='/emplacementsAdmin' element={<EmplacementsAdminPage />} />
+          <Route path='/emplacementsAdmin/:id' element={<EmplacementDetail />} />
         </Routes>
       </BrowserRouter>
     </AuthContext.Provider>
