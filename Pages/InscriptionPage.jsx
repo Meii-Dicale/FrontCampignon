@@ -82,6 +82,7 @@ const Inscription = () => {
           <Form.Control
             placeholder="Code Postal"
             name="codePostal"
+            type="number"
             value={utilisateur.codePostal}
             onChange={handleChange}
             required
@@ -112,6 +113,7 @@ const Inscription = () => {
           <Form.Control
             placeholder="Téléphone"
             name="tel"
+            type="tel"
             value={utilisateur.tel}
             onChange={handleChange}
             required

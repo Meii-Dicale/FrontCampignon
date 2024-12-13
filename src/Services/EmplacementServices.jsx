@@ -31,9 +31,10 @@ function associerServiceEmplacement(idService, idEmplacement) {
     
     return axios.post(`http://localhost:3001/api/services/associerServiceEmplacement/`, data );
 }
+function uploadPhoto(id, filePath) {
+    return axios.post(`http://localhost:3001/api/emplacements/upload/${id}`, filePath);
+}
 
 
-export default {photos, serviceEmplacement, infoEmplacement, AllServices, modifierEmplacement, associerServiceEmplacement, SupprimerAssociation}
-
-;
+export default {photos, serviceEmplacement, infoEmplacement, AllServices, modifierEmplacement, associerServiceEmplacement, SupprimerAssociation, uploadPhoto};
 
