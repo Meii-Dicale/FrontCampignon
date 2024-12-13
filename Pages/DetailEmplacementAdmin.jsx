@@ -82,20 +82,21 @@ function EmplacementDetail() {
     try {
       // Mettre à jour les données de l'emplacement
       await EmplacementServices.modifierEmplacement(id, formData);
+      EmplacementServices.SupprimerAssociation(idEmplacement),
+  
 
-      // Associer les services sélectionnés
-      if (nouveauxServices.length > 0) {
-        // Attendre que toutes les promesses se résolvent
-        await Promise.all(nouveauxServices.map((idService) => {
+        (nouveauxServices.map((idService) => {
           EmplacementServices.associerServiceEmplacement(idService , idEmplacement)
           console.log(idService, idEmplacement) 
+         
         }
-        ));
+        
+    ));
      
 
       setModification(false);
       Emplacements();
-    } }catch (error) {
+     }catch (error) {
       console.error(error);
     }
   };
@@ -105,7 +106,7 @@ function EmplacementDetail() {
     fetchServices();
     Emplacements();
     fetchAllServices();
-  }, [id]);
+  }, []);
 
   // Afficher un message de chargement ou l'emplacement une fois les données récupérées
   if (!emplacement) {

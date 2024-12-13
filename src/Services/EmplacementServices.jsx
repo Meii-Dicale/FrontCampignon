@@ -20,6 +20,10 @@ function modifierEmplacement(id, data) {
     return axios.patch(`http://localhost:3001/api/emplacement/${id}`, data);
 }
 
+function SupprimerAssociation(idEmplacement){
+return axios.delete(`http://localhost:3001/api/services/supprimerAssociationServiceEmplacement/${idEmplacement}`)
+}
+
 function associerServiceEmplacement(idService, idEmplacement) {
     const data = {
         idService: idService,
@@ -29,7 +33,7 @@ function associerServiceEmplacement(idService, idEmplacement) {
 }
 
 
-export default {photos, serviceEmplacement, infoEmplacement, AllServices, modifierEmplacement, associerServiceEmplacement}
+export default {photos, serviceEmplacement, infoEmplacement, AllServices, modifierEmplacement, associerServiceEmplacement, SupprimerAssociation}
 
 ;
 
