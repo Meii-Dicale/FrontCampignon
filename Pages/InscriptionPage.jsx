@@ -43,107 +43,115 @@ const Inscription = () => {
           
             <h1>Inscription</h1>
             <Link to="/" className="ms-3" style={{ textDecoration: 'none', color: 'black',fontSize: '1.5rem' }}>
-          Acceuil
+          Accueil
         </Link>
-        
-</div>
-            <Form className="col-10 mt-3" onSubmit={handleSubmit}>
-                <InputGroup className="mb-3">
-                    
-                    <Form.Control
-                        placeholder="Nom"
-                        name="nom"
-                        value={utilisateur.nom}
-                        onChange={handleChange}
-                        required
-                    />
-                </InputGroup>
-                <InputGroup className="mb-3">
-                    <Form.Control
-                        placeholder="Prénom"
-                        name="prenom"
-                        value={utilisateur.prenom}
-                        onChange={handleChange}
-                        required
-                    />
-                </InputGroup>
-                <InputGroup className="mb-3">
-                    <Form.Control
-                        placeholder="Rue"
-                        name="rue"
-                        value={utilisateur.rue}
-                        onChange={handleChange}
-                        required
-                    />
-                </InputGroup>
-                <InputGroup className="mb-3">
-                    <Form.Control
-                        placeholder="Code Postal"
-                        name="codePostal"
-                        value={utilisateur.codePostal}
-                        onChange={handleChange}
-                        required
-                    />
-                </InputGroup>
-                <InputGroup className="mb-3">
-                    <Form.Control
-                        placeholder="Ville"
-                        name="ville"
-                        value={utilisateur.ville}
-                        onChange={handleChange}
-                        required
-                    />
-                </InputGroup>
-                <InputGroup className="mb-3">
-                    <Form.Control
-                        placeholder="Pays"
-                        name="pays"
-                        value={utilisateur.pays}
-                        onChange={handleChange}
-                        required
-                    />
-                </InputGroup>
-                <InputGroup className="mb-3">
-                    <Form.Control
-                        placeholder="Téléphone"
-                        name="tel"
-                        value={utilisateur.tel}
-                        onChange={handleChange}
-                        required
-                    />
-                </InputGroup>
-                <InputGroup className="mb-3">
-                    <Form.Control
-                        placeholder="Email"
-                        type="email"
-                        name="mail"
-                        value={utilisateur.mail}
-                        onChange={handleChange}
-                        required
-                    />
-                </InputGroup>
-                <InputGroup className="mb-3">
-                    <InputGroup.Text>Date de Naissance</InputGroup.Text>
-                    <Form.Control
-                        placeholder="Date de Naissance"
-                        type="date"
-                        name="dateNaissance"
-                        value={utilisateur.dateNaissance}
-                        onChange={handleChange}
-                        required
-                    />
-                </InputGroup>
-                <InputGroup className="mb-3">
-                    <Form.Control
-                        placeholder="Mot de Passe"
-                        type="password"
-                        name="mdp"
-                        value={utilisateur.mdp}
-                        onChange={handleChange}
-                        required
-                    />
-                </InputGroup>
-              
+      </div>
+
+      <Form className="col-10 mt-3" onSubmit={handleSubmit}>
+        <InputGroup className="mb-2">
+          <Form.Control
+            placeholder="Nom"
+            name="nom"
+            value={utilisateur.nom}
+            onChange={handleChange}
+            required
+          />
+        </InputGroup>
+
+        <InputGroup className="mb-2">
+          <Form.Control
+            placeholder="Prénom"
+            name="prenom"
+            value={utilisateur.prenom}
+            onChange={handleChange}
+            required
+          />
+        </InputGroup>
+
+        <InputGroup className="mb-2">
+          <Form.Control
+            placeholder="Rue"
+            name="rue"
+            value={utilisateur.rue}
+            onChange={handleChange}
+            required
+          />
+        </InputGroup>
+
+        <InputGroup className="mb-2">
+          <Form.Control
+            placeholder="Code Postal"
+            name="codePostal"
+            value={utilisateur.codePostal}
+            onChange={handleChange}
+            required
+          />
+        </InputGroup>
+
+        <InputGroup className="mb-2">
+          <Form.Control
+            placeholder="Ville"
+            name="ville"
+            value={utilisateur.ville}
+            onChange={handleChange}
+            required
+          />
+        </InputGroup>
+
+        <InputGroup className="mb-2">
+          <Form.Control
+            placeholder="Pays"
+            name="pays"
+            value={utilisateur.pays}
+            onChange={handleChange}
+            required
+          />
+        </InputGroup>
+
+        <InputGroup className="mb-2">
+          <Form.Control
+            placeholder="Téléphone"
+            name="tel"
+            value={utilisateur.tel}
+            onChange={handleChange}
+            required
+          />
+        </InputGroup>
+
+        <InputGroup className="mb-2">
+          <Form.Control
+            placeholder="Email"
+            type="email"
+            name="mail"
+            value={utilisateur.mail}
+            onChange={handleChange}
+            required
+          />
+        </InputGroup>
+
+        <InputGroup className="mb-2">
+          <InputGroup.Text>Date de Naissance</InputGroup.Text>
+          <Form.Control
+            placeholder="Date de Naissance"
+            type="date"
+            name="dateNaissance"
+            value={utilisateur.dateNaissance}
+            onChange={handleChange}
+            required
+          />
+        </InputGroup>
+
+        <InputGroup className="mb-2">
+          <Form.Control
+            placeholder="Mot de Passe"
+            type="password"
+            name="mdp"
+            value={utilisateur.mdp}
+            onChange={handleChange}
+            required
+          />
+        </InputGroup>
+
                 <Button type="submit" variant="primary">
                     S'inscrire
                 </Button>
