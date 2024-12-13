@@ -51,7 +51,7 @@ const NavBarAdmin = () => {
               </a>
             </li>
             <li className="nav-item">
-              <a className="nav-link" href="#emplacements">
+              <a className="nav-link" href="/emplacementsAdmin">
                 Emplacements
               </a>
             </li>

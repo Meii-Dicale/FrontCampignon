@@ -8,6 +8,8 @@ import CarteDuCamping from "../Pages/Carteducamping";
 import CalendrierAdmin from '../Pages/CalendrierAdmin';
 import ContactPage from '../Pages/ContactPage';
 import DashboardAdmin from '../Pages/DashboardAdmin';
+import EmplacementsAdminPage from '../Pages/EmplacementAdminPage';
+import EmplacementDetail from '../Pages/DetailEmplacementAdmin';
 import GalleriePage from '../Pages/GalleriePage';
 import HomePage from '../Pages/HomePage';
 import InfoPersonnelPage from '../Pages/InfoPersonnelPage';
@@ -27,9 +29,10 @@ import AuthContext from '../src/Context/AuthContext';
 
 import AuthServices from './Services/AuthServices';
 
+
 function Layout() {
   const location = useLocation();
-  
+
   return (
     <>
       {/* Affiche une Navbar différente selon la page */}
@@ -41,6 +44,8 @@ function Layout() {
       )}
       {location.pathname === '/DashboardAdmin' && <NavBarAdmin />}
       {location.pathname === '/CalendrierAdmin' && <NavBarAdmin />}
+      {location.pathname.includes('/emplacementsAdmin') && <NavBarAdmin />}
+      
     </>
   );
 }
@@ -80,6 +85,8 @@ function App() {
         <Route path='/contact' element={<ContactPage />} />
         <Route path='/Reservation' element={<ReservationPage />} />
         <Route path='/Gallerie' element={<GalleriePage />} />
+          <Route path='/emplacementsAdmin' element={<EmplacementsAdminPage />} />
+          <Route path='/emplacementsAdmin/:id' element={<EmplacementDetail />} />
         </Routes>
       </BrowserRouter>
     </AuthContext.Provider>
