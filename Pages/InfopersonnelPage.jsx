@@ -26,7 +26,7 @@ function MonComptePage() {
 
   // Récupération des informations utilisateur depuis l'API
   useEffect(() => {
-    const fetchUserInfo = async () => {
+    const fetchUserInfo = async (id) => {
       try {
         const token = localStorage.getItem('token');
         if (!token) {

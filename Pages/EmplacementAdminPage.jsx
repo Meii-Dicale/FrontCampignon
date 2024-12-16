@@ -1,7 +1,7 @@
 import { useEffect, useState } from "react";
 import EmplacementAdminCard from "../Composants/CarteEmplacementAdmin";
 import { fetchEmplacements } from "../src/Services/ReservationService";
-import { Container } from "react-bootstrap";
+import { Button, Container } from "react-bootstrap";
 
 const EmplacementsAdminPage = () => {
 
@@ -27,6 +27,8 @@ const EmplacementsAdminPage = () => {
                 <h1 style={{
                     color: 'white'
                 }}>Liste des Emplacements</h1>
+                <Button href="/AjouterEmplacementAdmin" >Créer un emplacement</Button> 
+                <Button href="/AjouterServiceAdmin" >Créer un service</Button> 
                 {emplacements.map(emplacement => (
                     
                     <EmplacementAdminCard 
