@@ -21,9 +21,9 @@ body {
 /* Navbardroite placée juste en dessous de la navbar */
 .navbardroite {
   position: fixed;
-  top: 26vh; /* Ajuster selon la hauteur de la navbar, ici elle commence à 60px en dessous */
+  top: 90px; /* Ajuster selon la hauteur de la navbar, ici elle commence à 60px en dessous */
   right: 0;
-  height: calc(100vh - 60px); /* La hauteur prend toute la fenêtre, moins la hauteur de la navbar */
+  height: calc(100vh - 12vh); /* La hauteur prend toute la fenêtre, moins la hauteur de la navbar */
   width: 150px; /* Ajustez la largeur selon vos préférences */
   background-color: rgba(0, 0, 0, 0.3); /* Un fond légèrement transparent */
   padding: 20px;
@@ -202,7 +202,13 @@ input {
   text-align: center;
 }
 
-li {
+.thumbnail-container { max-height: 70vh; overflow-y: auto; }
+.thumbnail { cursor: pointer; margin-bottom: 10px; border: 2px solid transparent; }
+.thumbnail img { width: 100%; max-height: 180px; /* Ajustez la hauteur des miniatures selon vos besoins */ object-fit: contain; }
+.thumbnail.active { border: 2px solid blue; /* Définissez le style pour la miniature active */ }
+.photo-section { display: flex; flex-direction: column; align-items: center; }
+.description-section { padding: 10px; }
+.content-wrapper { flex-grow: 1; padding-right: 10vw; padding-top: 3vh; }li {
   list-style-type: none; /* Masque la puce */
   padding: 10px 0;
 }

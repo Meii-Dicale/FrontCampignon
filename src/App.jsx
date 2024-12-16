@@ -1,39 +1,38 @@
 import { BrowserRouter, Route, Routes, useLocation } from 'react-router-dom';
 import { useState, useEffect } from 'react';
+
 import 'bootstrap/dist/css/bootstrap.min.css';
 import './App.css';
-import HomePage from '../Pages/HomePage';
-import "bootstrap/dist/css/bootstrap.min.css";
-import './App.css';
-import Navbar from '../Composants/Navbar';
-import Navbardroite from '../Composants/Navbardroite';
-// import InscritpionPage from '../Pages/InscriptionPage';
-import MonComptePage from "../Pages/MoncomptePage";
 
-import "bootstrap/dist/css/bootstrap.min.css";
-import './App.css';
+import CarteDuCamping from "../Pages/Carteducamping";
+import CalendrierAdmin from '../Pages/CalendrierAdmin';
+import ContactPage from '../Pages/ContactPage';
+import DashboardAdmin from '../Pages/DashboardAdmin';
+import EmplacementsAdminPage from '../Pages/EmplacementAdminPage';
+import EmplacementDetail from '../Pages/DetailEmplacementAdmin';
+import GalleriePage from '../Pages/GalleriePage';
+import HomePage from '../Pages/HomePage';
+import InfoPersonnelPage from '../Pages/InfoPersonnelPage';
+import Inscription from '../Pages/InscriptionPage';
+import Login from '../Pages/Login';
+import MonComptePage from "../Pages/MoncomptePage";
 import MesFacturesPage from "../Pages/MesfacturesPage";
 import MesReservationsPage from "../Pages/MesReservationsPage";
 import PromoPage from '../Pages/PromoPage'
-import CarteDuCamping from "../Pages/Carteducamping";
-import InfoPersonnelPage from '../Pages/InfoPersonnelPage';
-import ContactPage from '../Pages/ContactPage';
+import ReservationPage from '../Pages/ReservationPage';
 
-import DashboardAdmin from '../Pages/DashboardAdmin';
-import EmplacementsAdminPage from '../Pages/EmplacementAdminPage';
-import Inscription from '../Pages/InscriptionPage';
-import Login from '../Pages/Login';
-
-
-
+import Navbar from '../Composants/Navbar';
 import NavBarAdmin from '../Composants/NavbarAdmin';
+import Navbardroite from '../Composants/Navbardroite';
+
 import AuthContext from '../src/Context/AuthContext';
+
 import AuthServices from './Services/AuthServices';
-import CalendrierAdmin from '../Pages/CalendrierAdmin';
+
 
 function Layout() {
   const location = useLocation();
-  
+
   return (
     <>
       {/* Affiche une Navbar différente selon la page */}
@@ -45,7 +44,8 @@ function Layout() {
       )}
       {location.pathname === '/DashboardAdmin' && <NavBarAdmin />}
       {location.pathname === '/CalendrierAdmin' && <NavBarAdmin />}
-      {location.pathname === '/Emplacements' && <NavBarAdmin />}
+      {location.pathname.includes('/emplacementsAdmin') && <NavBarAdmin />}
+      
     </>
   );
 }
@@ -53,7 +53,6 @@ function Layout() {
 function App() {
   const [isAuthenticated, setIsAuthenticated] = useState(AuthServices.isValid());
   const [user, setUser] = useState(AuthServices.getUser());
-  console.log(user);
 
   useEffect(() => {
     const token = localStorage.getItem('token');
@@ -84,7 +83,10 @@ function App() {
         <Route path='/promo' element={<PromoPage />} />
         <Route path='/carte' element={<CarteDuCamping />} />
         <Route path='/contact' element={<ContactPage />} />
-        <Route path='/Emplacements' element={<EmplacementsAdminPage />} />
+        <Route path='/Reservation' element={<ReservationPage />} />
+        <Route path='/Gallerie' element={<GalleriePage />} />
+          <Route path='/emplacementsAdmin' element={<EmplacementsAdminPage />} />
+          <Route path='/emplacementsAdmin/:id' element={<EmplacementDetail />} />
         </Routes>
       </BrowserRouter>
     </AuthContext.Provider>

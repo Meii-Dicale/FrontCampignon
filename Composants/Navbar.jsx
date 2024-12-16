@@ -1,6 +1,5 @@
 import React, { useState, useContext, useEffect, useRef } from 'react';
-import { Navbar, Container, Nav } from 'react-bootstrap';
-import { X } from 'react-bootstrap-icons';
+import { Navbar, Container, Nav, Button } from 'react-bootstrap';
 import { Link, useNavigate } from 'react-router-dom';
 import AuthContext from '../src/Context/AuthContext';
 import AuthServices from '../src/Services/AuthServices';
@@ -22,7 +21,7 @@ function MyNavbar() {
   };
 
   return (
-    <Navbar className="nabar" expand="lg">
+    <Navbar className="navbar" expand="lg">
       <Container className="d-flex justify-content-between w-100">
         <Navbar.Brand href="#home" className="d-flex align-items-center">
           <img
@@ -43,18 +42,18 @@ function MyNavbar() {
         <Nav className="ms-auto d-flex align-items-center">
           {isAuthenticated ? (
             <>
-              <Nav.Link
-                href="#home"
-                style={{ margin: '0 15px', color: 'black', fontWeight: '500' }}
+              <Button
+                href="/infos-personnel"
+                variant='info'
               >
                 Compte Utilisateur
-              </Nav.Link>
-              <Nav.Link
+              </Button>
+              <Button
                 onClick={handleLogout}
-                style={{ margin: '0 15px', color: 'red', fontWeight: '500' }}
+                variant='danger'
               >
-                <X size={24} />
-              </Nav.Link>
+                Déconnection
+              </Button>
             </>
           ) : (
             <Nav.Link

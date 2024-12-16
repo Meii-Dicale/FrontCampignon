@@ -16,7 +16,14 @@ function fetchEmplacements () {
      return  axios.get('http://localhost:3001/api/emplacement/');
 
 }
+function ValiderResa (id) {
+    return axios.put(`http://localhost:3001/api/reservations/ValiderReservation/${id}`);
+}
+
+function DeleteReservation (id) {
+    return axios.delete(`http://localhost:3001/api/reservations/DeleteReservation/${id}`);
+}
 
 export default NouvellesReservations;
 export { fetchReservations, fetchEmplacements };
-export { ChangerDatesReservations };
+export { ChangerDatesReservations , ValiderResa, DeleteReservation};
