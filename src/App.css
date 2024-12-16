@@ -21,9 +21,9 @@ body {
 /* Navbardroite placée juste en dessous de la navbar */
 .navbardroite {
   position: fixed;
-  top: 26vh; /* Ajuster selon la hauteur de la navbar, ici elle commence à 60px en dessous */
+  top: 90px; /* Ajuster selon la hauteur de la navbar, ici elle commence à 60px en dessous */
   right: 0;
-  height: calc(100vh - 60px); /* La hauteur prend toute la fenêtre, moins la hauteur de la navbar */
+  height: calc(100vh - 12vh); /* La hauteur prend toute la fenêtre, moins la hauteur de la navbar */
   width: 150px; /* Ajustez la largeur selon vos préférences */
   background-color: rgba(0, 0, 0, 0.3); /* Un fond légèrement transparent */
   padding: 20px;
@@ -202,3 +202,63 @@ input {
   text-align: center;
 }
 
+.thumbnail-container { max-height: 70vh; overflow-y: auto; }
+.thumbnail { cursor: pointer; margin-bottom: 10px; border: 2px solid transparent; }
+.thumbnail img { width: 100%; max-height: 180px; /* Ajustez la hauteur des miniatures selon vos besoins */ object-fit: contain; }
+.thumbnail.active { border: 2px solid blue; /* Définissez le style pour la miniature active */ }
+.photo-section { display: flex; flex-direction: column; align-items: center; }
+.description-section { padding: 10px; }
+.content-wrapper { flex-grow: 1; padding-right: 10vw; padding-top: 3vh; }li {
+  list-style-type: none; /* Masque la puce */
+  padding: 10px 0;
+}
+
+.bulle {
+  background-color: #007bff;
+  color: white;
+  padding: 10px 20px;
+  border-radius: 25px;
+  text-decoration: none;
+  font-size: 14px;
+  display: inline-block;
+  transition: background-color 0.3s;
+}
+
+.bulle:hover {
+  background-color: #0056b3;
+}
+
+.bubble-button {
+  position: relative;  /* Positionner le bouton si nécessaire */
+  display: inline-block;
+  padding: 50px 20px;  /* Taille du bouton */
+  border-radius: 10px;  /* Forme de bulle */
+  background-color: #007bff;  /* Couleur du fond */
+  color: white;  /* Couleur du texte */
+  font-size: 16px;
+  font-weight: bold;
+  border: none;  /* Pas de bordure */
+  cursor: pointer;  /* Curseur en forme de main */
+  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);  /* Ombre pour donner un effet flottant */
+  transition: transform 0.3s ease, box-shadow 0.3s ease;  /* Animation pour l'effet au survol */
+  text-align: center; /* Centrer le texte */
+  line-height: 1.2;  /* Espacement entre les lignes */
+  width: auto;  /* Assurer que la largeur du bouton s'adapte au contenu */
+}
+
+.bubble-button .line-one {
+  display: block;  /* Force "Facture {facture.id}" à être sur la première ligne */
+}
+
+.bubble-button .line-two {
+  display: block;  /* Force "{facture.total} €" à être sur la deuxième ligne */
+}
+
+.bubble-button:hover {
+  transform: scale(1.1);  /* Agrandir légèrement au survol */
+  box-shadow: 0 6px 12px rgba(0, 0, 0, 0.2);  /* Ombre plus prononcée au survol */
+}
+
+.bubble-button:active {
+  transform: scale(1);  /* Revenir à la taille normale lorsque le bouton est cliqué */
+}
