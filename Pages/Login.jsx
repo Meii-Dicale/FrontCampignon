@@ -1,11 +1,12 @@
 import { useContext, useState } from 'react';
-import { Container, Form, InputGroup } from 'react-bootstrap';
+import { Alert, Container, Form, InputGroup } from 'react-bootstrap';
 import AuthContext from '../src/Context/AuthContext';
 import AuthServices from '../src/Services/AuthServices';
 
 const Login = ({ setShowLoginModal }) => {
   // déclaration des variables et constantes
   const [user, setUser] = useState({ mail: '', mdp: '' }); // identifiants de cnx
+  const [errorMessage, setErrorMessage] = useState(''); // message d'erreur
   const {
     setIsAuthenticated,
     setUser: setAuthUser,
@@ -32,13 +33,21 @@ const Login = ({ setShowLoginModal }) => {
 
       setShowLoginModal(false); // fermeture de la modal
     } catch (err) {
-      console.error(err);
+      console.error("erreur :",err.response.status, err.response.data.message);
+      if (err.response.status === 404) {
+        setErrorMessage(err.response.data.message)
+      } else if (err.response.status === 401) {
+        setErrorMessage(err.response.data.message)
+      } else {
+        setErrorMessage("une erreur est survenue");
+      }
     }
   };
   // formulaire
   return (
     <Container className="d-flex flex-column align-items-center">
       <h1>Connexion</h1>
+      {errorMessage && <Alert variant='danger'>{errorMessage}</Alert> /*affichage de l'erreur si erreur de cnx */}
       {/* appel de la fonction de validation */}
       <Form className="col-6 mt-3" onSubmit={handleSubmit}>
         {' '}

@@ -13,12 +13,12 @@ function Footer() {
     <footer className="mt-3">
       <Container
         fluid
-        className="d-flex align-items-between"
+        className="d-flex flex-wrap align-items-between"
         style={{ marginRight: '10vw' }}
       >
         <Card className="pt-2 px-4">
           <p className="mb-0">Adresse du camping</p>
-          <p className="small">123 Rue Principale, 75001 Paris</p>
+          <p className="sma">123 Rue Principale, 75001 Paris</p>
         </Card>
         <Card className="pt-2 px-4">
           <p className="mb-0">Numéro de téléphone</p>
