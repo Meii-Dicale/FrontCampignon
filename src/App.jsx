@@ -8,7 +8,6 @@ import './App.css';
 import Navbar from '../Composants/Navbar';
 import Navbardroite from '../Composants/Navbardroite';
 // import InscritpionPage from '../Pages/InscriptionPage';
-import ConnexionPage from '../Pages/ConnexionPage';
 import MonComptePage from "../Pages/MoncomptePage";
 
 import "bootstrap/dist/css/bootstrap.min.css";
@@ -85,6 +84,7 @@ function App() {
         <Route path='/promo' element={<PromoPage />} />
         <Route path='/carte' element={<CarteDuCamping />} />
         <Route path='/contact' element={<ContactPage />} />
+        <Route path='/Emplacements' element={<EmplacementsAdminPage />} />
         </Routes>
       </BrowserRouter>
     </AuthContext.Provider>

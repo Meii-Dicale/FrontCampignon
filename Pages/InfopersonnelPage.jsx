@@ -2,6 +2,7 @@ import React, { useEffect, useState } from 'react';
 import NavbarMonCompte from '../Composants/NavbarMonCompte';
 import { Button, Container, Row, Col, Form } from 'react-bootstrap';
 import { useNavigate } from 'react-router-dom';
+import axios from 'axios';
 
 function MonComptePage() {
   const [userInfo, setUserInfo] = useState({
@@ -18,41 +19,60 @@ function MonComptePage() {
     telephone: '',
     motDePasse: '',
   });
+
+  const [loading, setLoading] = useState(true);
+  const [error, setError] = useState('');
   const navigate = useNavigate();
 
-  // Simulation d'une récupération de données depuis le backend
+  // Récupération des informations utilisateur depuis l'API
   useEffect(() => {
     const fetchUserInfo = async () => {
-      const response = {
-        nom: 'Dupont',
-        prenom: 'Jean',
-        dateNaissance: '1985-05-15',
-        email: 'jean.dupont@example.com',
-        adresse: {
-          rue: '123 Rue Principale',
-          codePostal: '75001',
-          ville: 'Paris',
-          pays: 'France',
-        },
-        telephone: '+33 6 12 34 56 78',
-        motDePasse: '********',
-      };
-      setUserInfo(response);
+      try {
+        const token = localStorage.getItem('token');
+        if (!token) {
+          setError('Vous devez être connecté pour voir vos informations.');
+          setLoading(false);
+          return;
+        }
+
+        const response = await axios.get('http://localhost:3001/api/utilisateur/' + id, { // Remplacez "1" par l'ID de l'utilisateur connecté
+          headers: {
+            Authorization: `Bearer ${token}`,
+          },
+        });
+        console.log(response.data);
+        setUserInfo(response.data);
+        setLoading(false);
+      } catch (err) {
+        setError("Erreur lors de la récupération des informations de l'utilisateur.");
+        setLoading(false);
+        console.log(err);
+        
+      }
     };
 
     fetchUserInfo();
   }, []);
 
+  if (loading) {
+    return <div>Chargement...</div>;
+  }
+
+  if (error) {
+    return <div>{error}</div>;
+  }
+
   return (
     <>
       <NavbarMonCompte />
       <Container className="pt-5 mt-5">
-      <h1 className="text-center mb-4 d-none d-md-block">Mes infos</h1>
-      <h2 className="text-center mb-4 d-block d-md-none" style={{ fontSize: '2rem' }}>Mes Infos</h2>        <Row>
+        <h1 className="text-center mb-4 d-none d-md-block">Mes infos</h1>
+        <h2 className="text-center mb-4 d-block d-md-none" style={{ fontSize: '2rem' }}>Mes Infos</h2>
+        <Row>
           {/* Section des informations personnelles */}
           <Col md={6}>
             <Form>
-              <Form.Group className="mb-2 ">
+              <Form.Group className="mb-2">
                 <Form.Label>Nom</Form.Label>
                 <Form.Control type="text" value={userInfo.nom} readOnly />
               </Form.Group>
@@ -94,35 +114,36 @@ function MonComptePage() {
 
           {/* Section des bulles d'action */}
           <Col lg={4} className="d-flex flex-wrap justify-content-center align-items-start mt-5 gap-3">
-      <Button
-        className="btn-light"
-        style={{ width: '200px', height: '100px' }}
-        onClick={() => navigate('/facture')}
-      >
-        Mes factures
-      </Button>
-      <Button
-        className="btn-light"
-        style={{ width: '200px', height: '100px' }}
-        onClick={() => navigate('/reservations')}
-      >
-        Mes réservations
-      </Button>
-      <Button
-        className="btn-light"
-        style={{ width: '200px', height: '100px' }}
-        onClick={() => navigate('/promo')}
-      >
-        Voir les offres
-      </Button>
-      <Button
-        className="btn-light"
-        style={{ width: '200px', height: '100px' }}
-        onClick={() => navigate('/carte')}
-      >
-        Carte du camping
-      </Button>
-    </Col>        </Row>
+            <Button
+              className="btn-light"
+              style={{ width: '200px', height: '100px' }}
+              onClick={() => navigate('/facture')}
+            >
+              Mes factures
+            </Button>
+            <Button
+              className="btn-light"
+              style={{ width: '200px', height: '100px' }}
+              onClick={() => navigate('/reservations')}
+            >
+              Mes réservations
+            </Button>
+            <Button
+              className="btn-light"
+              style={{ width: '200px', height: '100px' }}
+              onClick={() => navigate('/promo')}
+            >
+              Voir les offres
+            </Button>
+            <Button
+              className="btn-light"
+              style={{ width: '200px', height: '100px' }}
+              onClick={() => navigate('/carte')}
+            >
+              Carte du camping
+            </Button>
+          </Col>
+        </Row>
 
         {/* Bouton Réserver */}
         <div className="text-center mt-5">
