@@ -4,7 +4,7 @@ import { useState, useEffect } from 'react';
 import 'bootstrap/dist/css/bootstrap.min.css';
 import './App.css';
 
-import CarteDuCamping from "../Pages/Carteducamping";
+import CarteDuCamping from '../Pages/Carteducamping';
 import CalendrierAdmin from '../Pages/CalendrierAdmin';
 import ContactPage from '../Pages/ContactPage';
 import DashboardAdmin from '../Pages/DashboardAdmin';
@@ -12,14 +12,15 @@ import EmplacementsAdminPage from '../Pages/EmplacementAdminPage';
 import EmplacementDetail from '../Pages/DetailEmplacementAdmin';
 import GalleriePage from '../Pages/GalleriePage';
 import HomePage from '../Pages/HomePage';
-import InfoPersonnelPage from '../Pages/InfoPersonnelPage';
+import InfoPersonnelPage from '../Pages/InfopersonnelPage';
 import Inscription from '../Pages/InscriptionPage';
 import Login from '../Pages/Login';
-import MonComptePage from "../Pages/MoncomptePage";
-import MesFacturesPage from "../Pages/MesfacturesPage";
-import MesReservationsPage from "../Pages/MesReservationsPage";
-import PromoPage from '../Pages/PromoPage'
+import MonComptePage from '../Pages/MoncomptePage';
+import MesFacturesPage from '../Pages/MesfacturesPage';
+import MesReservationsPage from '../Pages/MesReservationsPage';
+import PromoPage from '../Pages/PromoPage';
 import ReservationPage from '../Pages/ReservationPage';
+import TarifsPage from '../Pages/TarifsPage';
 import Navbar from '../Composants/Navbar';
 import NavBarAdmin from '../Composants/NavbarAdmin';
 import Navbardroite from '../Composants/Navbardroite';
@@ -61,9 +62,18 @@ function App() {
     console.log('isAuthenticated:', isAuthenticated);
     if (token) {
       setIsAuthenticated(true);
-      // Vous pouvez également récupérer les informations de l'utilisateur ici si nécessaire
+      const readToken = AuthServices.getUser();
+      if (readToken) {
+        setUser(readToken);
+      }
+      console.log('token lu :',readToken);
     }
   }, [isAuthenticated]);
+
+//   useEffect(() => {
+//     AuthServices.getUser();
+//     console.log('user :',user);
+// }, [user])
 
   return (
     <AuthContext.Provider
@@ -74,33 +84,30 @@ function App() {
         <Routes>
           <Route path="/" element={<HomePage />} />
           <Route path="/DashboardAdmin" element={<DashboardAdmin />} />
-          <Route path='/Login' element={<Login />} />
-          <Route path='/Inscription' element={<Inscription />} />
-          <Route path='/CalendrierAdmin' element={<CalendrierAdmin />} />
-          <Route path='/compte' element={<MonComptePage />} />
-          <Route path='/infos-personnel' element={<InfoPersonnelPage />} />
-          <Route path='/facture' element={<MesFacturesPage />} />
-          <Route path='/reservations' element={<MesReservationsPage />} />
-          <Route path='/promo' element={<PromoPage />} />
-          <Route path='/carte' element={<CarteDuCamping />} />
-          <Route path='/contact' element={<ContactPage />} />
-          <Route path='/Reservation' element={<ReservationPage />} />
-          <Route path='/Gallerie' element={<GalleriePage />} />
-          <Route path='/emplacementsAdmin' element={<EmplacementsAdminPage />} />
-          <Route path='/emplacementsAdmin/:id' element={<EmplacementDetail />} />
+          <Route path="/Login" element={<Login />} />
+          <Route path="/Inscription" element={<Inscription />} />
+          <Route path="/CalendrierAdmin" element={<CalendrierAdmin />} />
+          <Route path="/compte" element={<MonComptePage />} />
+          <Route path="/infos-personnel" element={<InfoPersonnelPage />} />
+          <Route path="/facture" element={<MesFacturesPage />} />
+          <Route path="/reservations" element={<MesReservationsPage />} />
+          <Route path="/promo" element={<PromoPage />} />
+          <Route path="/carte" element={<CarteDuCamping />} />
+          <Route path="/contact" element={<ContactPage />} />
+          <Route path="/Reservation" element={<ReservationPage />} />
+          <Route path="/Gallerie" element={<GalleriePage />} />
+          <Route path="/emplacementsAdmin" element={<EmplacementsAdminPage />} />
+          <Route path="/emplacementsAdmin/:id" element={<EmplacementDetail />} />
           <Route path='/AjouterEmplacementAdmin' element={<AjoutEmplacement />} />
           <Route path='/AjouterServiceAdmin' element={<AjoutService />} />
           <Route path='/ArchivesReservationAdmin' element={<ArchiveReservation/> } />
           <Route path='/ArchivesMessagesAdmin' element={<ArchiveMessages/> } />
           <Route path='/stocksAdmin' element={<StockAdminPage />} />
           <Route path='/FinanceAdminPage' element={<FinanceAdminPage />} />
-      
-
-
+          <Route path='/Tarifs' element={<TarifsPage />} />
         </Routes>
       </BrowserRouter>
     </AuthContext.Provider>
-
   );
 }
 
