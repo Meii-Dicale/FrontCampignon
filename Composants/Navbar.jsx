@@ -15,7 +15,7 @@ function MyNavbar() {
     if (user && user.role && user.role.includes('superadmin')) {
       navigate('/dashboardAdmin');
     }
-  }, [user, navigate]);
+  }, [user, isAuthenticated, navigate]);
 
   const handleLogout = () => {
     AuthServices.logout();
@@ -24,7 +24,7 @@ function MyNavbar() {
   return (
     <Navbar className="navbar" expand="lg">
       <Container className="d-flex justify-content-between w-100">
-        <Navbar.Brand href="#home" className="d-flex align-items-center">
+        <Navbar.Brand href="/" className="d-flex align-items-center">
           <img
             src="../logo camping.png"
             alt="Logo"
