@@ -51,7 +51,7 @@ function logout() {
   console.log('Logged out successfully');
 
   // Redirection au lieu de recharger
-  window.location.href = '/login'; // Modifiez la route en fonction de votre projet
+  window.location.href = '/'; // Modifiez la route en fonction de votre projet
 }
 
 let isTokenValidCache = null;
