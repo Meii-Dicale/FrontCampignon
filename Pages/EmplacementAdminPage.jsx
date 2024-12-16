@@ -28,6 +28,7 @@ const EmplacementsAdminPage = () => {
                     color: 'white'
                 }}>Liste des Emplacements</h1>
                 {emplacements.map(emplacement => (
+                    
                     <EmplacementAdminCard 
                         numero={emplacement.numero} 
                         tarif={emplacement.tarif} 

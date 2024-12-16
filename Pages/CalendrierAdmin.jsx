@@ -9,19 +9,10 @@ import { useNavigate } from 'react-router-dom';
 
 const Calendar = () => {
   const [reservations, setReservations] = useState([]);
-  const [emplacements, setEmplacements] = useState([]);
   const navigate = useNavigate();
 
 
-const fetchEmplacementsALL = async() => {
-    try {
-       const response = await fetchEmplacements();
-       setEmplacements(response.data);
-       
-    } catch (error) {
-        
-    }
-}
+
 const fetchReservationsALL = async() => {
     try {
        const response = await fetchReservations();
@@ -35,18 +26,21 @@ const fetchReservationsALL = async() => {
 
   useEffect(() => {
     fetchReservationsALL();
-    fetchEmplacementsALL();
+   
   }, []);
 
   const events = reservations.map(reservation => ({
     id: reservation.idReservation,
     title: `Emplacement ${reservation.numero} pour ${reservation.nom}  ${reservation.prenom}`,
-    start: reservation.dateEntree,
-    end: reservation.dateSortie,
+    start: new Date(reservation.dateEntree).toISOString().split('T')[0],
+    end: new Date(reservation.dateSortie).toISOString().split('T')[0],
     backgroundColor: 'pink',
     borderColor: 'black',
 
-  }));
+    
+
+  })
+);
 
   return (
     <Container style={{

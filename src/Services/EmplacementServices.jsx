@@ -20,6 +20,10 @@ function modifierEmplacement(id, data) {
     return axios.patch(`http://localhost:3001/api/emplacement/${id}`, data);
 }
 
+function SupprimerAssociation(idEmplacement){
+return axios.delete(`http://localhost:3001/api/services/supprimerAssociationServiceEmplacement/${idEmplacement}`)
+}
+
 function associerServiceEmplacement(idService, idEmplacement) {
     const data = {
         idService: idService,
@@ -27,9 +31,10 @@ function associerServiceEmplacement(idService, idEmplacement) {
     
     return axios.post(`http://localhost:3001/api/services/associerServiceEmplacement/`, data );
 }
+function uploadPhoto(id, filePath) {
+    return axios.post(`http://localhost:3001/api/emplacements/upload/${id}`, filePath);
+}
 
 
-export default {photos, serviceEmplacement, infoEmplacement, AllServices, modifierEmplacement, associerServiceEmplacement}
-
-;
+export default {photos, serviceEmplacement, infoEmplacement, AllServices, modifierEmplacement, associerServiceEmplacement, SupprimerAssociation, uploadPhoto};
 
