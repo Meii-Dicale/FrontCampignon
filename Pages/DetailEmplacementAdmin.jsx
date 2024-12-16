@@ -1,5 +1,5 @@
 import { useEffect, useState } from 'react';
-import { useParams } from 'react-router-dom';
+import { Navigate, useNavigate, useParams } from 'react-router-dom';
 import EmplacementServices from '../src/Services/EmplacementServices';
 import Card from 'react-bootstrap/Card';
 import { Button, Form } from 'react-bootstrap';
@@ -15,6 +15,7 @@ function EmplacementDetail() {
   const [nouveauxServices, setNouveauxServices] = useState([]);
   const [selectedFile, setSelectedFile] = useState(null); // Nouvelle state pour l'image
   const idEmplacement = id;
+  const navigate = useNavigate();
 
   const Emplacements = async () => {
     try {
@@ -55,6 +56,14 @@ function EmplacementDetail() {
       console.error(error);
     }
   };
+
+  const DeleteEmplacement = async () => {
+    try {
+      await EmplacementServices.supprimerEmplacement(id)
+      navigate('/emplacementsAdmin');
+    } catch (error) {
+      console.error(error);
+    }}
 
   const handleClick = () => {
     setModification(true);
@@ -150,6 +159,9 @@ function EmplacementDetail() {
               )}
             </Card.Text>
             <Button onClick={handleClick}>Modifier</Button>
+            <Button variant="danger" onClick={DeleteEmplacement}>
+              Supprimer
+            </Button>
           </Card.Body>
         </Card>
       ) : (
