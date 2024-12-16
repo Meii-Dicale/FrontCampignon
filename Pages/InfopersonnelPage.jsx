@@ -1,15 +1,16 @@
-import React, { useEffect, useState } from 'react';
+import React, { useContext, useEffect, useState } from 'react';
 import NavbarMonCompte from '../Composants/NavbarMonCompte';
 import { Button, Container, Row, Col, Form } from 'react-bootstrap';
 import { useNavigate } from 'react-router-dom';
 import axios from 'axios';
+import AuthContext from '../src/Context/AuthContext';
 
 function MonComptePage() {
   const [userInfo, setUserInfo] = useState({
     nom: '',
     prenom: '',
     dateNaissance: '',
-    email: '',
+    mail: '',
     adresse: {
       rue: '',
       codePostal: '',
@@ -17,16 +18,18 @@ function MonComptePage() {
       pays: '',
     },
     telephone: '',
-    motDePasse: '',
+    mdp: '',
   });
 
   const [loading, setLoading] = useState(true);
   const [error, setError] = useState('');
   const navigate = useNavigate();
+  const {user} = useContext(AuthContext);
+
 
   // Récupération des informations utilisateur depuis l'API
   useEffect(() => {
-    const fetchUserInfo = async (id) => {
+    const fetchUserInfo = async () => {
       try {
         const token = localStorage.getItem('token');
         if (!token) {
@@ -35,10 +38,7 @@ function MonComptePage() {
           return;
         }
 
-        const response = await axios.get('http://localhost:3001/api/utilisateur/' + id, { // Remplacez "1" par l'ID de l'utilisateur connecté
-          headers: {
-            Authorization: `Bearer ${token}`,
-          },
+        const response = await axios.get('http://localhost:3001/api/utilisateur/' + user.id, { 
         });
         console.log(response.data);
         setUserInfo(response.data);
@@ -53,6 +53,12 @@ function MonComptePage() {
 
     fetchUserInfo();
   }, []);
+
+  const formatDate = (dateString) => {
+    return dateString.slice(0, 10);
+  };
+  const formattedDate = formatDate(userInfo.dateNaissance);
+
 
   if (loading) {
     return <div>Chargement...</div>;
@@ -82,28 +88,28 @@ function MonComptePage() {
               </Form.Group>
               <Form.Group className="mb-2">
                 <Form.Label>Date de Naissance</Form.Label>
-                <Form.Control type="date" value={userInfo.dateNaissance} readOnly />
+                <Form.Control type="date" value={formattedDate} readOnly />
               </Form.Group>
               <Form.Group className="mb-2">
                 <Form.Label>Email</Form.Label>
-                <Form.Control type="email" value={userInfo.email} readOnly />
+                <Form.Control type="email" value={userInfo.mail} readOnly />
               </Form.Group>
               <Form.Group className="mb-2">
                 <Form.Label>Adresse</Form.Label>
                 <Form.Control
                   as="textarea"
                   rows={3}
-                  value={`${userInfo.adresse.rue}, ${userInfo.adresse.codePostal}, ${userInfo.adresse.ville}, ${userInfo.adresse.pays}`}
+                  value={`${userInfo.rue}, ${userInfo.codePostal}, ${userInfo.ville}, ${userInfo.pays}`}
                   readOnly
                 />
               </Form.Group>
               <Form.Group className="mb-3">
                 <Form.Label>Téléphone</Form.Label>
-                <Form.Control type="tel" value={userInfo.telephone} readOnly />
+                <Form.Control type="tel" value={userInfo.tel} readOnly />
               </Form.Group>
               <Form.Group className="mb-5">
                 <Form.Label>Mot de Passe</Form.Label>
-                <Form.Control type="password" value={userInfo.motDePasse} readOnly />
+                <Form.Control type="password" value={userInfo.mdp} readOnly />
               </Form.Group>
               <div className="d-flex align-items-center justify-content-center gap-3">
                 <Button variant="primary">Modifier mes informations</Button>

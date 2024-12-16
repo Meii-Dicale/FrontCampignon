@@ -12,7 +12,7 @@ import EmplacementsAdminPage from '../Pages/EmplacementAdminPage';
 import EmplacementDetail from '../Pages/DetailEmplacementAdmin';
 import GalleriePage from '../Pages/GalleriePage';
 import HomePage from '../Pages/HomePage';
-import InfoPersonnelPage from '../Pages/InfoPersonnelPage';
+import InfoPersonnelPage from '../Pages/InfopersonnelPage';
 import Inscription from '../Pages/InscriptionPage';
 import Login from '../Pages/Login';
 import MonComptePage from '../Pages/MoncomptePage';

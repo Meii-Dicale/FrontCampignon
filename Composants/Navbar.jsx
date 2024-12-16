@@ -54,7 +54,7 @@ function MyNavbar() {
                 onClick={handleLogout}
                 variant='danger'
               >
-                Déconnection
+                Déconnexion
               </Button>
             </>
           ) : (
