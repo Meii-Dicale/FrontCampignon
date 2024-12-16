@@ -1,8 +1,9 @@
-import React, { useEffect, useState } from 'react';
+import React, { useContext, useEffect, useState } from 'react';
 import NavbarMonCompte from '../Composants/NavbarMonCompte';
 import { Button, Container, Row, Col, Form } from 'react-bootstrap';
 import { useNavigate } from 'react-router-dom';
 import axios from 'axios';
+import AuthContext from '../src/Context/AuthContext';
 
 function MonComptePage() {
   const [userInfo, setUserInfo] = useState({
@@ -23,6 +24,8 @@ function MonComptePage() {
   const [loading, setLoading] = useState(true);
   const [error, setError] = useState('');
   const navigate = useNavigate();
+  const {user} = useContext(AuthContext);
+
 
   // Récupération des informations utilisateur depuis l'API
   useEffect(() => {
@@ -34,11 +37,9 @@ function MonComptePage() {
           setLoading(false);
           return;
         }
+console.log(user.idUtilisateur);
 
-        const response = await axios.get('http://localhost:3001/api/utilisateur/' + id, { // Remplacez "1" par l'ID de l'utilisateur connecté
-          headers: {
-            Authorization: `Bearer ${token}`,
-          },
+        const response = await axios.get('http://localhost:3001/api/utilisateur/' + user.idUtilisateur, { 
         });
         console.log(response.data);
         setUserInfo(response.data);

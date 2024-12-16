@@ -38,6 +38,7 @@ function getUser() {
       prenom: decodedToken.prenom,
       email: decodedToken.email,
       role: decodedToken.role,
+      
     };
   } else {
     return {};
