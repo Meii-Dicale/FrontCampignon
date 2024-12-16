@@ -10,7 +10,6 @@ const Login = ({ setShowLoginModal }) => {
   const {
     setIsAuthenticated,
     setUser: setAuthUser,
-    isAuthenticated,
   } = useContext(AuthContext); // initialisation des etats d'authentification
 
   // gère les changements dans les champs du formulaire, sans recharger la page
@@ -23,15 +22,19 @@ const Login = ({ setShowLoginModal }) => {
     e.preventDefault(); // empèche le rechargement de la page
     try {
       const res = await AuthServices.loginUser(user); // appel au service de connexion
-      localStorage.setItem('token', res.data.token); // sauvegarde du token renvoyé par le serveur
-      console.log('Token saved'); // console pour tracer l'étape
+      if (res.data && res.data.token) {
+        localStorage.setItem('token', res.data.token); // sauvegarde du token renvoyé par le serveur
+        console.log('Token saved'); // console pour tracer l'étape
+        setIsAuthenticated(true); // mise à jour du contexte
 
-      setIsAuthenticated(true); // mise à jour du contexte
-      setAuthUser(res.data.user); // mise à jour du contexte
-      console.log('res.data :' + res.data)
-      console.log('isAuthenticated :', isAuthenticated);
-
-      setShowLoginModal(false); // fermeture de la modal
+        let majUser =  AuthServices.getUser();
+        if (majUser) {
+          setAuthUser(majUser);
+        }
+        setShowLoginModal(false); // fermeture de la modal
+      } else {
+        setErrorMessage("Erreur de connexion");
+      }
     } catch (err) {
       console.error("erreur :",err.response.status, err.response.data.message);
       if (err.response.status === 404) {
