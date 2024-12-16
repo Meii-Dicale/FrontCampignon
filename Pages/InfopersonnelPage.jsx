@@ -10,7 +10,7 @@ function MonComptePage() {
     nom: '',
     prenom: '',
     dateNaissance: '',
-    email: '',
+    mail: '',
     adresse: {
       rue: '',
       codePostal: '',
@@ -18,7 +18,7 @@ function MonComptePage() {
       pays: '',
     },
     telephone: '',
-    motDePasse: '',
+    mdp: '',
   });
 
   const [loading, setLoading] = useState(true);
@@ -37,9 +37,8 @@ function MonComptePage() {
           setLoading(false);
           return;
         }
-console.log(user.idUtilisateur);
 
-        const response = await axios.get('http://localhost:3001/api/utilisateur/' + user.idUtilisateur, { 
+        const response = await axios.get('http://localhost:3001/api/utilisateur/' + user.id, { 
         });
         console.log(response.data);
         setUserInfo(response.data);
@@ -54,6 +53,12 @@ console.log(user.idUtilisateur);
 
     fetchUserInfo();
   }, []);
+
+  const formatDate = (dateString) => {
+    return dateString.slice(0, 10);
+  };
+  const formattedDate = formatDate(userInfo.dateNaissance);
+
 
   if (loading) {
     return <div>Chargement...</div>;
@@ -83,28 +88,28 @@ console.log(user.idUtilisateur);
               </Form.Group>
               <Form.Group className="mb-2">
                 <Form.Label>Date de Naissance</Form.Label>
-                <Form.Control type="date" value={userInfo.dateNaissance} readOnly />
+                <Form.Control type="date" value={formattedDate} readOnly />
               </Form.Group>
               <Form.Group className="mb-2">
                 <Form.Label>Email</Form.Label>
-                <Form.Control type="email" value={userInfo.email} readOnly />
+                <Form.Control type="email" value={userInfo.mail} readOnly />
               </Form.Group>
               <Form.Group className="mb-2">
                 <Form.Label>Adresse</Form.Label>
                 <Form.Control
                   as="textarea"
                   rows={3}
-                  value={`${userInfo.adresse.rue}, ${userInfo.adresse.codePostal}, ${userInfo.adresse.ville}, ${userInfo.adresse.pays}`}
+                  value={`${userInfo.rue}, ${userInfo.codePostal}, ${userInfo.ville}, ${userInfo.pays}`}
                   readOnly
                 />
               </Form.Group>
               <Form.Group className="mb-3">
                 <Form.Label>Téléphone</Form.Label>
-                <Form.Control type="tel" value={userInfo.telephone} readOnly />
+                <Form.Control type="tel" value={userInfo.tel} readOnly />
               </Form.Group>
               <Form.Group className="mb-5">
                 <Form.Label>Mot de Passe</Form.Label>
-                <Form.Control type="password" value={userInfo.motDePasse} readOnly />
+                <Form.Control type="password" value={userInfo.mdp} readOnly />
               </Form.Group>
               <div className="d-flex align-items-center justify-content-center gap-3">
                 <Button variant="primary">Modifier mes informations</Button>

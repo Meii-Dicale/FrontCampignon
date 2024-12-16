@@ -1,6 +1,6 @@
 import React, { useState, useContext, useEffect, useRef } from 'react';
 import { Navbar, Container, Nav, Button } from 'react-bootstrap';
-import { Link, useNavigate } from 'react-router-dom';
+import { useNavigate } from 'react-router-dom';
 import AuthContext from '../src/Context/AuthContext';
 import AuthServices from '../src/Services/AuthServices';
 import LoginModal from './LoginModal';
@@ -52,7 +52,7 @@ function MyNavbar() {
                 onClick={handleLogout}
                 variant='danger'
               >
-                Déconnection
+                Déconnexion
               </Button>
             </>
           ) : (

@@ -32,9 +32,32 @@ function associerServiceEmplacement(idService, idEmplacement) {
     return axios.post(`http://localhost:3001/api/services/associerServiceEmplacement/`, data );
 }
 function uploadPhoto(id, filePath) {
-    return axios.post(`http://localhost:3001/api/emplacements/upload/${id}`, filePath);
+    return axios.post(`http://localhost:3001/api/emplacement/upload/${id}`, filePath);
+}
+
+function supprimerEmplacement(id) {
+    return axios.delete(`http://localhost:3001/api/emplacement/${id}`);
+}
+function creerEmplacement(data) {
+    const envoi = {
+        numero: data.numero,
+        type: data.type,
+        tarif: data.tarif,
+        description: data.description
+    }
+    return axios.post(`http://localhost:3001/api/emplacement/add`, envoi);
+}
+
+function creerService (data) {
+    const envoi = {
+    
+        libelle: data.libelle,
+        tarif: data.tarif,
+        stock: data.stock,
+    }
+    return axios.post(`http://localhost:3001/api/services/creerService`, envoi);
 }
 
 
-export default {photos, serviceEmplacement, infoEmplacement, AllServices, modifierEmplacement, associerServiceEmplacement, SupprimerAssociation, uploadPhoto};
+export default {photos, serviceEmplacement, infoEmplacement, AllServices, modifierEmplacement, associerServiceEmplacement, SupprimerAssociation, uploadPhoto, creerEmplacement, supprimerEmplacement, creerService};
 

@@ -20,14 +20,13 @@ import MesFacturesPage from "../Pages/MesfacturesPage";
 import MesReservationsPage from "../Pages/MesReservationsPage";
 import PromoPage from '../Pages/PromoPage'
 import ReservationPage from '../Pages/ReservationPage';
-
 import Navbar from '../Composants/Navbar';
 import NavBarAdmin from '../Composants/NavbarAdmin';
 import Navbardroite from '../Composants/Navbardroite';
-
 import AuthContext from '../src/Context/AuthContext';
-
 import AuthServices from './Services/AuthServices';
+import AjoutEmplacement from '../Pages/AjoutEmplacement';
+import AjoutService from '../Pages/AjoutServices';
 
 
 function Layout() {
@@ -42,10 +41,8 @@ function Layout() {
           <Navbardroite />
         </>
       )}
-      {location.pathname === '/DashboardAdmin' && <NavBarAdmin />}
-      {location.pathname === '/CalendrierAdmin' && <NavBarAdmin />}
-      {location.pathname.includes('/emplacementsAdmin') && <NavBarAdmin />}
-      
+      {location.pathname.includes('Admin') && <NavBarAdmin />}
+
     </>
   );
 }
@@ -77,16 +74,21 @@ function App() {
           <Route path='/Inscription' element={<Inscription />} />
           <Route path='/CalendrierAdmin' element={<CalendrierAdmin />} />
           <Route path='/compte' element={<MonComptePage />} />
-        <Route path='/infos-personnel' element={<InfoPersonnelPage />} />
-        <Route path='/facture' element={<MesFacturesPage />} />
-        <Route path='/reservations' element={<MesReservationsPage />} />
-        <Route path='/promo' element={<PromoPage />} />
-        <Route path='/carte' element={<CarteDuCamping />} />
-        <Route path='/contact' element={<ContactPage />} />
-        <Route path='/Reservation' element={<ReservationPage />} />
-        <Route path='/Gallerie' element={<GalleriePage />} />
+          <Route path='/infos-personnel' element={<InfoPersonnelPage />} />
+          <Route path='/facture' element={<MesFacturesPage />} />
+          <Route path='/reservations' element={<MesReservationsPage />} />
+          <Route path='/promo' element={<PromoPage />} />
+          <Route path='/carte' element={<CarteDuCamping />} />
+          <Route path='/contact' element={<ContactPage />} />
+          <Route path='/Reservation' element={<ReservationPage />} />
+          <Route path='/Gallerie' element={<GalleriePage />} />
           <Route path='/emplacementsAdmin' element={<EmplacementsAdminPage />} />
           <Route path='/emplacementsAdmin/:id' element={<EmplacementDetail />} />
+          <Route path='/AjouterEmplacementAdmin' element={<AjoutEmplacement />} />
+          <Route path='/AjouterServiceAdmin' element={<AjoutService />} />
+      
+
+
         </Routes>
       </BrowserRouter>
     </AuthContext.Provider>

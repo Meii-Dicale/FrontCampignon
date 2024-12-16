@@ -6,7 +6,7 @@ import { useNavigate } from 'react-router-dom';
 
 function EmplacementAdminCard({ numero, tarif, type, idEmplacement }) {
     const [services, setServices] = useState([]);
-    const [allServices, setAllServices] = useState([]);  
+ 
     const [photographies, setPhotographies] = useState([]);
     const navigate = useNavigate();  
 
