@@ -2,6 +2,7 @@ import { useEffect, useState } from "react";
 import { Pie } from "react-chartjs-2";
 import Chart from 'chart.js/auto';
 import FinanceServices from "../src/Services/FinancesServices";
+import { Container } from "react-bootstrap";
 
 const FinanceAdminPage = () => {
     const [nbreResas, setNbreResas] = useState(0);
@@ -15,8 +16,8 @@ const FinanceAdminPage = () => {
     const fetchReservationToday = async (dateAujourdhui) => {
         try {
             const response = await FinanceServices.reservationToday(dateAujourdhui);
-            setNbreResas(response.data);
-            console.log(response.data);
+            setNbreResas(response.data.reservations);
+            console.log(response.data.reservations);
         } catch (error) {
             console.error("Erreur lors de la récupération des réservations du jour :", error);
         }
@@ -25,8 +26,8 @@ const FinanceAdminPage = () => {
     const fetchNombreEmplace = async () => {
         try {
             const response = await FinanceServices.compterEmplacement();
-            setNbreEmplace(response.data);
-            console.log(response.data);
+            setNbreEmplace(response.data.Emplacements);
+            console.log(response.data.Emplacements);
         } catch (error) {
             console.error("Erreur lors de la récupération du nombre d'emplacements :", error);
         }
@@ -51,10 +52,15 @@ const FinanceAdminPage = () => {
     };
 
     return (
-        <div>
+        <Container className=" col-3 d-flex justify-align-center items-align-center w-25 h-25 flex-column">
+        <div >
             <h2>Taux d'occupation pour le {dateAujourdhui}</h2>
-            <Pie data={data} />
+            <Pie  data={data} /> 
         </div>
+        <div>
+        
+        </div>
+        </Container>
     );
 };
 
