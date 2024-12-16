@@ -43,7 +43,7 @@ return (
      <div className="d-flex flex-column ">
         <Alert key={'light'} variant={'light'}>
           Nouveaux messages 
-          <Button href="/ArchivesMessages">Voir archives</Button>
+          <Button href="/ArchivesMessagesAdmin">Voir archives</Button>
         </Alert>
         </div>
         <div className="d-flex flex-column justify-content-center align-items-center gap-3">
@@ -63,7 +63,7 @@ return (
         
         <Alert key={'light'} variant={'light'}>
           Nouvelles Reserations
-          <Button href="/ArchivesReservation">Voir archives</Button>
+          <Button href="/ArchivesReservationAdmin">Voir archives</Button>
         </Alert>
         </div>
         <div className="d-flex flex-column justify-content-center align-items-center gap-3">

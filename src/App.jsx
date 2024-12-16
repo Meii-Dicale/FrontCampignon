@@ -28,6 +28,11 @@ import AuthContext from '../src/Context/AuthContext';
 import AuthServices from './Services/AuthServices';
 import AjoutEmplacement from '../Pages/AjoutEmplacement';
 import AjoutService from '../Pages/AjoutServices';
+import ArchiveReservation from '../Pages/ArchiveReservations';
+import ArchiveMessages from '../Pages/ArchivesMessages';
+import StockAdminPage from '../Pages/StockAdminPage';
+import FinanceAdminPage from '../Pages/FinanceAdminPage';
+
 
 function Layout() {
   const location = useLocation();
@@ -95,6 +100,10 @@ function App() {
           <Route path="/emplacementsAdmin/:id" element={<EmplacementDetail />} />
           <Route path='/AjouterEmplacementAdmin' element={<AjoutEmplacement />} />
           <Route path='/AjouterServiceAdmin' element={<AjoutService />} />
+          <Route path='/ArchivesReservationAdmin' element={<ArchiveReservation/> } />
+          <Route path='/ArchivesMessagesAdmin' element={<ArchiveMessages/> } />
+          <Route path='/stocksAdmin' element={<StockAdminPage />} />
+          <Route path='/FinanceAdminPage' element={<FinanceAdminPage />} />
           <Route path='/Tarifs' element={<TarifsPage />} />
         </Routes>
       </BrowserRouter>

@@ -2,6 +2,7 @@ import { useContext, useState } from 'react';
 import { Alert, Container, Form, InputGroup } from 'react-bootstrap';
 import AuthContext from '../src/Context/AuthContext';
 import AuthServices from '../src/Services/AuthServices';
+import { useNavigate } from 'react-router-dom';
 
 const Login = ({ setShowLoginModal }) => {
   // déclaration des variables et constantes

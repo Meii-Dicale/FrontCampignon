@@ -4,6 +4,8 @@ import EmplacementServices from '../src/Services/EmplacementServices';
 import Card from 'react-bootstrap/Card';
 import { Button, Form } from 'react-bootstrap';
 
+//https://rapidapi.com/guides/upload-files-react-axios
+
 function EmplacementDetail() {
   const { id } = useParams();
   const [emplacement, setEmplacement] = useState();
@@ -88,10 +90,7 @@ function EmplacementDetail() {
   };
 
   const handleFileUpload = async () => {
-    if (!selectedFile) {
-      alert('Veuillez sélectionner un fichier à télécharger.');
-      return;
-    }
+
     const formData = new FormData();
     formData.append('file', selectedFile);
     formData.append('emplacementId', idEmplacement);

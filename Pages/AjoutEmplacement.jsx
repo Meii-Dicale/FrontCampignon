@@ -23,11 +23,7 @@ const AjoutEmplacement = () => {
 
     try {
       // Envoyer une requête POST au backend
-      const response = await axios.post('http://localhost:3001/api/emplacement/add', formData, {
-        headers: {
-          'Authorization': `Bearer ${localStorage.getItem('token')}`, // Si un token est nécessaire
-        },
-      });
+      const response = await axios.post('http://localhost:3001/api/emplacement/add', formData);
 
       setSuccess(response.data.message); // Afficher un message de succès
       setError(null);

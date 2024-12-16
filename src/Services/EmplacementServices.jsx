@@ -48,16 +48,20 @@ function creerEmplacement(data) {
     return axios.post(`http://localhost:3001/api/emplacement/add`, envoi);
 }
 
-function creerService (data) {
+function updateService(data) {
     const envoi = {
-    
         libelle: data.libelle,
-        tarif: data.tarif,
         stock: data.stock,
+        tarif: data.tarif,
+        idService: data.idService
     }
-    return axios.post(`http://localhost:3001/api/services/creerService`, envoi);
+    return axios.put(`http://localhost:3001/api/services/modifierService`, envoi);
+}
+function supprimerService(idService) {
+    return axios.delete(`http://localhost:3001/api/services/supprimerService/${idService}`);
 }
 
 
-export default {photos, serviceEmplacement, infoEmplacement, AllServices, modifierEmplacement, associerServiceEmplacement, SupprimerAssociation, uploadPhoto, creerEmplacement, supprimerEmplacement, creerService};
+
+export default {photos, serviceEmplacement, infoEmplacement, AllServices, modifierEmplacement, associerServiceEmplacement, SupprimerAssociation, uploadPhoto, creerEmplacement, supprimerEmplacement, updateService,supprimerService};
 

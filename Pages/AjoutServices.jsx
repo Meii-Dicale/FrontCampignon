@@ -1,6 +1,6 @@
 import { useState } from 'react';
 import { Form, Button, Container, Row, Col } from 'react-bootstrap';
-
+import axios from 'axios';
 
 const AjoutService = () => {
   const [formData, setFormData] = useState({
@@ -8,8 +8,10 @@ const AjoutService = () => {
     tarif: '',
     stock: '',
   });
+  const [success, setSuccess] = useState(null);
+  const [error, setError] = useState(null);
 
-  const handleChange =  (e) => {
+  const handleChange = (e) => {
     const { name, value } = e.target;
     setFormData({ ...formData, [name]: value });
   };
@@ -17,19 +19,33 @@ const AjoutService = () => {
   const handleSubmit = async (e) => {
     e.preventDefault();
 
-try {await creerService(formData)
+    // Convertir les champs vides en null
+    const dataToSend = {
+      ...formData,
+      tarif: formData.tarif === '' ? null : parseFloat(formData.tarif),
+      stock: formData.stock === '' ? null : parseInt(formData.stock, 10),
+    };
+
+    try {
+      const response = await axios.post(
+        'http://localhost:3001/api/services/creerService',
+        dataToSend
+      );
 
       setSuccess(response.data.message); // Afficher un message de succès
+      setError(null); // Réinitialiser l'erreur
       setFormData({
         libelle: '',
         tarif: '',
         stock: '',
       });
-    }
-    catch (error) {
+    } catch (error) {
+      setSuccess(null);
+      setError(
+        error.response ? error.response.data.message : 'Erreur lors de la création du service'
+      );
       console.error(error);
     }
-    
   };
 
   return (
@@ -37,6 +53,8 @@ try {await creerService(formData)
       <Row className="justify-content-center">
         <Col md={6}>
           <h2 className="text-center mb-4">Créer un Service</h2>
+          {success && <div className="alert alert-success">{success}</div>}
+          {error && <div className="alert alert-danger">{error}</div>}
           <Form onSubmit={handleSubmit}>
             <Form.Group controlId="libelle">
               <Form.Label>Libellé</Form.Label>
@@ -59,7 +77,6 @@ try {await creerService(formData)
                 value={formData.tarif}
                 onChange={handleChange}
                 placeholder="Entrez le tarif (en euros)"
-                required
               />
             </Form.Group>
 
@@ -71,7 +88,6 @@ try {await creerService(formData)
                 value={formData.stock}
                 onChange={handleChange}
                 placeholder="Entrez la quantité en stock"
-                required
               />
             </Form.Group>
 
@@ -85,4 +101,4 @@ try {await creerService(formData)
   );
 };
 
-export default AjoutService;
+export default AjoutService

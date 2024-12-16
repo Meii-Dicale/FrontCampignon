@@ -23,11 +23,11 @@ const EmplacementsAdminPage = () => {
 
     return (
         <>
-            <Container className="w-75 d-flex flex-column gap-3">
+            <Container className="w-75 d-flex justify-content-center align-items-center flex-column gap-3">
                 <h1 style={{
                     color: 'white'
                 }}>Liste des Emplacements</h1>
-                <Button href="/AjouterEmplacementAdmin" >Créer un emplacement</Button> 
+                <Button  href="/AjouterEmplacementAdmin" >Créer un emplacement</Button> 
                 <Button href="/AjouterServiceAdmin" >Créer un service</Button> 
                 {emplacements.map(emplacement => (
                     
