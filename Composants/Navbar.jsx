@@ -12,11 +12,10 @@ function MyNavbar() {
  
 
   useEffect(() => {
-    if (user && user.role && user.role.includes('superadmin')) {
+    if (user && user.role && Array.isArray(user.role) && user.role.includes('superadmin')) {
       navigate('/dashboardAdmin');
     }
   }, [user, navigate]);
-
   const handleLogout = () => {
     AuthServices.logout();
   };
