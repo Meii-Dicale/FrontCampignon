@@ -66,12 +66,12 @@ const NavBarAdmin = () => {
               </a>
             </li>
             <li className="nav-item">
-              <a className="nav-link" href="#finances">
+              <a className="nav-link" href="/FinanceAdminPage">
                 Finances
               </a>
             </li>
             <li className="nav-item">
-              <a className="nav-link" href="#mon-compte">
+              <a className="nav-link" href="/infos-personnel">
                 Mon compte
               </a>
             </li>

@@ -2,6 +2,7 @@ import { useContext, useState } from 'react';
 import { Container, Form, InputGroup } from 'react-bootstrap';
 import AuthContext from '../src/Context/AuthContext';
 import AuthServices from '../src/Services/AuthServices';
+import { useNavigate } from 'react-router-dom';
 
 const Login = ({ setShowLoginModal }) => {
   // déclaration des variables et constantes
@@ -31,6 +32,7 @@ const Login = ({ setShowLoginModal }) => {
       console.log('isAuthenticated :', isAuthenticated);
 
       setShowLoginModal(false); // fermeture de la modal
+
     } catch (err) {
       console.error(err);
     }
