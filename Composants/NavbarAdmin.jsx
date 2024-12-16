@@ -61,7 +61,7 @@ const NavBarAdmin = () => {
               </a>
             </li>
             <li className="nav-item">
-              <a className="nav-link" href="#stocks">
+              <a className="nav-link" href="/stocksAdmin">
                 Stocks
               </a>
             </li>

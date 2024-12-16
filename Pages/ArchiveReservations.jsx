@@ -43,8 +43,6 @@ reservation.validation === 1 ? (
 
         
         </div>
-
-
 </>
      );
     

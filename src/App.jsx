@@ -29,6 +29,7 @@ import AjoutEmplacement from '../Pages/AjoutEmplacement';
 import AjoutService from '../Pages/AjoutServices';
 import ArchiveReservation from '../Pages/ArchiveReservations';
 import ArchiveMessages from '../Pages/ArchivesMessages';
+import StockAdminPage from '../Pages/StockAdminPage';
 
 
 function Layout() {
@@ -90,6 +91,7 @@ function App() {
           <Route path='/AjouterServiceAdmin' element={<AjoutService />} />
           <Route path='/ArchivesReservationAdmin' element={<ArchiveReservation/> } />
           <Route path='/ArchivesMessagesAdmin' element={<ArchiveMessages/> } />
+          <Route path='/stocksAdmin' element={<StockAdminPage />} />
       
 
 
