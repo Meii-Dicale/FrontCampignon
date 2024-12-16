@@ -1,15 +1,15 @@
 import { useContext, useState } from 'react';
-import { Container, Form, InputGroup } from 'react-bootstrap';
+import { Alert, Container, Form, InputGroup } from 'react-bootstrap';
 import AuthContext from '../src/Context/AuthContext';
 import AuthServices from '../src/Services/AuthServices';
 
 const Login = ({ setShowLoginModal }) => {
   // déclaration des variables et constantes
   const [user, setUser] = useState({ mail: '', mdp: '' }); // identifiants de cnx
+  const [errorMessage, setErrorMessage] = useState(''); // message d'erreur
   const {
     setIsAuthenticated,
     setUser: setAuthUser,
-    isAuthenticated,
   } = useContext(AuthContext); // initialisation des etats d'authentification
 
   // gère les changements dans les champs du formulaire, sans recharger la page
@@ -22,23 +22,35 @@ const Login = ({ setShowLoginModal }) => {
     e.preventDefault(); // empèche le rechargement de la page
     try {
       const res = await AuthServices.loginUser(user); // appel au service de connexion
-      localStorage.setItem('token', res.data.token); // sauvegarde du token renvoyé par le serveur
-      console.log('Token saved'); // console pour tracer l'étape
+      if (res.data && res.data.token) {
+        localStorage.setItem('token', res.data.token); // sauvegarde du token renvoyé par le serveur
+        console.log('Token saved'); // console pour tracer l'étape
+        setIsAuthenticated(true); // mise à jour du contexte
 
-      setIsAuthenticated(true); // mise à jour du contexte
-      setAuthUser(res.data.user); // mise à jour du contexte
-      console.log('res.data :' + res.data)
-      console.log('isAuthenticated :', isAuthenticated);
-
-      setShowLoginModal(false); // fermeture de la modal
+        let majUser =  AuthServices.getUser();
+        if (majUser) {
+          setAuthUser(majUser);
+        }
+        setShowLoginModal(false); // fermeture de la modal
+      } else {
+        setErrorMessage("Erreur de connexion");
+      }
     } catch (err) {
-      console.error(err);
+      console.error("erreur :",err.response.status, err.response.data.message);
+      if (err.response.status === 404) {
+        setErrorMessage(err.response.data.message)
+      } else if (err.response.status === 401) {
+        setErrorMessage(err.response.data.message)
+      } else {
+        setErrorMessage("une erreur est survenue");
+      }
     }
   };
   // formulaire
   return (
     <Container className="d-flex flex-column align-items-center">
       <h1>Connexion</h1>
+      {errorMessage && <Alert variant='danger'>{errorMessage}</Alert> /*affichage de l'erreur si erreur de cnx */}
       {/* appel de la fonction de validation */}
       <Form className="col-6 mt-3" onSubmit={handleSubmit}>
         {' '}
