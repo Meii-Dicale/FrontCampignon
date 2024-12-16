@@ -48,9 +48,7 @@ function Layout() {
 }
 
 function App() {
-  const [isAuthenticated, setIsAuthenticated] = useState(
-    AuthServices.isValid()
-  );
+  const [isAuthenticated, setIsAuthenticated] = useState(AuthServices.isValid());
   const [user, setUser] = useState(AuthServices.getUser());
 
   useEffect(() => {
@@ -59,9 +57,18 @@ function App() {
     console.log('isAuthenticated:', isAuthenticated);
     if (token) {
       setIsAuthenticated(true);
-      // Vous pouvez également récupérer les informations de l'utilisateur ici si nécessaire
+      const readToken = AuthServices.getUser();
+      if (readToken) {
+        setUser(readToken);
+      }
+      console.log('token lu :',readToken);
     }
   }, [isAuthenticated]);
+
+//   useEffect(() => {
+//     AuthServices.getUser();
+//     console.log('user :',user);
+// }, [user])
 
   return (
     <AuthContext.Provider
@@ -76,21 +83,18 @@ function App() {
           <Route path="/Inscription" element={<Inscription />} />
           <Route path="/CalendrierAdmin" element={<CalendrierAdmin />} />
           <Route path="/compte" element={<MonComptePage />} />
-            <Route path="/infos-personnel" element={<InfoPersonnelPage />} />
-            <Route path="/facture" element={<MesFacturesPage />} />
-            <Route path="/reservations" element={<MesReservationsPage />} />
-            <Route path="/promo" element={<PromoPage />} />
-            <Route path="/carte" element={<CarteDuCamping />} />
-            <Route path="/contact" element={<ContactPage />} />
-            <Route path="/Reservation" element={<ReservationPage />} />
-            <Route path="/Gallerie" element={<GalleriePage />} />
+          <Route path="/infos-personnel" element={<InfoPersonnelPage />} />
+          <Route path="/facture" element={<MesFacturesPage />} />
+          <Route path="/reservations" element={<MesReservationsPage />} />
+          <Route path="/promo" element={<PromoPage />} />
+          <Route path="/carte" element={<CarteDuCamping />} />
+          <Route path="/contact" element={<ContactPage />} />
+          <Route path="/Reservation" element={<ReservationPage />} />
+          <Route path="/Gallerie" element={<GalleriePage />} />
           <Route path="/emplacementsAdmin" element={<EmplacementsAdminPage />} />
           <Route path="/emplacementsAdmin/:id" element={<EmplacementDetail />} />
           <Route path='/AjouterEmplacementAdmin' element={<AjoutEmplacement />} />
           <Route path='/AjouterServiceAdmin' element={<AjoutService />} />
-      
-
-
           <Route path='/Tarifs' element={<TarifsPage />} />
         </Routes>
       </BrowserRouter>

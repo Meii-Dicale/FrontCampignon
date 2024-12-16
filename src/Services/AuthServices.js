@@ -48,10 +48,11 @@ function logout() {
   delete axios.defaults.headers['Authorization'];
   localStorage.removeItem('token');
   localStorage.setItem('loggedOut', 'true'); // Ajout d'un indicateur
+  isTokenValidCache = null;
   console.log('Logged out successfully');
 
   // Redirection au lieu de recharger
-  window.location.href = '/login'; // Modifiez la route en fonction de votre projet
+  window.location.href = '/'; // Modifiez la route en fonction de votre projet
 }
 
 let isTokenValidCache = null;
@@ -60,7 +61,6 @@ function isValid() {
   if (isTokenValidCache !== null) {
     return isTokenValidCache;
   }
-
   const token = localStorage.getItem('token');
   if (token) {
     const decodedToken = jwtDecode(token);
@@ -79,11 +79,7 @@ function isValid() {
     }
   } else {
     // Empêcher une déconnexion répétée
-    if (!localStorage.getItem('loggedOut')) {
-      logout();
-    }
-    isTokenValidCache = false;
-    return false;
+    return null;
   }
 }
 

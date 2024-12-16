@@ -1,21 +1,22 @@
 import React, { useState, useContext, useEffect, useRef } from 'react';
 import { Navbar, Container, Nav, Button } from 'react-bootstrap';
-import { Link, useNavigate } from 'react-router-dom';
+import { useNavigate } from 'react-router-dom';
 import AuthContext from '../src/Context/AuthContext';
 import AuthServices from '../src/Services/AuthServices';
 import LoginModal from './LoginModal';
 
 function MyNavbar() {
-  const { isAuthenticated, setIsAuthenticated, user } = useContext(AuthContext);
+  const { isAuthenticated, user } = useContext(AuthContext);
   const [showLoginModal, setShowLoginModal] = useState(false);
   const navigate = useNavigate();
- 
 
   useEffect(() => {
-    if (user && user.role && Array.isArray(user.role) && user.role.includes('superadmin')) {
-      navigate('/dashboardAdmin');
+    if (user && Object.keys(user).length > 0) {
+      if (user.role && user.role.includes('superadmin')) {
+        navigate('/dashboardAdmin');
+      }
     }
-  }, [user, isAuthenticated, navigate]);
+  }, [user, navigate]);
 
   const handleLogout = () => {
     AuthServices.logout();

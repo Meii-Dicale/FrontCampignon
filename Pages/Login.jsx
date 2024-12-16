@@ -24,6 +24,7 @@ const Login = ({ setShowLoginModal }) => {
       const res = await AuthServices.loginUser(user); // appel au service de connexion
       if (res.data && res.data.token) {
         localStorage.setItem('token', res.data.token); // sauvegarde du token renvoyé par le serveur
+        localStorage.removeItem('loggedOut');
         console.log('Token saved'); // console pour tracer l'étape
         setIsAuthenticated(true); // mise à jour du contexte
 
