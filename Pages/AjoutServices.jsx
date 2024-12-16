@@ -1,6 +1,6 @@
 import { useState } from 'react';
 import { Form, Button, Container, Row, Col } from 'react-bootstrap';
-
+import axios from 'axios';
 
 const AjoutService = () => {
   const [formData, setFormData] = useState({
@@ -8,6 +8,8 @@ const AjoutService = () => {
     tarif: '',
     stock: '',
   });
+  const [success, setSuccess] = useState(null);
+  const [error, setError] = useState(null);
 
   const handleChange =  (e) => {
     const { name, value } = e.target;
@@ -17,9 +19,10 @@ const AjoutService = () => {
   const handleSubmit = async (e) => {
     e.preventDefault();
 
-try {await creerService(formData)
+try { const response = await axios.post ('http://localhost:3001/api/services/creerService', formData )
 
       setSuccess(response.data.message); // Afficher un message de succès
+      setError(null); // Réinitialiser l'erreur
       setFormData({
         libelle: '',
         tarif: '',
@@ -27,9 +30,10 @@ try {await creerService(formData)
       });
     }
     catch (error) {
-      console.error(error);
+        setSuccess(null);
+        setError(err.response ? err.response.data.message : 'Erreur lors de la création du service');
+        console.error(err);
     }
-    
   };
 
   return (

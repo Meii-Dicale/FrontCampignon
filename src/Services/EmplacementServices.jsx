@@ -48,16 +48,8 @@ function creerEmplacement(data) {
     return axios.post(`http://localhost:3001/api/emplacement/add`, envoi);
 }
 
-function creerService (data) {
-    const envoi = {
-    
-        libelle: data.libelle,
-        tarif: data.tarif,
-        stock: data.stock,
-    }
-    return axios.post(`http://localhost:3001/api/services/creerService`, envoi);
-}
 
 
-export default {photos, serviceEmplacement, infoEmplacement, AllServices, modifierEmplacement, associerServiceEmplacement, SupprimerAssociation, uploadPhoto, creerEmplacement, supprimerEmplacement, creerService};
+
+export default {photos, serviceEmplacement, infoEmplacement, AllServices, modifierEmplacement, associerServiceEmplacement, SupprimerAssociation, uploadPhoto, creerEmplacement, supprimerEmplacement};
 

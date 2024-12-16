@@ -9,8 +9,12 @@ function Archivage (idContact) {
     return axios.post ('http://localhost:3001/api/contact/Archiver', {idContact} )
 }
 
+function VoirArchives() {
+    return axios.get ('http://localhost:3001/api/contact/MessagesArchives' )
+}
 
-
-
+function Supprimer (idContact) {
+    return axios.delete (`http://localhost:3001/api/contact/supprimer/${idContact}`)
+}
 export default Contact;
-export { Archivage};
+export { Archivage, VoirArchives, Supprimer};
