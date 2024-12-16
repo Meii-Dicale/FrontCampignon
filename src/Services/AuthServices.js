@@ -36,7 +36,7 @@ function getUser() {
     return {
       nom: decodedToken.nom,
       prenom: decodedToken.prenom,
-      email: decodedToken.email,
+      idUtilisateur: decodedToken.idUtilisateur,
       role: decodedToken.role,
     };
   } else {
