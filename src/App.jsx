@@ -37,6 +37,7 @@ import InscriptionAgent from '../Pages/AjoutAgen';
 import PromotionAdmin from '../Pages/PromotionAdmin';
 import ReservationDetails from '../Pages/ReservationDetailPage';
 import PrivateRoute from './Services/RouteProtection';
+import ValiderResaPage from '../Pages/ValiderResaPage.jsx';
 
 
 function Layout() {
@@ -75,11 +76,6 @@ function App() {
     }
   }, [isAuthenticated]);
 
-//   useEffect(() => {
-//     AuthServices.getUser();
-//     console.log('user :',user);
-// }, [user])
-
   return (
     <AuthContext.Provider
       value={{ isAuthenticated, setIsAuthenticated, user, setUser }}
@@ -90,17 +86,20 @@ function App() {
           <Route path="/" element={<HomePage />} />
           <Route path="/Login" element={<Login />} />
           <Route path="/Inscription" element={<Inscription />} />
-          <Route path="/compte" element={<MonComptePage />} />
-          <Route path="/infos-personnel" element={<InfoPersonnelPage />} />
-          <Route path="/facture" element={<MesFacturesPage />} />
-          <Route path="/reservations" element={<MesReservationsPage />} />
           <Route path="/promo" element={<PromoPage />} />
           <Route path="/carte" element={<CarteDuCamping />} />
           <Route path="/contact" element={<ContactPage />} />
-          <Route path="/Reservation" element={<ReservationPage />} />
+          <Route path="/Reserver" element={<ReservationPage />} />
           <Route path="/Gallerie" element={<GalleriePage />} />
           <Route path='/Tarifs' element={<TarifsPage />} />
           <Route path='/Services' element={<ServicesPage />} />
+
+{/* devrait etre accessible à role client mimimum */}
+<Route path="/compte" element={<MonComptePage />} />
+<Route path="/infos-personnel" element={<InfoPersonnelPage />} /> 
+<Route path="/facture" element={<MesFacturesPage />} />
+<Route path="/reservations" element={<MesReservationsPage />} />
+<Route path="/valider" element={<ValiderResaPage />} />
 
 
   {/* Routes accessibles à tous */}
@@ -120,13 +119,6 @@ function App() {
   <Route path='/InscriptionAdmin' element={<PrivateRoute element={<InscriptionAgent />} allowedRoles={['superadmin']} />} />
   <Route path='/PromotionAdmin' element={<PrivateRoute element={<PromotionAdmin />} allowedRoles={['superadmin']} />} />
 
-
-
-  
-
-
-
-          
         </Routes>
       </BrowserRouter>
     </AuthContext.Provider>
