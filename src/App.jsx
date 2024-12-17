@@ -111,19 +111,16 @@ function App() {
   <Route path="/CalendrierAdmin" element={<PrivateRoute element={<CalendrierAdmin />} allowedRoles={['superadmin', 'rh', 'agent']} />} />
   <Route path='/reservationAdmin/:idReservation' element={<PrivateRoute element={<ReservationDetails />} allowedRoles={['superadmin', 'rh', 'agent']} />} />
 
-  {/* Routes réservées à 'superadmin' */}
+  {/* Routes réservées à 'superadmin' et/ou 'rh'*/}
   <Route path='/ArchivesMessagesAdmin' element={<PrivateRoute element={<ArchiveMessages />} allowedRoles={['superadmin']} />} />
-  <Route path='/stocksAdmin' element={<PrivateRoute element={<StockAdminPage />} allowedRoles={['superadmin']} />} />
-  <Route path='/FinanceAdminPage' element={<PrivateRoute element={<FinanceAdminPage />} allowedRoles={['superadmin']} />} />
+  <Route path='/stocksAdmin' element={<PrivateRoute element={<StockAdminPage />} allowedRoles={['superadmin', 'rh']} />} />
+  <Route path='/FinanceAdminPage' element={<PrivateRoute element={<FinanceAdminPage />} allowedRoles={['superadmin','rh']} />} />
   <Route path='/InscriptionAdmin' element={<PrivateRoute element={<InscriptionAgent />} allowedRoles={['superadmin']} />} />
   <Route path='/PromotionAdmin' element={<PrivateRoute element={<PromotionAdmin />} allowedRoles={['superadmin']} />} />
 
-  {/* Routes réservées à 'rh' */}
-  <Route path='/stocksAdmin' element={<PrivateRoute element={<StockAdminPage />} allowedRoles={['rh']} />} />
-  <Route path='/FinanceAdminPage' element={<PrivateRoute element={<FinanceAdminPage />} allowedRoles={['rh']} />} />
 
-  {/* Routes réservées à 'agent' */}
-  <Route path='/FinanceAdminPage' element={<PrivateRoute element={<FinanceAdminPage />} allowedRoles={['agent']} />} />
+
+  
 
 
 
