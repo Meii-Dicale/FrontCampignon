@@ -13,6 +13,8 @@ const Login = ({ setShowLoginModal }) => {
     setUser: setAuthUser,
   } = useContext(AuthContext); // initialisation des etats d'authentification
 
+  const navigate = useNavigate();
+
   // gère les changements dans les champs du formulaire, sans recharger la page
   const handleChange = (e) => {
     setUser({ ...user, [e.target.name]: e.target.value });
@@ -37,6 +39,7 @@ const Login = ({ setShowLoginModal }) => {
       } else {
         setErrorMessage("Erreur de connexion");
       }
+      navigate('/compte');
     } catch (err) {
       console.error("erreur :",err.response.status, err.response.data.message);
       if (err.response.status === 404) {
