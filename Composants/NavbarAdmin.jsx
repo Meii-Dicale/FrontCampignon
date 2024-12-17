@@ -56,7 +56,7 @@ const NavBarAdmin = () => {
               </a>
             </li>
             <li className="nav-item">
-              <a className="nav-link" href="#promotions">
+              <a className="nav-link" href="/PromotionAdmin">
                 Promotions
               </a>
             </li>

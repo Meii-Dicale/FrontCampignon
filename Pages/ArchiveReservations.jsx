@@ -34,7 +34,7 @@ reservation.validation === 1 ? (
         mail={reservation.mail} 
         numero={reservation.numero} 
         prenom={reservation.prenom} 
-        tarif={reservation.tarif} 
+        tarif={reservation.tarif+reservation.tarifEmplacement} 
         type={reservation.type}
     />
 ) : null
