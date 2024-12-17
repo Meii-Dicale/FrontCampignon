@@ -3,6 +3,7 @@ import { useNavigate } from 'react-router-dom';
 import axios from 'axios';
 import AuthContext from '../src/Context/AuthContext';
 import { jsPDF } from 'jspdf';
+import moment from 'moment';
 
 function GenerateurFacture() {
   const [userInfo, setUserInfo] = useState({
@@ -64,9 +65,8 @@ function GenerateurFacture() {
 
 
   const formatDate = (dateString) => {
-    return dateString.slice(0, 10);
+    return moment(dateString).format("DD/MM/YYYY");
   };
-  const formattedDate = formatDate(userInfo.dateNaissance);
 
 
   // Fonction pour générer la facture en PDF
@@ -90,17 +90,21 @@ function GenerateurFacture() {
     // doc.text(`Facture ID: ${facture.id}`, 20, 20);
 
     const logo = '../logo camping.png'; // Remplacez par votre logo
-    doc.addImage(logo, 'PNG', 10, 10, 50, 20); // (image, format, x, y, width, height)
+    doc.addImage(logo, 'PNG', 10, 10, 32, 35); // (image, format, x, y, width, height)
     
     const image = '../nom camping.png'; // Remplacez par votre image d'entreprise
-    doc.addImage(image, 'PNG', 105, 150, 80, 50); // (image, format, x, y, width, height)
+    doc.addImage(image, 'PNG', 75, 10, 80, 25); // (image, format, x, y, width, height)
     
     
-    doc.text(`${userInfo.nom} ${userInfo.prenom}`, 20, 30);
-    doc.text(`${userInfo.rue}, ${userInfo.codePostal} ${userInfo.ville}, ${userInfo.pays}`, 20, 40);
-    doc.text(`${userInfo.mail}`, 20, 50);
-    doc.text(`${formatDate(formattedDate)}`, 20, 60);
-    doc.text(`${totalFormatted} €`, 20, 70);
+    doc.text(`${userInfo.prenom} ${userInfo.nom}`, 150, 60);
+    doc.text(`${userInfo.rue}`, 150, 70);
+    doc.text(`${userInfo.codePostal} ${userInfo.ville}`, 150, 80);
+    doc.text(` ${userInfo.pays}`, 150, 90);
+    // doc.text(`${userInfo.mail}`, 20, 50);
+    doc.text(`${formatDate(facture.date_facture)}`, 20, 60);   
+     doc.text(`${totalFormatted} €`, 150, 200);
+     doc.setFontSize(28);
+     doc.text(`Facture`, 93, 120);
   
     // Sauvegarder le PDF
     doc.save(`facture-${facture.id}.pdf`);
@@ -117,8 +121,7 @@ function GenerateurFacture() {
               className="bubble-button"
               onClick={() => generatePDF(facture)}
             >
-              <span className="line-one">Facture {formattedDate}</span>
-              <span className="line-two">{facture.total} €</span>
+ <span className="line-one">Facture du {moment(facture.date_facture).format('DD/MM/YYYY')}</span>              <span className="line-two">{facture.total} €</span>
             </button>
           ))}
         </div>

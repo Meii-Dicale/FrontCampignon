@@ -1,6 +1,14 @@
 import React from 'react';
-import { Navbar, Container, Nav, Dropdown } from 'react-bootstrap';
-import { Link } from 'react-router-dom';
+import { Navbar, Container, Nav, Dropdown, Button } from 'react-bootstrap';
+import { Link, Navigate } from 'react-router-dom';
+import AuthServices from '../src/Services/AuthServices';
+
+
+  const handleLogout = () => {
+    AuthServices.logout();
+    Navigate("/");
+  };
+
 
 function NavbarMonCompte() {
   return (
@@ -96,9 +104,19 @@ function NavbarMonCompte() {
             Accueil
           </Link>
         </Nav>
-        <Nav className="ms-auto d-flex align-items-center">
+<Nav className="ms-auto d-flex align-items-center">
+        <Button
+                onClick={handleLogout}
+                variant='danger'
+              >
+                Déconnexion
+              </Button>
+</Nav>
+
+
+        {/* <Nav className="ms-auto d-flex align-items-center">
           <Link
-            to="/deconnexion"
+            to="/"
             style={{
               margin: '0 15px',
               color: 'black',
@@ -108,7 +126,7 @@ function NavbarMonCompte() {
           >
             Déconnexion
           </Link>
-        </Nav>
+        </Nav> */}
       </Container>
     </Navbar>
   );
