@@ -20,6 +20,7 @@ import MesFacturesPage from '../Pages/MesfacturesPage';
 import MesReservationsPage from '../Pages/MesReservationsPage';
 import PromoPage from '../Pages/PromoPage';
 import ReservationPage from '../Pages/ReservationPage';
+import ServicesPage from '../Pages/ServicesPage';
 import TarifsPage from '../Pages/TarifsPage';
 import Navbar from '../Composants/Navbar';
 import NavBarAdmin from '../Composants/NavbarAdmin';
@@ -105,6 +106,7 @@ function App() {
           <Route path='/stocksAdmin' element={<StockAdminPage />} />
           <Route path='/FinanceAdminPage' element={<FinanceAdminPage />} />
           <Route path='/Tarifs' element={<TarifsPage />} />
+          <Route path='/Services' element={<ServicesPage />} />
         </Routes>
       </BrowserRouter>
     </AuthContext.Provider>
