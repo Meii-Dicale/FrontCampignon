@@ -24,7 +24,10 @@ function DeleteReservation (id) {
     return axios.delete(`http://localhost:3001/api/reservations/DeleteReservation/${id}`);
 }
 
+function ReservationById (idReservation) {
+    return axios.get(`http://localhost:3001/api/reservations/${idReservation}`);
+}
 
 export default NouvellesReservations;
 export { fetchReservations, fetchEmplacements };
-export { ChangerDatesReservations , ValiderResa, DeleteReservation};
+export { ChangerDatesReservations , ValiderResa, DeleteReservation, ReservationById};

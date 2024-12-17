@@ -46,7 +46,7 @@ function EmplacementAdminCard({ numero, tarif, type, idEmplacement }) {
 
     return (
         <Container style={{
-            marginLeft: "250px",
+            
             width: "75%"
         }}>
             <Card className='d-flex flex-row' onClick={handleCardClick}> 
