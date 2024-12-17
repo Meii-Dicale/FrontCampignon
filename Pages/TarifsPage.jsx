@@ -2,99 +2,112 @@ import React, { useEffect, useState } from 'react';
 import MyNavbar from '../Composants/Navbar';
 import Navbardroite from '../Composants/Navbardroite';
 import Footer from '../Composants/footer';
-import {
-  listeEmplacements,
-  photoEmplacement,
-} from '../src/Services/apiServices';
 import { Container, Row, Col, Card } from 'react-bootstrap';
+import { listeEmplacements, listeServices } from '../src/Services/apiServices';
 
 const TarifsPage = () => {
-  const [gallerieData, setGallerieData] = useState([]);
-  const [currentIndex, setCurrentIndex] = useState(0);
+  const [promotions, setPromotions] = useState([]);
+  const [emplacements, setEmplacements] = useState([]);
+  const [services, setServices] = useState([]);
 
   useEffect(() => {
-    const loadContent = async () => {
-      const descriptionData = await listeEmplacements();
-      let emplacements = descriptionData.data;
-      let nouvGalData = await Promise.all(
-        emplacements.map(async (emplacement) => {
-          const { idEmplacement, description } = emplacement;
-          const photoReq = await photoEmplacement(idEmplacement);
-          const photoData = photoReq.data[0];
-          return { idEmplacement, description, ...photoData };
-        })
-      );
-      setGallerieData(nouvGalData);
+    const loadPromotions = async () => {
+      // données de promotions insérées à la main
+      const promoData = [
+        {
+          id: 1,
+          title: 'Promotion 1',
+          description: 'Profitez de 10% pour votre prochain séjour',
+        },
+        {
+          id: 2,
+          title: 'Promotion 2',
+          description:
+            'Réservez en avril ou en octobre et bénéficiez de 20% de réduction',
+        },
+        {
+          id: 3,
+          title: 'Promotion 3',
+          description:
+            'Accès gratuit au spa pour une réservation de 3 nuits ou plus',
+        },
+        {
+          id: 4,
+          title: 'Promotion 3',
+          description:
+            'Réduction pour les séjours en famille : -15% pour 4 personnes ou plus',
+        },
+      ];
+      setPromotions(promoData);
     };
-    loadContent();
+    const loadTarifs = async () => {
+      try {
+        const emplacementsData = await listeEmplacements();
+        const servicesData = await listeServices();
+        setEmplacements(emplacementsData.data);
+        setServices(servicesData.data);
+      } catch (error) {
+        console.error('Erreur lors du chargement des tarifs:', error);
+      }
+    };
+    loadPromotions();
+    loadTarifs();
   }, []);
 
-  const handleSelect = (selectedIndex) => {
-    setCurrentIndex(selectedIndex);
-  };
-
-  useEffect(() => {
-    const interval = setInterval(() => {
-      setCurrentIndex((prevIndex) => (prevIndex + 1) % gallerieData.length);
-    }, 10000);
-    return () => clearInterval(interval);
-  }, [gallerieData.length]);
-
-  useEffect(() => {
-    const adjustNavbardroite = () => {
-      const navbarHeight = document.querySelector('.navbar').offsetHeight;
-      document.querySelector('.navbardroite').style.top = `${navbarHeight}px`;
-    };
-
-    // Ajuster au chargement
-    adjustNavbardroite();
-
-    // Ajuster lors du redimensionnement de la fenêtre
-    window.addEventListener('resize', adjustNavbardroite);
-
-    return () => {
-      window.removeEventListener('resize', adjustNavbardroite);
-    };
-  }, []);
+  console.log(services);
 
   return (
     <>
       <MyNavbar />
       <Navbardroite />
-      <div className="content-wrapper">
-        <Container fluid className="mt-5">
-          <Row>
-            <Col md={8}>
-              <Card className="photo-section w-100" style={{ maxHeight: '70vh' }}>
-                <Card.Img
-                  src={gallerieData[currentIndex]?.chemin}
-                  alt={gallerieData[currentIndex]?.idPhoto}
-                  className="img-fluid"
-                  style={{ objectFit: 'contain', height: '100%' }}
-                />
+        <Container className="content-wrapper mt-5">
+          <Row lg={2} md={1} >
+            <Col md={6}>
+              <Card className="h-100">
                 <Card.Body>
-                  <Card.Text className="description-section">
-                    {gallerieData[currentIndex]?.description}
+                  <Card.Title>Tarifs</Card.Title>
+                  <Card.Text>
+                    Voici la liste des tarifs de nos emplacements:
                   </Card.Text>
+                  <ul>
+                    {emplacements.map((emplacement) => (
+                      <li key={emplacement.idEmplacement}>
+                        {emplacement.type}: {emplacement.tarif} €
+                      </li>
+                    ))}
+                  </ul>
+                  <Card.Text>
+                    Voici la liste des tarifs de nos services:
+                  </Card.Text>
+                  <ul>
+                    {services.map((service) => (
+                      <li key={service.idService}>
+                        {service.libelle}: {service.tarif} €
+                      </li>
+                    ))}
+                  </ul>
                 </Card.Body>
               </Card>
             </Col>
-            <Col md={4}>
-              <div className="thumbnail-container">
-                {gallerieData.map((data, index) => (
-                  <div
-                    key={index}
-                    className={`thumbnail ${index === currentIndex ? 'active' : ''}`}
-                    onClick={() => handleSelect(index)}
-                  >
-                    <img src={data.chemin} alt={`Thumbnail ${index}`} />
-                  </div>
-                ))}
-              </div>
+            <Col md={6}>
+              <Card style={{ height: '100%' }} className='p-2'>
+                <Card.Title className='m-3'>Promotions</Card.Title>
+                <Row md={1} lg={2} className="g-4">
+                  {Array.from(promotions).map((promo, index) => (
+                    <Col key={index}>
+                      <Card className='m-2'>
+                        <Card.Body>
+                          <Card.Title>{promo.title}</Card.Title>
+                          <Card.Text>{promo.description}</Card.Text>
+                        </Card.Body>
+                      </Card>
+                    </Col>
+                  ))}
+                </Row>
+              </Card>
             </Col>
           </Row>
         </Container>
-      </div>
       <Footer />
     </>
   );
