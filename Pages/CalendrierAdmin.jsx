@@ -88,13 +88,11 @@ const Calendar = () => {
         initialView="resourceTimelineMonth" // Vue par mois
         events={events} // Renvoi vers le .map des reservations filtrées
         resources={resources} // Renvoi vers le .map des emplacements filtrés
-        locale="fr" // Langue française
-        editable={true} // Permet d’éditer les événements (optionnel)
-        droppable={true} // Permet de glisser-déposer les événements (optionnel)
+        locale="fr" // Langue française 
         eventClick={(info) => {
           // Redirection ou action lors du clic sur un événement
           console.log('Événement cliqué :', info.event);
-          navigate(`/reservation/${info.event.id}`);
+          navigate(`/reservationAdmin/${info.event.id}`);
         }}
       />
     </Container>

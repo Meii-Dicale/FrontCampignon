@@ -5,12 +5,13 @@ import { ChangerDatesReservations, DeleteReservation, ValiderResa } from '../src
 
 function ReservationCard({ nom, mail, prenom, numero, tarif, dateEntree, dateSortie, idReservation, type }) {
   const [Modify, setModify] = useState(false);
-  const [newDateEntree, setNewDateEntree] = useState(() =>
-    new Date(dateEntree).toISOString().split('T')[0]
-  );
-  const [newDateSortie, setNewDateSortie] = useState(() =>
-    new Date(dateSortie).toISOString().split('T')[0]
-  );
+const [newDateEntree, setNewDateEntree] = useState(() =>
+  dateEntree ? new Date(dateEntree).toISOString().split('T')[0] : ''
+);
+const [newDateSortie, setNewDateSortie] = useState(() =>
+  dateSortie ? new Date(dateSortie).toISOString().split('T')[0] : ''
+);
+
 
   const handleValidate = async () => {
     if (new Date(newDateEntree) >= new Date(newDateSortie)) {

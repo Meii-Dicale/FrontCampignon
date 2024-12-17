@@ -53,7 +53,7 @@ const StockAdminPage = () => {
   };
   const handleDelete = async (idService) => {
     try {
-   
+
       await EmplacementServices.supprimerService(idService);
       setSuccess(`Service supprimé avec succès.`);
       setError(null);
@@ -94,7 +94,8 @@ const StockAdminPage = () => {
             {services.map((service, index) => (
               <tr key={index}>
                 <td>{service.libelle}</td>
-                <td>{service.tarif} €</td>
+                <td>{service.tarif !== null ? 
+                (<span> {service.tarif} € </span>) : (<span>Gratuit</span>)} </td>
                 <td>
                   {service.stock !== null ? (
                     <div className="d-flex justify-content-center align-items-center">

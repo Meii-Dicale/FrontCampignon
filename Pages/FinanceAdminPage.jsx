@@ -2,7 +2,7 @@ import { useEffect, useState } from "react";
 import { Pie } from "react-chartjs-2";
 import Chart from 'chart.js/auto';
 import FinanceServices from "../src/Services/FinancesServices";
-import { Container } from "react-bootstrap";
+import { Button, Container } from "react-bootstrap";
 
 const FinanceAdminPage = () => {
     const [nbreResas, setNbreResas] = useState(0);
@@ -58,10 +58,10 @@ const FinanceAdminPage = () => {
             <Pie  data={data} /> 
         </div>
         <div>
-        
+        <Button href="/InscriptionAdmin">Ajouter un agent ou un client</Button>
         </div>
         </Container>
-    );
+    );  
 };
 
 export default FinanceAdminPage;

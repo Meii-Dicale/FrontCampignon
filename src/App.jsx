@@ -32,6 +32,10 @@ import ArchiveReservation from '../Pages/ArchiveReservations';
 import ArchiveMessages from '../Pages/ArchivesMessages';
 import StockAdminPage from '../Pages/StockAdminPage';
 import FinanceAdminPage from '../Pages/FinanceAdminPage';
+import InscriptionAgent from '../Pages/AjoutAgen';
+import PromotionAdmin from '../Pages/PromotionAdmin';
+import ReservationDetails from '../Pages/ReservationDetailPage';
+import PrivateRoute from './Services/RouteProtection';
 
 
 function Layout() {
@@ -83,10 +87,8 @@ function App() {
         <Layout />
         <Routes>
           <Route path="/" element={<HomePage />} />
-          <Route path="/DashboardAdmin" element={<DashboardAdmin />} />
           <Route path="/Login" element={<Login />} />
           <Route path="/Inscription" element={<Inscription />} />
-          <Route path="/CalendrierAdmin" element={<CalendrierAdmin />} />
           <Route path="/compte" element={<MonComptePage />} />
           <Route path="/infos-personnel" element={<InfoPersonnelPage />} />
           <Route path="/facture" element={<MesFacturesPage />} />
@@ -96,15 +98,36 @@ function App() {
           <Route path="/contact" element={<ContactPage />} />
           <Route path="/Reservation" element={<ReservationPage />} />
           <Route path="/Gallerie" element={<GalleriePage />} />
-          <Route path="/emplacementsAdmin" element={<EmplacementsAdminPage />} />
-          <Route path="/emplacementsAdmin/:id" element={<EmplacementDetail />} />
-          <Route path='/AjouterEmplacementAdmin' element={<AjoutEmplacement />} />
-          <Route path='/AjouterServiceAdmin' element={<AjoutService />} />
-          <Route path='/ArchivesReservationAdmin' element={<ArchiveReservation/> } />
-          <Route path='/ArchivesMessagesAdmin' element={<ArchiveMessages/> } />
-          <Route path='/stocksAdmin' element={<StockAdminPage />} />
-          <Route path='/FinanceAdminPage' element={<FinanceAdminPage />} />
           <Route path='/Tarifs' element={<TarifsPage />} />
+
+
+  {/* Routes accessibles à tous */}
+  <Route path="/DashboardAdmin" element={<PrivateRoute element={<DashboardAdmin />} allowedRoles={['superadmin', 'rh', 'agent']} />} />
+  <Route path="/emplacementsAdmin" element={<PrivateRoute element={<EmplacementsAdminPage />} allowedRoles={['superadmin', 'rh', 'agent']} />} />
+  <Route path="/emplacementsAdmin/:id" element={<PrivateRoute element={<EmplacementDetail />} allowedRoles={['superadmin', 'rh', 'agent']} />} />
+  <Route path='/AjouterEmplacementAdmin' element={<PrivateRoute element={<AjoutEmplacement />} allowedRoles={['superadmin', 'rh', 'agent']} />} />
+  <Route path='/AjouterServiceAdmin' element={<PrivateRoute element={<AjoutService />} allowedRoles={['superadmin', 'rh', 'agent']} />} />
+  <Route path='/ArchivesReservationAdmin' element={<PrivateRoute element={<ArchiveReservation />} allowedRoles={['superadmin', 'rh', 'agent']} />} />
+  <Route path="/CalendrierAdmin" element={<PrivateRoute element={<CalendrierAdmin />} allowedRoles={['superadmin', 'rh', 'agent']} />} />
+  <Route path='/reservationAdmin/:idReservation' element={<PrivateRoute element={<ReservationDetails />} allowedRoles={['superadmin', 'rh', 'agent']} />} />
+
+  {/* Routes réservées à 'superadmin' */}
+  <Route path='/ArchivesMessagesAdmin' element={<PrivateRoute element={<ArchiveMessages />} allowedRoles={['superadmin']} />} />
+  <Route path='/stocksAdmin' element={<PrivateRoute element={<StockAdminPage />} allowedRoles={['superadmin']} />} />
+  <Route path='/FinanceAdminPage' element={<PrivateRoute element={<FinanceAdminPage />} allowedRoles={['superadmin']} />} />
+  <Route path='/InscriptionAdmin' element={<PrivateRoute element={<InscriptionAgent />} allowedRoles={['superadmin']} />} />
+  <Route path='/PromotionAdmin' element={<PrivateRoute element={<PromotionAdmin />} allowedRoles={['superadmin']} />} />
+
+  {/* Routes réservées à 'rh' */}
+  <Route path='/stocksAdmin' element={<PrivateRoute element={<StockAdminPage />} allowedRoles={['rh']} />} />
+  <Route path='/FinanceAdminPage' element={<PrivateRoute element={<FinanceAdminPage />} allowedRoles={['rh']} />} />
+
+  {/* Routes réservées à 'agent' */}
+  <Route path='/FinanceAdminPage' element={<PrivateRoute element={<FinanceAdminPage />} allowedRoles={['agent']} />} />
+
+
+
+          
         </Routes>
       </BrowserRouter>
     </AuthContext.Provider>
