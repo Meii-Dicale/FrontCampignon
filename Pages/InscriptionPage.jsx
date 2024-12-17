@@ -1,8 +1,10 @@
 import { useState } from "react";
-import { Button, Container, InputGroup, Form } from "react-bootstrap";
+import { Button, Container, InputGroup, Form, Alert } from "react-bootstrap";
 import { Link, useNavigate } from "react-router-dom";
 import inscriptions from "../src/Service";
 const Inscription = () => {
+  const [errorMessage, setErrorMessage] = useState(''); // message d'erreur
+
     const [utilisateur, setUtilisateur] = useState({
       nom: '',
       prenom: '',
@@ -29,6 +31,13 @@ const Inscription = () => {
             navigate("/");  // Redirige vers la page d'accueil ou la page souhaitée après l'inscription
         } catch (error) {
             console.error("Erreur lors de l'inscription :", error);
+            if (error.response.status === 400) {
+              setErrorMessage(error.response.data.message)
+            } else if (error.response.status === 500) {
+              setErrorMessage(error.response.data.message)
+            } else {
+              setErrorMessage("une erreur est survenue");
+            }
         }
     };
     return (
@@ -48,6 +57,7 @@ const Inscription = () => {
       </div>
 
       <Form className="col-10 mt-3" onSubmit={handleSubmit}>
+      {errorMessage && <Alert variant='danger'>{errorMessage}</Alert> /*affichage de l'erreur si erreur de cnx */}
         <InputGroup className="mb-2">
           <Form.Control
             placeholder="Nom"
