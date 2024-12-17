@@ -20,6 +20,7 @@ function MyNavbar() {
 
   const handleLogout = () => {
     AuthServices.logout();
+    navigate("/");
   };
 
   return (
@@ -45,7 +46,7 @@ function MyNavbar() {
           {isAuthenticated ? (
             <>
               <Button
-                href="/infos-personnel"
+                href="/compte"
                 variant='info'
               >
                 Compte Utilisateur

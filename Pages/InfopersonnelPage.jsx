@@ -24,9 +24,41 @@ function MonComptePage() {
   const [loading, setLoading] = useState(true);
   const [error, setError] = useState('');
   const navigate = useNavigate();
-  const {user} = useContext(AuthContext);
+  const {user, setUser} = useContext(AuthContext);
 
 
+const SupprimerCompte = async () => {
+    const token = localStorage.getItem('token');  // Récupérer le token de l'utilisateur dans localStorage
+    
+    if (!token) {
+        alert("Vous devez être connecté pour supprimer votre compte.");
+        return;
+    }
+
+    if (!user || !user.id) {
+        alert("L'utilisateur n'est pas trouvé.");
+        return;
+    }
+
+    try {
+        const response = await axios.delete(`http://localhost:3001/api/utilisateur/` + user.id, {
+            headers: {
+                Authorization: `Bearer ${token}`,  // Inclure le token dans l'en-tête de la requête
+            },
+        });
+
+        // Si la suppression est réussie, déconnecter l'utilisateur
+        alert(response.data.message); // Afficher le message de succès
+        setUser(null);  // Supprimer les informations de l'utilisateur du contexte
+        localStorage.removeItem('token');  // Supprimer le token du localStorage
+
+        // Rediriger l'utilisateur vers la page d'accueil après la suppression
+        navigate('/');
+    } catch (error) {
+        console.error("Erreur lors de la suppression du compte:", error);
+        alert("Une erreur est survenue. Veuillez réessayer.");
+    }
+};
   // Récupération des informations utilisateur depuis l'API
   useEffect(() => {
     const fetchUserInfo = async () => {
@@ -113,7 +145,13 @@ function MonComptePage() {
               </Form.Group>
               <div className="d-flex align-items-center justify-content-center gap-3">
                 <Button variant="primary">Modifier mes informations</Button>
-                <Button variant="danger">Supprimer mon compte</Button>
+
+
+      <Button variant="danger" onClick={SupprimerCompte}>
+        Supprimer mon compte
+      </Button>
+
+
               </div>
             </Form>
           </Col>
