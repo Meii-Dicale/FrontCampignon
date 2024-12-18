@@ -28,7 +28,7 @@ const Inscription = () => {
             // Appelez la méthode d'inscription du service avec les données de l'utilisateur
             await inscriptions(utilisateur);  // Assurez-vous que le service d'inscription soit bien défini ailleurs dans votre code.
             console.log(utilisateur);
-            navigate("/");  // Redirige vers la page d'accueil ou la page souhaitée après l'inscription
+            navigate("/compte");  // Redirige vers la page d'accueil ou la page souhaitée après l'inscription
         } catch (error) {
             console.error("Erreur lors de l'inscription :", error);
             if (error.response.status === 400) {

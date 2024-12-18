@@ -20,7 +20,7 @@ function MonComptePage() {
     telephone: '',
     mdp: '',
   });
-
+  const [isEditing, setIsEditing] = useState(false);
   const [loading, setLoading] = useState(true);
   const [error, setError] = useState('');
   const navigate = useNavigate();
@@ -86,10 +86,10 @@ const SupprimerCompte = async () => {
     fetchUserInfo();
   }, []);
 
-  const formatDate = (dateString) => {
-    return dateString.slice(0, 10);
-  };
-  const formattedDate = formatDate(userInfo.dateNaissance);
+  // const formatDate = (dateString) => {
+  //   return dateString.slice(0, 10);
+  // };
+  // const formatedDate = formatDate(userInfo.dateNaissance);
 
 
   if (loading) {
@@ -99,102 +99,179 @@ const SupprimerCompte = async () => {
   if (error) {
     return <div>{error}</div>;
   }
+  // Fonction pour gérer la modification
+  const handleEdit = () => {
+    setIsEditing(true);
+  };
+
+  const handleSave = async () => {
+    const token = localStorage.getItem('token');
+
+    try {
+      const response = await axios.put(
+        `http://localhost:3001/api/utilisateur/utilisateur/` +user.id,
+        userInfo,
+        {
+          headers: { Authorization: `Bearer ${token}` },
+        }
+      );
+
+      alert(response.data.message || "Informations mises à jour avec succès !");
+      setIsEditing(false);
+    } catch (err) {
+      console.error("Erreur lors de la mise à jour des informations:", err);
+      alert("Une erreur est survenue lors de la mise à jour.");
+    }
+  };
+
+  const handleCancel = () => {
+    setIsEditing(false);
+  };
+
+  const handleChange = (e) => {
+    const { name, value } = e.target;
+    setUserInfo((prevInfo) => ({
+      ...prevInfo,
+      [name]: value,
+    }));
+  };
+
+  if (loading) {
+    return <div>Chargement...</div>;
+  }
+
+  if (error) {
+    return <div>{error}</div>;
+  }
+  console.log("User ID:", user.id);
 
   return (
     <>
       <NavbarMonCompte />
       <Container className="pt-5 mt-5">
-        <h1 className="text-center mb-4 d-none d-md-block">Mes infos</h1>
-        <h2 className="text-center mb-4 d-block d-md-none" style={{ fontSize: '2rem' }}>Mes Infos</h2>
+        <h1 className="text-center mb-4">Mes Infos</h1>
         <Row>
-          {/* Section des informations personnelles */}
           <Col md={6}>
             <Form>
               <Form.Group className="mb-2">
                 <Form.Label>Nom</Form.Label>
-                <Form.Control type="text" value={userInfo.nom} readOnly />
+                <Form.Control
+                  type="text"
+                  name="nom"
+                  value={userInfo.nom}
+                  readOnly={!isEditing}
+                  onChange={handleChange}
+                />
               </Form.Group>
               <Form.Group className="mb-2">
                 <Form.Label>Prénom</Form.Label>
-                <Form.Control type="text" value={userInfo.prenom} readOnly />
+                <Form.Control
+                  type="text"
+                  name="prenom"
+                  value={userInfo.prenom}
+                  readOnly={!isEditing}
+                  onChange={handleChange}
+                />
               </Form.Group>
               <Form.Group className="mb-2">
                 <Form.Label>Date de Naissance</Form.Label>
-                <Form.Control type="date" value={formattedDate} readOnly />
+                <Form.Control
+                  type="date"
+                  name="dateNaissance"
+                  value={userInfo.dateNaissance.slice(0, 10)}
+                  readOnly={!isEditing}
+                  onChange={handleChange}
+                />
               </Form.Group>
               <Form.Group className="mb-2">
                 <Form.Label>Email</Form.Label>
-                <Form.Control type="email" value={userInfo.mail} readOnly />
+                <Form.Control
+                  type="email"
+                  name="mail"
+                  value={userInfo.mail}
+                  readOnly={!isEditing}
+                  onChange={handleChange}
+                />
               </Form.Group>
               <Form.Group className="mb-2">
                 <Form.Label>Adresse</Form.Label>
                 <Form.Control
-                  as="textarea"
-                  rows={3}
-                  value={`${userInfo.rue}, ${userInfo.codePostal}, ${userInfo.ville}, ${userInfo.pays}`}
-                  readOnly
+                  type="text"
+                  name="rue"
+                  value={userInfo.rue}
+                  readOnly={!isEditing}
+                  onChange={handleChange}
+                  placeholder="Rue"
+                />
+                                <Form.Label>Code postal</Form.Label>
+
+                <Form.Control
+                  type="text"
+                  name="codePostal"
+                  value={userInfo.codePostal}
+                  readOnly={!isEditing}
+                  onChange={handleChange}
+                  placeholder="Code Postal"
+                  className="mt-2"
+                />
+                                <Form.Label>Ville</Form.Label>
+
+                <Form.Control
+                  type="text"
+                  name="ville"
+                  value={userInfo.ville}
+                  readOnly={!isEditing}
+                  onChange={handleChange}
+                  placeholder="Ville"
+                  className="mt-2"
+                />
+                                <Form.Label>Pays</Form.Label>
+
+                <Form.Control
+                  type="text"
+                  name="pays"
+                  value={userInfo.pays}
+                  readOnly={!isEditing}
+                  onChange={handleChange}
+                  placeholder="Pays"
+                  className="mt-2"
                 />
               </Form.Group>
               <Form.Group className="mb-3">
                 <Form.Label>Téléphone</Form.Label>
-                <Form.Control type="tel" value={userInfo.tel} readOnly />
+                <Form.Control
+                  type="tel"
+                  name="tel"
+                  value={userInfo.tel}
+                  readOnly={!isEditing}
+                  onChange={handleChange}
+                />
               </Form.Group>
-              <Form.Group className="mb-5">
-                <Form.Label>Mot de Passe</Form.Label>
-                <Form.Control type="password" value={userInfo.mdp} readOnly />
-              </Form.Group>
+
               <div className="d-flex align-items-center justify-content-center gap-3">
-                <Button variant="primary">Modifier mes informations</Button>
-
-
-      <Button variant="danger" onClick={SupprimerCompte}>
-        Supprimer mon compte
-      </Button>
-
-
+                {isEditing ? (
+                  <>
+                    <Button variant="success" onClick={handleSave}>
+                      Sauvegarder
+                    </Button>
+                    <Button variant="secondary" onClick={handleCancel}>
+                      Annuler
+                    </Button>
+                  </>
+                ) : (
+                  <>
+                    <Button variant="primary" onClick={handleEdit}>
+                      Modifier mes informations
+                    </Button>
+                    <Button variant="danger" onClick={SupprimerCompte}>
+                      Supprimer mon compte
+                    </Button>
+                  </>
+                )}
               </div>
             </Form>
           </Col>
-
-          {/* Section des bulles d'action */}
-          <Col lg={4} className="d-flex flex-wrap justify-content-center align-items-start mt-5 gap-3">
-            <Button
-              className="btn-light"
-              style={{ width: '200px', height: '100px' }}
-              onClick={() => navigate('/facture')}
-            >
-              Mes factures
-            </Button>
-            <Button
-              className="btn-light"
-              style={{ width: '200px', height: '100px' }}
-              onClick={() => navigate('/reservations')}
-            >
-              Mes réservations
-            </Button>
-            <Button
-              className="btn-light"
-              style={{ width: '200px', height: '100px' }}
-              onClick={() => navigate('/promo')}
-            >
-              Voir les offres
-            </Button>
-            <Button
-              className="btn-light"
-              style={{ width: '200px', height: '100px' }}
-              onClick={() => navigate('/carte')}
-            >
-              Carte du camping
-            </Button>
-          </Col>
         </Row>
-
-        {/* Bouton Réserver */}
-        <div className="text-center mt-5">
-          <Button variant="success" style={{ width: '200px', height: '50px' }}>
-            Réserver
-          </Button>
-        </div>
       </Container>
     </>
   );
