@@ -20,7 +20,7 @@ const CarteEmplacement = ({ emplacement }) => {
 
   const handleReservation = () => {
     // Redirige vers la page de confirmation de réservation
-    navigate('/confirmation', { state: { emplacement } });
+    navigate('/valider', { state: { emplacement } });
   };
   console.log('url : ' + url);
   return (

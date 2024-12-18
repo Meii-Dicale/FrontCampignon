@@ -6,7 +6,7 @@ function Navbardroite() {
     <div className="navbardroite">
       
       <ul>
-        <li><a href="/Reservation">Réserver</a></li>
+        <li><a href="/Reserver">Réserver</a></li>
         <li><a href="/Tarifs">Tarifs</a></li>
         <li><a href="Promo">Promos</a></li>
         <li><a href="/Gallerie">Gallerie</a></li>
