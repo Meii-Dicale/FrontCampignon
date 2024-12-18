@@ -17,10 +17,16 @@ function listeServicesEmplacements(id) {
 function photoEmplacement(id) {
     return axios.get(`${API_URL}/services/photoEmplacement/${id}`)
 }
+
+function infosUtilisateur(id) {
+    return axios.get(`${API_URL}/utilisateur/${id}`);
+}
+
 export default listeEmplacements;
 export {
     listeEmplacements,
     listeServices, 
     listeServicesEmplacements,
-    photoEmplacement
+    photoEmplacement,
+    infosUtilisateur
 }
