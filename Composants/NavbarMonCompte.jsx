@@ -1,16 +1,19 @@
-import React from 'react';
+import React, {useEffect, useContext} from 'react';
 import { Navbar, Container, Nav, Dropdown, Button } from 'react-bootstrap';
 import { Link, Navigate } from 'react-router-dom';
 import AuthServices from '../src/Services/AuthServices';
+import { useNavigate } from 'react-router-dom';
+import AuthContext from '../src/Context/AuthContext';
 
+function NavbarMonCompte() {
+  const user = useContext(AuthContext).user;
+  const navigate = useNavigate();
 
   const handleLogout = () => {
     AuthServices.logout();
-    Navigate("/");
+    navigate("/");
   };
 
-
-function NavbarMonCompte() {
   return (
     <Navbar className="navbar" expand="lg" style={{ zIndex: 1000 }}>
       <Container className="d-flex justify-content-between w-100">
@@ -105,6 +108,13 @@ function NavbarMonCompte() {
           </Link>
         </Nav>
 <Nav className="ms-auto d-flex align-items-center">
+        {(user && user.role.includes('superadmin')) || 
+         (user.role.includes('rh')) ||
+         (user.role.includes('agent')) ? <>
+        <Button className='mx-3' onClick={() => navigate('/dashboardAdmin')}>
+          Dashboard
+        </Button>
+        </> : null}
         <Button
                 onClick={handleLogout}
                 variant='danger'

@@ -60,6 +60,14 @@ const FinanceAdminPage = () => {
         <div>
         <Button href="/InscriptionAdmin">Ajouter un agent ou un client</Button>
         </div>
+        <div>
+            <h2>Nombre de réservations du jour : {nbreResas}</h2>
+            <h2>Nombre d'emplacements : {nbreEmplace}</h2>
+        </div>
+        <div>
+            <h2>Taux d'occupation : {occupationRate.toFixed(2)}%</h2>
+        </div>
+        
         </Container>
     );  
 };
