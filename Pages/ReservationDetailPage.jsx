@@ -4,15 +4,17 @@ import ReservationCard from "../Composants/CarteReservation";
 import { ReservationById } from "../src/Services/ReservationService";
 import { Container } from "react-bootstrap";
 
-const ReservationDetails = () => {
+function ReservationDetails () {
   const { idReservation } = useParams(); // Extraction de l'ID depuis les paramètres d'URL
-  const [reservation, setReservation] = useState({}); // Utilisation correcte de useState
+  const [reservations, setReservations] = useState([]); // Utilisation correcte de useState
+  console.log(idReservation)
 
   const fetchReservationByID = async () => {
+    
     try {
       const response = await ReservationById(idReservation); // Appel de l'API avec async/await
       console.log(response.data[0]); // Affichage du résultat dans la console
-      setReservation(response.data[0]); // Mise à jour de l'état avec les données reçues
+      setReservations(response.data); // Mise à jour de l'état avec les données reçues
     } catch (error) {
       console.error("Erreur lors de la récupération des réservations :", error);
     }
@@ -20,16 +22,16 @@ const ReservationDetails = () => {
 
   useEffect(() => {
     fetchReservationByID();
-  }, [idReservation]); // Dépendance sur idReservation
+  }, [idReservation]); 
 
   return (
     <>
     <Container  className="col-6 p-4 border rounded shadow bg-light">
-      {reservation && (
+      {reservations  &&  reservations.map((reservation =>  
         <ReservationCard
           dateEntree={reservation.dateEntree}
           dateSortie={reservation.dateSortie}
-          idReservation={idReservation}
+          idReservation={reservation.idReservation}
           mail={reservation.mail}
           nom={reservation.nom}
           prenom={reservation.prenom}
@@ -38,7 +40,7 @@ const ReservationDetails = () => {
           type={reservation.type}
           key={idReservation}
 
-        />
+        />)
       )}
       </Container>
     </>
