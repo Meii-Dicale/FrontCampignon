@@ -41,7 +41,7 @@ const SupprimerCompte = async () => {
     }
 
     try {
-        const response = await axios.delete(`http://localhost:3001/api/utilisateur/` + user.id, {
+        const response = await axios.delete(`http://localhost:3001/api/utilisateur/utilisateur/` + user.id, {
             headers: {
                 Authorization: `Bearer ${token}`,  // Inclure le token dans l'en-tête de la requête
             },
