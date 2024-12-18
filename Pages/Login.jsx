@@ -39,7 +39,7 @@ const Login = ({ setShowLoginModal }) => {
       } else {
         setErrorMessage("Erreur de connexion");
       }
-      navigate('/');
+      navigate('/compte');
     } catch (err) {
       console.error("erreur :",err.response.status, err.response.data.message);
       if (err.response.status === 404) {
