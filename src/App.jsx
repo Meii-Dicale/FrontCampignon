@@ -54,13 +54,14 @@ function Layout() {
         </>
       )}
       {location.pathname.includes('Admin') && <NavBarAdmin />}
-
     </>
   );
 }
 
 function App() {
-  const [isAuthenticated, setIsAuthenticated] = useState(AuthServices.isValid());
+  const [isAuthenticated, setIsAuthenticated] = useState(
+    AuthServices.isValid()
+  );
   const [user, setUser] = useState(AuthServices.getUser());
 
   useEffect(() => {
@@ -73,9 +74,19 @@ function App() {
       if (readToken) {
         setUser(readToken);
       }
-      console.log('token lu :',readToken);
+      console.log('token lu :', readToken);
     }
   }, [isAuthenticated]);
+
+  useEffect(() => {
+    const interval = setInterval(() => {
+      const isValid = AuthServices.isValid();
+      if (!isValid) {
+        AuthServices.logout();
+      }
+    }, 60000);
+    return () => clearInterval(interval);
+  }, []);
 
   return (
     <AuthContext.Provider
@@ -104,23 +115,126 @@ function App() {
 <Route path="/valider"  element={<PrivateRoute element={<ValiderResaPage />} allowedRoles={['client','superadmin','rh','agent']}/>} />  
 
 
-  {/* Routes accessibles à tous */}
-  <Route path="/DashboardAdmin" element={<PrivateRoute element={<DashboardAdmin />} allowedRoles={['superadmin', 'rh', 'agent']} />} />
-  <Route path="/emplacementsAdmin" element={<PrivateRoute element={<EmplacementsAdminPage />} allowedRoles={['superadmin', 'rh', 'agent']} />} />
-  <Route path="/emplacementsAdmin/:id" element={<PrivateRoute element={<EmplacementDetail />} allowedRoles={['superadmin', 'rh', 'agent']} />} />
-  <Route path='/AjouterEmplacementAdmin' element={<PrivateRoute element={<AjoutEmplacement />} allowedRoles={['superadmin', 'rh', 'agent']} />} />
-  <Route path='/AjouterServiceAdmin' element={<PrivateRoute element={<AjoutService />} allowedRoles={['superadmin', 'rh', 'agent']} />} />
-  <Route path='/ArchivesReservationAdmin' element={<PrivateRoute element={<ArchiveReservation />} allowedRoles={['superadmin', 'rh', 'agent']} />} />
-  <Route path="/CalendrierAdmin" element={<PrivateRoute element={<CalendrierAdmin />} allowedRoles={['superadmin', 'rh', 'agent']} />} />
-  <Route path='/reservationAdmin/:idReservation' element={<PrivateRoute element={<ReservationDetails />} allowedRoles={['superadmin', 'rh', 'agent']} />} />
+          {/* Routes accessibles à tous */}
+          <Route
+            path="/DashboardAdmin"
+            element={
+              <PrivateRoute
+                element={<DashboardAdmin />}
+                allowedRoles={['superadmin', 'rh', 'agent']}
+              />
+            }
+          />
+          <Route
+            path="/emplacementsAdmin"
+            element={
+              <PrivateRoute
+                element={<EmplacementsAdminPage />}
+                allowedRoles={['superadmin', 'rh', 'agent']}
+              />
+            }
+          />
+          <Route
+            path="/emplacementsAdmin/:id"
+            element={
+              <PrivateRoute
+                element={<EmplacementDetail />}
+                allowedRoles={['superadmin', 'rh', 'agent']}
+              />
+            }
+          />
+          <Route
+            path="/AjouterEmplacementAdmin"
+            element={
+              <PrivateRoute
+                element={<AjoutEmplacement />}
+                allowedRoles={['superadmin', 'rh', 'agent']}
+              />
+            }
+          />
+          <Route
+            path="/AjouterServiceAdmin"
+            element={
+              <PrivateRoute
+                element={<AjoutService />}
+                allowedRoles={['superadmin', 'rh', 'agent']}
+              />
+            }
+          />
+          <Route
+            path="/ArchivesReservationAdmin"
+            element={
+              <PrivateRoute
+                element={<ArchiveReservation />}
+                allowedRoles={['superadmin', 'rh', 'agent']}
+              />
+            }
+          />
+          <Route
+            path="/CalendrierAdmin"
+            element={
+              <PrivateRoute
+                element={<CalendrierAdmin />}
+                allowedRoles={['superadmin', 'rh', 'agent']}
+              />
+            }
+          />
+          <Route
+            path="/reservationAdmin/:idReservation"
+            element={
+              <PrivateRoute
+                element={<ReservationDetails />}
+                allowedRoles={['superadmin', 'rh', 'agent']}
+              />
+            }
+          />
 
-  {/* Routes réservées à 'superadmin' et/ou 'rh'*/}
-  <Route path='/ArchivesMessagesAdmin' element={<PrivateRoute element={<ArchiveMessages />} allowedRoles={['superadmin']} />} />
-  <Route path='/stocksAdmin' element={<PrivateRoute element={<StockAdminPage />} allowedRoles={['superadmin', 'rh']} />} />
-  <Route path='/FinanceAdminPage' element={<PrivateRoute element={<FinanceAdminPage />} allowedRoles={['superadmin','rh']} />} />
-  <Route path='/InscriptionAdmin' element={<PrivateRoute element={<InscriptionAgent />} allowedRoles={['superadmin']} />} />
-  <Route path='/PromotionAdmin' element={<PrivateRoute element={<PromotionAdmin />} allowedRoles={['superadmin']} />} />
-
+          {/* Routes réservées à 'superadmin' et/ou 'rh'*/}
+          <Route
+            path="/ArchivesMessagesAdmin"
+            element={
+              <PrivateRoute
+                element={<ArchiveMessages />}
+                allowedRoles={['superadmin']}
+              />
+            }
+          />
+          <Route
+            path="/stocksAdmin"
+            element={
+              <PrivateRoute
+                element={<StockAdminPage />}
+                allowedRoles={['superadmin', 'rh']}
+              />
+            }
+          />
+          <Route
+            path="/FinanceAdminPage"
+            element={
+              <PrivateRoute
+                element={<FinanceAdminPage />}
+                allowedRoles={['superadmin', 'rh']}
+              />
+            }
+          />
+          <Route
+            path="/InscriptionAdmin"
+            element={
+              <PrivateRoute
+                element={<InscriptionAgent />}
+                allowedRoles={['superadmin']}
+              />
+            }
+          />
+          <Route
+            path="/PromotionAdmin"
+            element={
+              <PrivateRoute
+                element={<PromotionAdmin />}
+                allowedRoles={['superadmin']}
+              />
+            }
+          />
         </Routes>
       </BrowserRouter>
     </AuthContext.Provider>

@@ -10,6 +10,7 @@ function HomePage() {
   
       <div className="container">
       
+      <img src="../Designer (1).jpeg" alt="Description de l'image" className="img-fluid home"/>
 
       </div>
     </div>

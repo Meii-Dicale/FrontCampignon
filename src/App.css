@@ -273,3 +273,34 @@ input {
 .bubble-button:active {
   transform: scale(1);  /* Revenir à la taille normale lorsque le bouton est cliqué */
 }
+
+.img-fluid {
+  max-width: 100%;
+  height: auto;
+  margin-top: 15vh;
+}
+.home {
+  max-width: 100%;
+}
+
+.interactive-button {
+  position: relative;
+}
+
+/* Texte qui apparaît au survol */
+.button-text {
+  display: none; /* Par défaut, ne pas afficher le texte */
+  position: absolute;
+  top: 50%; /* Position du texte au centre du bouton */
+  left: 50%;
+  transform: translate(-50%, -50%);
+  color: white;
+  font-size: 1.2rem;
+  font-weight: bold;
+  text-shadow: 2px 2px 5px rgba(0, 0, 0, 0.7); /* Ombre pour améliorer la lisibilité */
+}
+
+/* Quand on survole le bouton, afficher le texte */
+.interactive-button:hover .button-text {
+  display: block; /* Afficher le texte lorsque l'utilisateur survole le bouton */
+}

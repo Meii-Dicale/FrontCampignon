@@ -10,7 +10,7 @@ function MesInfosPersonnel() {
 
   useEffect(() => {
     if (user?.id) {
-      axios.get(`http://localhost:3001/api/utilisateur/${user.id}`)
+      axios.get(`http://localhost:3001/api/utilisateur/` +user.id)
         .then(response => setPrenom(response.data.prenom))
         .catch(() => setPrenom('Utilisateur'));
     }
@@ -20,8 +20,11 @@ function MesInfosPersonnel() {
     <>
       <NavbarMonCompte />
       <div className="container pt-5 mt-5">
-        <h1>Bienvenue, {prenom}</h1> {/* Affichage du prénom */}
+        <h1>Bienvenue,  {prenom}</h1> {/* Affichage du prénom */}
+        <img src="../Designer (1).jpeg" alt="Description de l'image" className="home"/>
+
       </div>
+      
     </>
   );
 }
