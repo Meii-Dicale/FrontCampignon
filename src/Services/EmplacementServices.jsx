@@ -5,6 +5,10 @@ import axios from 'axios';
 function photos(id) {
     return axios.get(`http://localhost:3001/api/services/photoEmplacement/${id}`);
   }
+
+  function photoApi (imageName) {
+    return axios.get(`http://localhost:3001/api/photo/${imageName}`);
+  }
   
   function serviceEmplacement(id) {
     return axios.get(`http://localhost:3001/api/services/serviceEmplacement/${id}`);
@@ -63,5 +67,5 @@ function supprimerService(idService) {
 
 
 
-export default {photos, serviceEmplacement, infoEmplacement, AllServices, modifierEmplacement, associerServiceEmplacement, SupprimerAssociation, uploadPhoto, creerEmplacement, supprimerEmplacement, updateService,supprimerService};
+export default {photoApi ,photos, serviceEmplacement, infoEmplacement, AllServices, modifierEmplacement, associerServiceEmplacement, SupprimerAssociation, uploadPhoto, creerEmplacement, supprimerEmplacement, updateService,supprimerService};
 
