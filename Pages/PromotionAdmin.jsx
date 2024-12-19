@@ -14,6 +14,7 @@ const PromotionAdmin = () => {
         typePromo: '',
         contrainte: '',
         type: '',
+        libelle: '',
     });
     const [allPromos, setAllPromos] = useState([]);
 
@@ -42,6 +43,7 @@ const PromotionAdmin = () => {
         try {
             const response = await fetchPromo();
             setAllPromos(response.data);
+            console.log(response.data);
         } catch (error) {
             console.error("Erreur lors de la récupération des promotions", error);
         }
@@ -95,6 +97,7 @@ const PromotionAdmin = () => {
             typePromo: formData.typePromo === '' ? null : formData.typePromo,
             contrainte: formData.contrainte === '' ? null : formData.contrainte,
             type: formData.type === '' ? null : formData.type,
+            libelle: formData.libelle === ''? null : formData.libelle,
         };
         NouvellePromotion(dataToSend);
     };
@@ -141,6 +144,12 @@ const PromotionAdmin = () => {
                         min="0"
                         max="100"
                     />
+                    <input
+                        type="text"
+                        placeholder="Description"
+                        name="libelle"
+                        onChange={handleChange}
+                        />
 
                     <input
                         type="number"
@@ -156,6 +165,7 @@ const PromotionAdmin = () => {
                     <thead>
                         <tr>
                             <th>Service</th>
+                            <th>Description</th>
                             <th>Type</th>
                             <th>Taux de réduction</th>
                             <th>Nombre de nuits minimum</th>
@@ -166,6 +176,7 @@ const PromotionAdmin = () => {
                         {allPromos.map((promo) => (
                             <tr key={promo.idPromotion}>
                                 <td>{promo.libelle}</td>
+                                <td>{promo.promolibelle}</td>
                                 <td>{promo.type}</td>
                                 <td>{promo.typePromo}</td>
                                 <td>{promo.contrainte}</td>
