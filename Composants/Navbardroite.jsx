@@ -10,7 +10,7 @@ function Navbardroite() {
         <li><a href="/Tarifs">Tarifs</a></li>
         <li><a href="Promo">Promos</a></li>
         <li><a href="/Gallerie">Gallerie</a></li>
-        <li><a href="/Contact">Nous contacter</a></li>
+        <li><a href="/ContactezNous">Nous contacter</a></li>
         <li><a href="/Services">Nos services</a></li>
       </ul>
     </div>
