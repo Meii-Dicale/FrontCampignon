@@ -5,8 +5,7 @@ import { useLocation } from 'react-router-dom';
 import FullCalendar from '@fullcalendar/react';
 import dayGridPlugin from '@fullcalendar/daygrid';
 import interactionPlugin from '@fullcalendar/interaction'; // needed for dayClick
-import { differenceInDays } from 'date-fns';
-
+import moment from 'moment';
 import MyNavbar from '../Composants/Navbar';
 import Navbardroite from '../Composants/Navbardroite';
 import Footer from '../Composants/footer';
@@ -54,8 +53,8 @@ const ValiderResa = () => {
       try {
         const response = await resaParEmplacement(data.idEmplacement);
         const formatDate = response.data.map((resa) => ({
-          start: new Date(resa.dateEntree).toISOString().split('T')[0],
-          end: new Date(resa.dateSortie).toISOString().split('T')[0],
+          start: moment(resa.dateEntree).format('YYYY-MM-DDTHH:mm'),
+          end: moment(resa.dateSortie).format(),
           display: 'background',
           backgroundColor: '#fd3030',
         }));
@@ -75,8 +74,39 @@ const ValiderResa = () => {
   // La fonction met à jour les variables d'état `dateEntree` et `dateSortie` avec les dates de début et de fin sélectionnées respectivement.
   const handleChoixDate = (choixInfo) => {
     const { startStr, endStr } = choixInfo;
-    setDateEntree(startStr);
-    setDateSortie(endStr);
+    setDateEntree(moment(startStr));
+    setDateSortie(moment(endStr));
+
+    if (dateEntree.isSameOrAfter(dateSortie)) {
+      alert("Le départ doit être ultérieur à l'arrivée.");
+      return;
+    }
+
+    const entreeDateHeure = dateEntree.set({ hour: 14, minute: 0 });
+    const sortieDateHeure = dateSortie.set({ hour: 11, minute: 0 });
+
+    // Vérifiez si les dates sélectionnées chevauchent une réservation existante
+    const datesValides = (start, end, datesNonLibres) => {
+      for (const period of datesNonLibres) {
+        const periodStart = moment(period.start);
+        const periodEnd = moment(period.end);
+        if (
+          (start.isBefore(periodEnd) && start.isAfter(periodStart)) ||
+          (end.isBefore(periodEnd) && end.isAfter(periodStart))
+        ) {
+          return false;
+        }
+      }
+      return true;
+    };
+    if (datesValides(entreeDateHeure, sortieDateHeure, datesNonLibres)) {
+      setDateEntree(entreeDateHeure.format());
+      setDateSortie(sortieDateHeure.format());
+    } else {
+      alert(
+        'Les dates sélectionnées chevauchent une réservation existante, veuillez choisir une période libre'
+      );
+    }
   };
 
   // cette fonction gère la sélection d'une checkbox et vient ajouter/retirer le service coché de selectionServices
@@ -92,7 +122,7 @@ const ValiderResa = () => {
   // Vérification si dateSortie et dateEntree sont des objets Date valides
   if (dateSortie && dateEntree) {
     // Calcul du nombre de jours
-    nbJours = differenceInDays(new Date(dateSortie), new Date(dateEntree));
+    nbJours = moment(dateSortie).diff(moment(dateEntree), 'days');
   }
 
   const montantTotal = selectionServices.reduce(
@@ -164,10 +194,16 @@ const ValiderResa = () => {
                   Emplacement : {data.type}, {data.tarif}€
                 </Card.Text>
                 <Card.Text>
-                  Date de début : {dateEntree ? dateEntree : ''}
+                  Date de début :{' '}
+                  {dateEntree
+                    ? moment(dateEntree).format('YYYY-MM-DD HH:mm')
+                    : ''}
                 </Card.Text>
                 <Card.Text>
-                  Date de fin : {dateSortie ? dateSortie : ''}
+                  Date de fin :{' '}
+                  {dateSortie
+                    ? moment(dateSortie).format('YYYY-MM-DD HH:mm')
+                    : ''}
                 </Card.Text>
                 <Card.Text>
                   Services demandés :
@@ -187,8 +223,12 @@ const ValiderResa = () => {
                   <Form.Group controlId="dateEntree">
                     <Form.Label>Arrivée</Form.Label>
                     <Form.Control
-                      type="date"
-                      value={dateEntree || ''}
+                      type="datetime-local"
+                      value={
+                        dateEntree
+                          ? moment(dateEntree).format('YYYY-MM-DDTHH:mm')
+                          : ''
+                      }
                       onChange={(e) => setDateEntree(e.target.value)}
                       className="form-control"
                       required
@@ -197,8 +237,12 @@ const ValiderResa = () => {
                   <Form.Group controlId="dateSortie">
                     <Form.Label>Départ</Form.Label>
                     <Form.Control
-                      type="date"
-                      value={dateSortie || ''}
+                      type="datetime-local"
+                      value={
+                        dateSortie
+                          ? moment(dateSortie).format('YYYY-MM-DDTHH:mm')
+                          : ''
+                      }
                       onChange={(e) => setDateSortie(e.target.value)}
                       className="form-control"
                       required
