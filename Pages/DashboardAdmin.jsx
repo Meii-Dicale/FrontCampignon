@@ -37,7 +37,7 @@ return (
 <>
 
   <NavBarAdmin />
-  <Container className="d-flex w-75 justify-content-around ">
+  <Container className="d-flex w-75 justify-content-around">
 <div className="dashboard d-flex flex-row gap-5 justify-content-between">
     <div className="messages d-flex flex-column w-25">
      <div className="d-flex flex-column ">
@@ -47,7 +47,7 @@ return (
         </Alert>
         </div>
         <div className="d-flex flex-column justify-content-center align-items-center gap-3">
-        {NouveauxMessages.length === 0 && <Alert key={'light'} variant={'light'}>
+        {NouveauxMessages.length === 0 && <Alert key={'light'} variant={'light'} className="couleurFond">
           Aucun nouveau message
           
         </Alert>
@@ -68,7 +68,7 @@ return (
         </div>
         <div className="d-flex flex-column justify-content-center align-items-center gap-3">
            
-            {NouvellesReservation.length === 0 && <Alert key={'light'} variant={'light'}> Aucune Réservations </Alert>}
+            {NouvellesReservation.length === 0 && <Alert key={'light'} variant={'light'} className="couleurFond"> Aucune Réservations </Alert>}
             {NouvellesReservation.map(reservation => (
     reservation.validation === 0 ? (
         <ReservationCard 

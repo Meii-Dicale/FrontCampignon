@@ -51,7 +51,7 @@ const [newDateSortie, setNewDateSortie] = useState(() =>
 
 
   return (
-    <Card style={{ width: '22rem' }} className="mb-3">
+    <Card style={{ width: '22rem' }} className="mb-3 couleurFond">
       <Card.Body>
         <Card.Title>Réservation de l'emplacement {numero}</Card.Title>
         <Card.Text className="mb-3">

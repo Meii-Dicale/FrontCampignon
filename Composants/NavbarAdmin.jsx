@@ -15,13 +15,13 @@ const NavBarAdmin = () => {
   }
 
   return (
-    <div className="d-flex">
+    <div >
       {/* Barre de navigation */}
       <nav
-        className="navbar navbar-expand-md navbar-light bg-light flex-md-column flex-row align-items-start py-2 px-3 vh-100 position-fixed"
-        style={{ width: "250px" }}
+        className=" navbar navbar-expand-md navbar-light bg-light flex-md-column flex-row align-items-start py-2 px-3 vh-100 position-fixed align-items-center"
+        style={{ width: "10%" }}
       >
-        <a className="navbar-brand mb-md-4" href="#">
+        <a className="navbar-brand mb-md-4 textColor" >
           Campingnon
         </a>
         <button

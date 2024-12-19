@@ -6,6 +6,17 @@ body {
   height: 100vh;
   margin: 0;
 }
+.transparence{
+  opacity: 0.9;
+  
+}
+
+.couleurFond{
+  background-color: rgba(216, 112, 147, 0.874)
+}
+.textColor{
+  color : rgba(216, 112, 147, 0.874);
+}
 
 /* Navbar fixée en haut */
 .navbar {

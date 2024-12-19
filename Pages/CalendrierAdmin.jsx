@@ -35,7 +35,7 @@ const Calendar = () => {
   useEffect(() => {
     fetchReservationsALL();
     fetchAllEmplacements();
-  }, []);
+  }, [selectedType]);
 
   // Obtenir les types uniques d'emplacements
   const types = [...new Set(allEmplacements.map((emplacement) => emplacement.type))];
@@ -47,7 +47,7 @@ const Calendar = () => {
 
   // Mapper les emplacements en ressources
   const resources = filteredEmplacements.map((emplacement) => ({
-    id: emplacement.numero, // Identifiant unique pour la ressource
+    id: emplacement.idEmplacement, // Identifiant unique pour la ressource
     title: `${emplacement.type} ${emplacement.numero}`, // Nom ou description de la ressource
   }));
 
@@ -60,13 +60,13 @@ const Calendar = () => {
       title: `${reservation.nom} ${reservation.prenom} - Emplacement ${reservation.numero}`,
       start: new Date(reservation.dateEntree).toISOString(),
       end: new Date(reservation.dateSortie).toISOString(),
-      resourceId: reservation.numero, // Associer l'événement à une ressource
+      resourceId: reservation.idEmplacement, // Associer l'événement à une ressource
       backgroundColor: '#ffcccc', // Couleur personnalisée
       borderColor: '#ff0000', // Bordure personnalisée
     }));
 
   return (
-    <Container style={{ marginLeft: '250px', backgroundColor: 'white' }}>
+    <Container style={{ marginLeft: '250px', width:"75%"   }} className='couleurFond'>
       <Form.Group controlId="typeSelect">
         <Form.Label>Type d'emplacement</Form.Label>
         <Form.Control

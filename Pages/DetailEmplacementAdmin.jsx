@@ -1,10 +1,8 @@
 import { useEffect, useState } from 'react';
 import { Navigate, useNavigate, useParams } from 'react-router-dom';
 import EmplacementServices from '../src/Services/EmplacementServices';
-import Card from 'react-bootstrap/Card';
-import { Button, Form } from 'react-bootstrap';
-
-//https://rapidapi.com/guides/upload-files-react-axios
+import { Card, Button, Form, Carousel } from 'react-bootstrap';
+import ImageUpload from '../src/Services/FileUpload';
 
 function EmplacementDetail() {
   const { id } = useParams();
@@ -15,93 +13,43 @@ function EmplacementDetail() {
   const [allServices, setAllServices] = useState([]);
   const [formData, setFormData] = useState({});
   const [nouveauxServices, setNouveauxServices] = useState([]);
-  const [selectedFile, setSelectedFile] = useState(null); // Nouvelle state pour l'image
   const idEmplacement = id;
   const navigate = useNavigate();
 
-  const Emplacements = async () => {
-    try {
-      const response = await EmplacementServices.infoEmplacement(id);
-      setEmplacement(response.data);
-      setFormData({
-        tarif: response.data.tarif,
-        type: response.data.type,
-      });
-    } catch (error) {
-      console.error(error);
-    }
-  };
+  useEffect(() => {
+    const fetchData = async () => {
+      try {
+        const emplacementResponse = await EmplacementServices.infoEmplacement(id);
+        setEmplacement(emplacementResponse.data);
+        setFormData({
+          tarif: emplacementResponse.data.tarif,
+          type: emplacementResponse.data.type,
+        });
 
-  const fetchServices = async () => {
-    try {
-      const response = await EmplacementServices.serviceEmplacement(id);
-      setServices(response.data);
-    } catch (error) {
-      console.error(error);
-    }
-  };
+        const servicesResponse = await EmplacementServices.serviceEmplacement(id);
+        setServices(servicesResponse.data);
 
-  const fetchPhotos = async () => {
-    try {
-      const response = await EmplacementServices.photos(id);
-      setPhotographies(response.data);
-    } catch (error) {
-      console.error(error);
-    }
-  };
+        const photosResponse = await EmplacementServices.photos(id);
+        setPhotographies(photosResponse.data);
 
-  const fetchAllServices = async () => {
-    try {
-      const response = await EmplacementServices.AllServices();
-      setAllServices(response.data);
-    } catch (error) {
-      console.error(error);
-    }
-  };
+        const allServicesResponse = await EmplacementServices.AllServices();
+        setAllServices(allServicesResponse.data);
+      } catch (error) {
+        console.error(error);
+      }
+    };
 
-  const DeleteEmplacement = async () => {
-    try {
-      await EmplacementServices.supprimerEmplacement(id)
-      navigate('/emplacementsAdmin');
-    } catch (error) {
-      console.error(error);
-    }}
+    fetchData();
+  }, [id]);
 
-  const handleClick = () => {
-    setModification(true);
-  };
-
+  const handleClick = () => setModification(true);
   const handleChange = (e) => {
     const { name, value, type, checked } = e.target;
-
-    if (type === "select-multiple") {
+    if (type === 'select-multiple') {
       const selectedServices = Array.from(e.target.selectedOptions, (option) => option.value);
       setNouveauxServices(selectedServices);
     } else {
-      setFormData({
-        ...formData,
-        [name]: value,
-      });
-    }
-  };
-
-  const handleFileChange = (e) => {
-    setSelectedFile(e.target.files[0]);
-  };
-
-  const handleFileUpload = async () => {
-
-    const formData = new FormData();
-    formData.append('file', selectedFile);
-    formData.append('emplacementId', idEmplacement);
-
-    try {
-      await EmplacementServices.uploadPhoto(formData); // Ajoutez cette méthode dans vos services
-      alert('Image téléchargée avec succès.');
-      fetchPhotos(); // Recharger les photos
-    } catch (error) {
-      console.error(error);
-      alert('Échec du téléchargement de l\'image.');
+      setFormData({ ...formData, [name]: value });
     }
   };
 
@@ -109,10 +57,10 @@ function EmplacementDetail() {
     e.preventDefault();
     try {
       await EmplacementServices.modifierEmplacement(id, formData);
-      EmplacementServices.SupprimerAssociation(idEmplacement),
-        nouveauxServices.map((idService) => {
-          EmplacementServices.associerServiceEmplacement(idService, idEmplacement);
-        });
+      await EmplacementServices.SupprimerAssociation(idEmplacement);
+      nouveauxServices.forEach((idService) => {
+        EmplacementServices.associerServiceEmplacement(idService, idEmplacement);
+      });
       setModification(false);
       alert('Emplacement modifié');
     } catch (error) {
@@ -120,12 +68,14 @@ function EmplacementDetail() {
     }
   };
 
-  useEffect(() => {
-    fetchPhotos();
-    fetchServices();
-    Emplacements();
-    fetchAllServices();
-  }, []);
+  const DeleteEmplacement = async () => {
+    try {
+      await EmplacementServices.supprimerEmplacement(id);
+      navigate('/emplacementsAdmin');
+    } catch (error) {
+      console.error(error);
+    }
+  };
 
   if (!emplacement) {
     return <div>Chargement...</div>;
@@ -135,13 +85,19 @@ function EmplacementDetail() {
     <div style={{ marginLeft: '250px', width: '75%' }}>
       <h1>Détails de l'emplacement {emplacement.numero}</h1>
       {modification === false ? (
-        <Card className="d-flex flex-row">
+        <Card className="d-flex flex-row align-items-center justify-content-center align-self-center">
           {photographies.length > 0 && (
-            <div>
-              {photographies.map((photographie, index) => (
-                <Card.Img key={index} variant="top" src={`../src/assets/${photographie.chemin}`} />
+            <Carousel style={{ width: '60%' }}>
+              {photographies.map((photographie) => (
+                <Carousel.Item key={photographie.idPhoto}>
+                  <img
+                    className="d-block w-100"
+                    src={`http://localhost:3001/api/photo${photographie.chemin}`}
+                    alt={`Photographie ${photographie.idPhoto}`}
+                  />
+                </Carousel.Item>
               ))}
-            </div>
+            </Carousel>
           )}
           <Card.Body>
             <Card.Title>Emplacement n° {emplacement.numero}</Card.Title>
@@ -150,8 +106,12 @@ function EmplacementDetail() {
               Type : {emplacement.type}<br />
               Équipements disponibles :
               {services.length > 0 ? (
-                services.map((service, index) =>
-                  service && service.libelle ? <li key={index}>{service.libelle}</li> : <span>Aucun équipement disponible</span>
+                services.map((service) =>
+                  service && service.libelle ? (
+                    <li key={service.idService}>{service.libelle}</li>
+                  ) : (
+                    <span key={service.idService}>Aucun équipement disponible</span>
+                  )
                 )
               ) : (
                 <li>Aucun équipement disponible</li>
@@ -176,19 +136,14 @@ function EmplacementDetail() {
           <Form.Group>
             <Form.Label>Services disponibles</Form.Label>
             <Form.Control as="select" name="services" multiple onChange={handleChange}>
-              {allServices.length > 0 &&
-                allServices.map((service, index) => (
-                  <option key={index} value={service.idService}>
-                    {service.libelle}
-                  </option>
-                ))}
+              {allServices.map((service) => (
+                <option key={service.idService} value={service.idService}>
+                  {service.libelle}
+                </option>
+              ))}
             </Form.Control>
           </Form.Group>
-          <Form.Group>
-            <Form.Label>Télécharger une image</Form.Label>
-            <Form.Control type="file" onChange={handleFileChange} />
-          </Form.Group>
-          <Button onClick={handleFileUpload}>Télécharger l'image</Button>
+          <ImageUpload idEmplacement={emplacement} key={emplacement.idEmplacement} />
           <Button type="submit">Enregistrer les modifications</Button>
         </Form>
       )}
