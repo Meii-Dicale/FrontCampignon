@@ -38,6 +38,7 @@ import PromotionAdmin from '../Pages/PromotionAdmin';
 import ReservationDetails from '../Pages/ReservationDetailPage';
 import PrivateRoute from './Services/RouteProtection';
 import ValiderResaPage from '../Pages/ValiderResaPage.jsx';
+import ContactezNousPage from '../Pages/ContactezNous.jsx';
 
 
 function Layout() {
@@ -93,13 +94,14 @@ function App() {
           <Route path="/Gallerie" element={<GalleriePage />} />
           <Route path='/Tarifs' element={<TarifsPage />} />
           <Route path='/Services' element={<ServicesPage />} />
+          <Route path='/ContactezNous' element={<ContactezNousPage />} />
 
 {/* devrait etre accessible à role client mimimum */}
-<Route path="/compte" element={<MonComptePage />} />
-<Route path="/infos-personnel" element={<InfoPersonnelPage />} /> 
-<Route path="/facture" element={<MesFacturesPage />} />
-<Route path="/reservations" element={<MesReservationsPage />} />
-<Route path="/valider" element={<ValiderResaPage />} />
+<Route path="/compte" element={<PrivateRoute element={<MonComptePage />} allowedRoles={['client','superadmin','rh','agent']} /> }/> 
+<Route path="/infos-personnel" element={<PrivateRoute element={<InfoPersonnelPage />} allowedRoles={['client','superadmin','rh','agent']}/>} /> 
+<Route path="/facture"  element={<PrivateRoute element={<MesFacturesPage />} allowedRoles={['client','superadmin','rh','agent']}/>} /> 
+<Route path="/reservations"  element={<PrivateRoute element={<MesReservationsPage />} allowedRoles={['client']}/>} /> 
+<Route path="/valider"  element={<PrivateRoute element={<ValiderResaPage />} allowedRoles={['client','superadmin','rh','agent']}/>} />  
 
 
   {/* Routes accessibles à tous */}
