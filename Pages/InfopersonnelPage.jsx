@@ -48,7 +48,7 @@ const SupprimerCompte = async () => {
         });
 
         // Si la suppression est réussie, déconnecter l'utilisateur
-        alert(response.data.message); // Afficher le message de succès
+        alert(response.data.message);
         setUser(null);  // Supprimer les informations de l'utilisateur du contexte
         localStorage.removeItem('token');  // Supprimer le token du localStorage
 
@@ -86,10 +86,6 @@ const SupprimerCompte = async () => {
     fetchUserInfo();
   }, []);
 
-  // const formatDate = (dateString) => {
-  //   return dateString.slice(0, 10);
-  // };
-  // const formatedDate = formatDate(userInfo.dateNaissance);
 
 
   if (loading) {
