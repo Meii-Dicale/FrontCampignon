@@ -262,3 +262,12 @@ input {
 .bubble-button:active {
   transform: scale(1);  /* Revenir à la taille normale lorsque le bouton est cliqué */
 }
+
+.img-fluid {
+  max-width: 100%;
+  height: auto;
+  margin-top: 15vh;
+}
+.home {
+  max-width: 100%;
+}
