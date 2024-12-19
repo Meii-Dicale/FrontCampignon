@@ -18,7 +18,7 @@ function CarteCamping() {
           }}
         >
           {/* Bouton 1 */}
-          <button
+          <div
             style={{
               position: 'absolute',
               top: '10%',  // Positionnement relatif à la hauteur de l'écran
@@ -30,13 +30,17 @@ function CarteCamping() {
               border: '3px solid white',
               borderRadius: '50%', // Circulaire
               cursor: 'pointer',
+              textAlign: 'center', // Pour centrer le texte à l'intérieur du bouton
             }}
-            onClick={() => window.location.href = '/page1'}
+            onClick={() => window.location.href = '/mobile-home'}
             title="Mobile Home"
-          />
+            className="interactive-button"
+          >
+            <span className="button-text">Mobile Home</span>
+          </div>
 
           {/* Bouton 2 */}
-          <button
+          <div
             style={{
               position: 'absolute',
               top: '45%',
@@ -48,13 +52,17 @@ function CarteCamping() {
               border: '3px solid white',
               borderRadius: '50%',
               cursor: 'pointer',
+              textAlign: 'center',
             }}
-            onClick={() => window.location.href = '/page2'}
+            onClick={() => window.location.href = '/tente'}
             title="Tente"
-          />
+            className="interactive-button"
+          >
+            <span className="button-text">Tente</span>
+          </div>
 
           {/* Bouton 3 */}
-          <button
+          <div
             style={{
               position: 'absolute',
               top: '10%',
@@ -66,10 +74,14 @@ function CarteCamping() {
               border: '3px solid white',
               borderRadius: '50%',
               cursor: 'pointer',
+              textAlign: 'center',
             }}
-            onClick={() => window.location.href = '/page3'}
+            onClick={() => window.location.href = '/caravane'}
             title="Caravane"
-          />
+            className="interactive-button"
+          >
+            <span className="button-text">Caravane</span>
+          </div>
         </div>
       </div>
     </>
