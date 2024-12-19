@@ -15,7 +15,7 @@ function ContactCard({ nom, message, mail, idContact, }) {
   };
 
   return (
-    <Card style={{ width: '18rem' }}>
+    <Card style={{ width: '18rem' }} className='couleurFond'>
       <Card.Body>
         <Card.Title>De : {nom}</Card.Title>
         <Card.Text>

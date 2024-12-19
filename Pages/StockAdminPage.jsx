@@ -71,7 +71,7 @@ const StockAdminPage = () => {
 
   return (
     <>
-      <Container className="col-6 p-4 border rounded shadow bg-light">
+      <Container className="col-6 p-4 border rounded shadow couleurFond">
         <h3 className="text-center mb-4">
           Liste des Services{" "}
           <Button href="/AjouterServiceAdmin">Ajouter un Service</Button>

@@ -26,7 +26,7 @@ function ReservationDetails () {
 
   return (
     <>
-    <Container  className="col-6 p-4 border rounded shadow bg-light">
+    <Container  className="col-6 p-4 border rounded shadow bg-light d-flex flex-row align-items-center justify-content-center align-self-center">
       {reservations  &&  reservations.map((reservation =>  
         <ReservationCard
           dateEntree={reservation.dateEntree}
