@@ -1,5 +1,4 @@
 import React, { useContext, useEffect, useState } from 'react';
-import { useNavigate } from 'react-router-dom';
 import axios from 'axios';
 import AuthContext from '../src/Context/AuthContext';
 import { jsPDF } from 'jspdf';
@@ -42,10 +41,10 @@ function GenerateurFacture() {
           return;
         }
   
-        const userResponse = await axios.get(`http://localhost:3001/api/utilisateur/${user.id}`);
-        const factureResponse = await axios.get(`http://localhost:3001/api/facture/utilisateur/${user.id}`);
+        const userResponse = await axios.get(`http://localhost:3001/api/utilisateur/` +user.id);
+        const factureResponse = await axios.get(`http://localhost:3001/api/facture/utilisateur/` +user.id);
         
-        // Vérifiez que vous obtenez bien les informations utilisateur
+        //  informations utilisateur
         console.log('User Info:', userResponse.data); 
         console.log('Factures:', factureResponse.data);
         
@@ -61,7 +60,7 @@ function GenerateurFacture() {
     };
   
     fetchUserInfo();
-  }, [user]); // Ajoutez `user` comme dépendance
+  }, [user]); // dépendance
 
 
   const formatDate = (dateString) => {

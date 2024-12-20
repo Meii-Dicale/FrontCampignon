@@ -1,11 +1,11 @@
 import React, { useState, useContext, useEffect } from 'react';
 import { Container, Form, Button, Row, Col, Modal } from 'react-bootstrap';
 import NavbarMonCompte from '../Composants/NavbarMonCompte';
-import AuthContext from '../src/Context/AuthContext'; 
-import axios from 'axios'; 
+import AuthContext from '../src/Context/AuthContext';
+import axios from 'axios';
 
 function ContactPage() {
-  const { user } = useContext(AuthContext);  // Récupération du contexte pour l'utilisateur
+  const { user } = useContext(AuthContext); // Récupération du contexte utilisateur
   const [userInfo, setUserInfo] = useState({
     nom: '',
     prenom: '',
@@ -16,7 +16,7 @@ function ContactPage() {
   const [error, setError] = useState('');
   const [showModal, setShowModal] = useState(false);
 
-  // Effect hook pour récupérer les informations de l'utilisateur via l'API
+  // Récupération des informations utilisateur
   useEffect(() => {
     const fetchUserInfo = async () => {
       if (!user || !user.id) {
@@ -26,13 +26,11 @@ function ContactPage() {
       }
 
       try {
-        // Appel à l'API pour récupérer les informations de l'utilisateur
         const token = localStorage.getItem('token');
         const response = await axios.get(`http://localhost:3001/api/utilisateur/` +user.id, {
-          headers: { Authorization: `Bearer ${token}` }, // Ajouter le token dans les en-têtes
+          headers: { Authorization: `Bearer ${token}` },
         });
 
-        // Mise à jour des informations utilisateur dans l'état
         setUserInfo({
           nom: response.data.nom || '',
           prenom: response.data.prenom || '',
@@ -46,24 +44,35 @@ function ContactPage() {
       }
     };
 
-    fetchUserInfo(); // Lancer la récupération des données
+    fetchUserInfo();
   }, [user]);
 
-  const handleSubmit = (e) => {
+  // Gestion de la soumission du formulaire
+  const handleSubmit = async (e) => {
     e.preventDefault();
 
-    // Logique pour envoyer le message à l'API ou à un service d'email
-    console.log("Message envoyé :", { ...userInfo, message });
-    // Ajouter ici la logique pour envoyer le message au camping via l'API
+    try {
+      const data = {
+        nom: userInfo.nom,
+        mail: userInfo.mail,
+        message: message,
+      };
 
-    setShowModal(true);
-    setTimeout(() => {
-      window.location.reload();
-    }, 2000); 
+      // Appel à la route d'envoi de message
+      const response = await axios.post('http://localhost:3001/api/contact/EnvoiMessages', data);
 
+      if (response.data.message) {
+        setShowModal(true); // Affiche le modal de confirmation
+        setTimeout(() => {
+          window.location.reload(); // Recharge la page après un délai
+        }, 2000);
+      }
+    } catch (err) {
+      console.error('Erreur lors de l\'envoi du message :', err);
+      setError("Impossible d'envoyer le message.");
+    }
   };
 
-  // Gestion du chargement et des erreurs
   if (loading) {
     return <div>Chargement...</div>;
   }
@@ -76,10 +85,8 @@ function ContactPage() {
     <>
       <NavbarMonCompte />
       <Container fluid className="pt-5 mt-5">
-        {/* Titre de la page */}
         <h1 className="text-center mb-4">Contact</h1>
 
-        {/* Section des informations */}
         <div className="contact-bubbles d-flex flex-wrap justify-content-center gap-3 p-3">
           <div className="bubble">
             <p className="mb-0">Adresse du camping</p>
@@ -99,7 +106,6 @@ function ContactPage() {
           </div>
         </div>
 
-        {/* Section des réseaux sociaux */}
         <Row className="justify-content-center mt-4">
           <Col md={6} className="bg-light p-4 rounded shadow-sm">
             <h5 className="mb-3">Suivez-nous sur les réseaux sociaux</h5>
@@ -136,7 +142,6 @@ function ContactPage() {
           </Col>
         </Row>
 
-        {/* Formulaire de contact */}
         <div className="contact-form bg-light p-4 rounded shadow-sm mt-4 mx-auto" style={{ maxWidth: '500px' }}>
           <h5 className="mb-3 text-center">Envoyez-nous un message</h5>
           <Form onSubmit={handleSubmit}>
@@ -184,8 +189,8 @@ function ContactPage() {
           </Form>
         </div>
       </Container>
- {/* Modale de confirmation */}
- <Modal show={showModal} onHide={() => setShowModal(false)}>
+
+      <Modal show={showModal} onHide={() => setShowModal(false)}>
         <Modal.Header closeButton>
           <Modal.Title>Confirmation</Modal.Title>
         </Modal.Header>
@@ -198,10 +203,6 @@ function ContactPage() {
           </Button>
         </Modal.Footer>
       </Modal>
-
-
-
-
     </>
   );
 }

@@ -13,9 +13,15 @@ const MesfacturesPage = () => {
   return (
     <>
       <NavbarMonCompte />
+      
       <div className="pt-5 mt-5">
         <h1>Mes Factures</h1>
-        <GenerateurFacture utilisateurId={user.id} /> {/* Passer l'ID de l'utilisateur à GenerateurFacture */}
+        
+
+        <div className="gap-5">
+       
+          <GenerateurFacture utilisateurId={user.id} /> 
+        </div>
       </div>
     </>
   );

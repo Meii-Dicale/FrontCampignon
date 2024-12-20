@@ -1,4 +1,4 @@
-import { Button, Container, Table } from "react-bootstrap";
+import { Button, Container, Table, Form, Alert } from "react-bootstrap";
 import { listeServices } from "../src/Services/apiServices";
 import { useEffect, useState } from "react";
 import { fetchEmplacements } from "../src/Services/ReservationService";
@@ -113,30 +113,37 @@ const PromotionAdmin = () => {
     const types = [...new Set(emplacements.map((emplacement) => emplacement.type))];
 
     return (
-        <>
-            <Container className="col-8">
-                {errorMessage && <div className="error-message alert alert-danger">{errorMessage}</div>}
+        <Container className="mt-5">
+            {errorMessage && <Alert variant="danger">{errorMessage}</Alert>}
 
-                <form onSubmit={handleSubmit}>
-                    <select name="idService" onChange={handleChange}>
+            <Form onSubmit={handleSubmit} className="mb-4 p-4 border rounded shadow-sm bg-light w-75 ms-5 me-auto">
+                <Form.Group controlId="idService">
+                    <Form.Label>Choisir un service</Form.Label>
+                    <Form.Control as="select" name="idService" onChange={handleChange}>
                         <option value="">-- Aucun service --</option>
                         {services.map((service) => (
                             <option key={service.idService} value={service.idService}>
                                 {service.libelle}
                             </option>
                         ))}
-                    </select>
+                    </Form.Control>
+                </Form.Group>
 
-                    <select name="type" onChange={handleChange}>
+                <Form.Group controlId="type">
+                    <Form.Label>Choisir un emplacement</Form.Label>
+                    <Form.Control as="select" name="type" onChange={handleChange}>
                         <option value="">-- Aucun emplacement --</option>
                         {types.map((type) => (
                             <option key={type} value={type}>
                                 {type}
                             </option>
                         ))}
-                    </select>
+                    </Form.Control>
+                </Form.Group>
 
-                    <input
+                <Form.Group controlId="typePromo">
+                    <Form.Label>Taux de réduction (%)</Form.Label>
+                    <Form.Control
                         type="number"
                         placeholder="Taux de réduction"
                         name="typePromo"
@@ -144,54 +151,60 @@ const PromotionAdmin = () => {
                         min="0"
                         max="100"
                     />
-                    <input
+                </Form.Group>
+
+                <Form.Group controlId="libelle">
+                    <Form.Label>Description de la promotion</Form.Label>
+                    <Form.Control
                         type="text"
                         placeholder="Description"
                         name="libelle"
                         onChange={handleChange}
-                        required
-                        />
+                    />
+                </Form.Group>
 
-                    <input
+                <Form.Group controlId="contrainte">
+                    <Form.Label>Nombre de nuits minimum</Form.Label>
+                    <Form.Control
                         type="number"
                         placeholder="Nombre de nuits minimum pour activer la promotion"
                         name="contrainte"
                         onChange={handleChange}
                     />
+                </Form.Group>
 
-                    <button type="submit">Ajouter promotion</button>
-                </form>
+                <Button type="submit" variant="primary">Ajouter promotion</Button>
+            </Form>
 
-                <Table striped bordered hover>
-                    <thead>
-                        <tr>
-                            <th>Service</th>
-                            <th>Description</th>
-                            <th>Type</th>
-                            <th>Taux de réduction</th>
-                            <th>Nombre de nuits minimum</th>
-                            <th>Actions</th>
+            <Table className="mb-4 p-4 border rounded shadow-sm bg-light w-75 ms-5 me-auto">
+                <thead>
+                    <tr>
+                        <th>Service</th>
+                        <th>Description</th>
+                        <th>Type</th>
+                        <th>Taux de réduction</th>
+                        <th>Nombre de nuits minimum</th>
+                        <th>Actions</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    {allPromos.map((promo) => (
+                        <tr key={promo.idPromotion}>
+                            <td>{promo.libelle}</td>
+                            <td>{promo.promolibelle}</td>
+                            <td>{promo.type}</td>
+                            <td>{promo.typePromo}</td>
+                            <td>{promo.contrainte}</td>
+                            <td>
+                                <Button variant="danger" onClick={() => handleDelete(promo.idPromotion)}>
+                                    Supprimer
+                                </Button>
+                            </td>
                         </tr>
-                    </thead>
-                    <tbody>
-                        {allPromos.map((promo) => (
-                            <tr key={promo.idPromotion}>
-                                <td>{promo.libelle}</td>
-                                <td>{promo.promolibelle}</td>
-                                <td>{promo.type}</td>
-                                <td>{promo.typePromo}</td>
-                                <td>{promo.contrainte}</td>
-                                <td>
-                                    <Button variant="danger" onClick={() => handleDelete(promo.idPromotion)}>
-                                        Supprimer
-                                    </Button>
-                                </td>
-                            </tr>
-                        ))}
-                    </tbody>
-                </Table>
-            </Container>
-        </>
+                    ))}
+                </tbody>
+            </Table>
+        </Container>
     );
 };
 
