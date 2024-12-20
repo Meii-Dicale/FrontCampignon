@@ -224,7 +224,7 @@ input {
   padding: 10px 0;
 }
 
-.bulle {
+/* .bulle {
   background-color: #007bff;
   color: white;
   padding: 10px 20px;
@@ -233,7 +233,8 @@ input {
   font-size: 14px;
   display: inline-block;
   transition: background-color 0.3s;
-}
+  
+} */
 
 .bulle:hover {
   background-color: #0056b3;
@@ -255,6 +256,7 @@ input {
   text-align: center; /* Centrer le texte */
   line-height: 1.2;  /* Espacement entre les lignes */
   width: auto;  /* Assurer que la largeur du bouton s'adapte au contenu */
+  margin: 15px;
 }
 
 .bubble-button .line-one {
@@ -304,3 +306,35 @@ input {
 .interactive-button:hover .button-text {
   display: block; /* Afficher le texte lorsque l'utilisateur survole le bouton */
 }
+
+.container {
+  padding: 20px;
+  text-align: center;
+}
+
+.promotions {
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: center;
+  gap: 20px;
+}
+
+.promotion-card {
+  border: 1px solid #ddd;
+  border-radius: 25px;
+  padding: 15px;
+  width: 250px;
+  background-color: #f9f9f9;
+  box-shadow: 0 4px 6px rgba(0, 0, 0, 0.7);
+}
+
+.promotion-card h2 {
+  font-size: 1.2em;
+  margin-bottom: 10px;
+}
+
+.promotion-card p {
+  font-size: 0.9em;
+  color: #555;
+}
+

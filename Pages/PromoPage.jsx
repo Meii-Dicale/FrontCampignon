@@ -1,35 +1,48 @@
-import React from 'react';
-import { Container } from 'react-bootstrap';
+import React, { useEffect, useState } from 'react';
+import axios from 'axios';
 import NavbarMonCompte from '../Composants/NavbarMonCompte';
 
-function MesOffresPage() {
-  return (
-    <>
-      <NavbarMonCompte />
-      <Container fluid className="pt-5 mt-5">
-        {/* Titre de la page */}
-        <h1 className="text-center mb-4">Mes Offres</h1>
+function PromoPage() {
+  const [promotions, setPromotions] = useState([]);
+  const [error, setError] = useState(null);
 
-        {/* Section des bulles d'offres */}
-        <div className="offers-bubbles d-flex flex-wrap justify-content-center gap-3 p-3">
-          <div className="offer-bubble">
-            <p className="offer-text">Profitez de 10% pour votre prochain séjour</p>
-          </div>
-          <div className="offer-bubble">
-            <p className="offer-text">Réservez en avril ou en octobre et bénéficiez de 20% de réduction</p>
-          </div>
-          <div className="offer-bubble">
-            <p className="offer-text">Accès gratuit au spa pour une réservation de 3 nuits ou plus</p>
-          </div>
-          <div className="offer-bubble">
-            <p className="offer-text">Réduction pour les séjours en famille : -15% pour 4 personnes ou plus</p>
-          </div>
-        </div>
-        <h2 className="text-center mb-4">Offres non cumulables</h2>
+  useEffect(() => {
+    // Fonction pour récupérer les promotions
+    const fetchPromotions = async () => {
+      try {
+        const response = await axios.get('http://localhost:3001/api/promotion/toutes');
+        
+        setPromotions(response.data); // Met à jour les promotions
+      } catch (err) {
+        setError('Erreur lors de la récupération des promotions.');
+        console.error(err);
+      }
+    };
 
-      </Container>
-    </>
-  );
+    fetchPromotions();
+  }, []);
+
+  return <>
+
+  <NavbarMonCompte />
+    <div className="container pt-5 mt-5">
+      <h1>Mes Offres</h1>
+
+      {/* Affiche une erreur si elle existe */}
+      {error && <p className="error">{error}</p>}
+
+      {/* Affiche les promotions */}
+      <div className="promotions">
+        {promotions.map((promo) => (
+          <div key={promo.idPromotion} className="promotion-card">
+            <h2>{promo.libelle || 'Offre spéciale'}</h2>
+            <p>Remise : {promo.typePromo || 'Non spécifié'}%</p>
+            <p>Pour  {promo.contrainte || 'Aucune'} nuits</p>
+          </div>
+        ))}
+      </div>
+    </div>
+    </>;
 }
 
-export default MesOffresPage;
+export default PromoPage;
