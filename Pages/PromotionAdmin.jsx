@@ -149,6 +149,7 @@ const PromotionAdmin = () => {
                         placeholder="Description"
                         name="libelle"
                         onChange={handleChange}
+                        required
                         />
 
                     <input

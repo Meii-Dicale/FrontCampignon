@@ -39,7 +39,7 @@ const Calendar = () => {
 
   // Obtenir les types uniques d'emplacements
   const types = [...new Set(allEmplacements.map((emplacement) => emplacement.type))];
-
+  
   // Filtrer les emplacements en fonction du type sélectionné
   const filteredEmplacements = selectedType
     ? allEmplacements.filter((emplacement) => emplacement.type === selectedType)
@@ -61,8 +61,8 @@ const Calendar = () => {
       start: new Date(reservation.dateEntree).toISOString(),
       end: new Date(reservation.dateSortie).toISOString(),
       resourceId: reservation.idEmplacement, // Associer l'événement à une ressource
-      backgroundColor: '#ffcccc', // Couleur personnalisée
-      borderColor: '#ff0000', // Bordure personnalisée
+      backgroundColor: '#ffcccc', 
+      borderColor: '#ff0000', 
     }));
 
   return (
