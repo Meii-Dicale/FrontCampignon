@@ -45,8 +45,8 @@ function GenerateurFacture() {
         const factureResponse = await axios.get(`http://localhost:3001/api/facture/utilisateur/` +user.id);
         
         //  informations utilisateur
-        console.log('User Info:', userResponse.data); 
-        console.log('Factures:', factureResponse.data);
+        // console.log('User Info:', userResponse.data); 
+        // console.log('Factures:', factureResponse.data);
         
         setUserInfo(userResponse.data); // Utilisateur avec adresse et autres infos
         setFactures(factureResponse.data); // Factures de l'utilisateur
