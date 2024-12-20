@@ -27,15 +27,24 @@ function DeleteReservation (id) {
 function ReservationById (idReservation) {
     return axios.get(`http://localhost:3001/api/reservations/${idReservation}`);
 }
-function ajouterResa () {
-    return axios.post(`http://localhost:3001/api/reservations/AddReservation`)
+function ajouterResa (resa) {
+    return axios.post(`http://localhost:3001/api/reservations/AddReservation`, resa)
+}
+
+function addServiceResa (resa) {
+    return axios.post(`http://localhost:3001/api/reservations/AddServiceReservation`, resa)
 }
 
 function resaParEmplacement (idEmplacement) {
     return axios.get(`http://localhost:3001/api/reservations/ReservationsEmplacement/${idEmplacement}`);
 }
 
+function resaParUtilisateur (idUtilisateur) {
+    return axios.get(`http://localhost:3001/api/reservations/ReservationsUtilisateur/${idUtilisateur}`);
+}
+
+
 export default NouvellesReservations;
 export { fetchReservations, fetchEmplacements };
 export { ChangerDatesReservations , ValiderResa, DeleteReservation, ReservationById};
-export { ajouterResa, resaParEmplacement};
+export { ajouterResa, resaParEmplacement, addServiceResa, resaParUtilisateur};

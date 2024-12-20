@@ -39,6 +39,7 @@ import ReservationDetails from '../Pages/ReservationDetailPage';
 import PrivateRoute from './Services/RouteProtection';
 import ValiderResaPage from '../Pages/ValiderResaPage.jsx';
 import ContactezNousPage from '../Pages/ContactezNous.jsx';
+import PaiementPage from '../Pages/PaiementPage';
 
 
 function Layout() {
@@ -113,7 +114,7 @@ function App() {
 <Route path="/facture"  element={<PrivateRoute element={<MesFacturesPage />} allowedRoles={['client','superadmin','rh','agent']}/>} /> 
 <Route path="/reservations"  element={<PrivateRoute element={<MesReservationsPage />} allowedRoles={['client']}/>} /> 
 <Route path="/valider"  element={<PrivateRoute element={<ValiderResaPage />} allowedRoles={['client','superadmin','rh','agent']}/>} />  
-
+<Route path="/paiement" element={<PrivateRoute element={<PaiementPage />} allowedRoles={['client','superadmin','rh','agent']}/>} />
 
           {/* Routes accessibles à tous */}
           <Route
