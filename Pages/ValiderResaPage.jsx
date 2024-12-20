@@ -204,6 +204,7 @@ const ValiderResa = () => {
         dateSortie: moment(dateSortie).format('YYYY-MM-DD[T]HH:mm'),
         idUtilisateur: user.id, // Utilisation de l'ID de l'utilisateur du contexte
         idEmplacement: data.idEmplacement,
+        validation:0,
       };
 
       const facturer = calculTotal();
